@@ -22,10 +22,7 @@ Body
     "shouldUpdateTargetCapacity": {
       "Type": "String",
       "Default": "true",
-      "AllowedValues": [
-        "false",
-        "true"
-      ],
+      "AllowedValues": ["false", "true"],
       "Description": "Should update target capacity on group update"
     }
   },
@@ -79,12 +76,7 @@ Body
           "compute": {
             "instanceTypes": {
               "ondemand": "m3.large",
-              "spot": [
-                "m3.large",
-                "m4.large",
-                "c3.large",
-                "c4.large"
-              ]
+              "spot": ["m3.large", "m4.large", "c3.large", "c4.large"]
             },
             "availabilityZones": [
               {
@@ -96,9 +88,7 @@ Body
               "monitoring": false,
               "imageId": "ami-12345",
               "keyPair": "Assignment",
-              "securityGroupIds": [
-                "sg-12345"
-              ]
+              "securityGroupIds": ["sg-12345"]
             },
             "product": "Linux/UNIX"
           },

@@ -51,21 +51,21 @@ If you want your Elastigroup to persist even after you delete the CloudFormation
 ## Request - Import ASG and Scale Once
 
 ```yaml
-  SpotinstASG:
-    Type: "Custom::importAsg"
-    Properties:
-      ServiceToken: !Sub arn:aws:lambda:${AWS::Region}:178579023202:function:spotinst-cloudformation
-      accessToken: !Ref SpotinstToken
-      accountId: !Ref SpotinstAccountId
-      asgName: !Ref ASGImportName
-      region: !Sub ${AWS::Region}
-      group:
-        product: !Ref GroupProduct
-        spotInstanceTypes: !Ref SpotInstanceType
-        name: !Ref ElastigroupName
-      asgOperation:
-        elastigroupThreshold: 0
-        asgTarget: 0
-      deletePolicy:
-        asgScaleTarget: 5
+SpotinstASG:
+  Type: "Custom::importAsg"
+  Properties:
+    ServiceToken: !Sub arn:aws:lambda:${AWS::Region}:178579023202:function:spotinst-cloudformation
+    accessToken: !Ref SpotinstToken
+    accountId: !Ref SpotinstAccountId
+    asgName: !Ref ASGImportName
+    region: !Sub ${AWS::Region}
+    group:
+      product: !Ref GroupProduct
+      spotInstanceTypes: !Ref SpotInstanceType
+      name: !Ref ElastigroupName
+    asgOperation:
+      elastigroupThreshold: 0
+      asgTarget: 0
+    deletePolicy:
+      asgScaleTarget: 5
 ```

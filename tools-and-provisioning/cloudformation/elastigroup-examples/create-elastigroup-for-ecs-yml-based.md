@@ -5,7 +5,7 @@ Create a new Elastigroup for ECS cluster.
 The full body attributes list is available on the [Create](https://help.spot.io/elastigroup/amazon-web-services/create/) page of the API documentation.
 
 ```yml
-AWSTemplateFormatVersion: '2010-09-09'
+AWSTemplateFormatVersion: "2010-09-09"
 Metadata:
   AWS::CloudFormation::Interface:
     ParameterGroups:
@@ -104,13 +104,13 @@ Parameters:
   ShouldRoll:
     Type: String
     Description: Should roll when updating
-    Default: 'true'
+    Default: "true"
   ShouldUpdateTargetCapacity:
     Type: String
-    Default: 'true'
+    Default: "true"
   BatchSizePercentage:
     Type: Number
-    Default: '20'
+    Default: "20"
   ClusterOrientation:
     Type: String
     AllowedValues:
@@ -121,9 +121,9 @@ Parameters:
     Description: Specify Cluster Orientation
   SpotPercentage:
     Type: Number
-    MinValue: '0'
-    MaxValue: '100'
-    Default: '100'
+    MinValue: "0"
+    MaxValue: "100"
+    Default: "100"
     Description: Spot Instances Percentage in the Cluster
     ConstraintDescription: Select a Number Between 0 and 100
   CapacityTarget:
@@ -205,9 +205,9 @@ Parameters:
   DetailedMonitoring:
     Type: String
     AllowedValues:
-      - 'True'
-      - 'False'
-    Default: 'False'
+      - "True"
+      - "False"
+    Default: "False"
     Description: Allow Detailed CloudWatch Monitoring?
   KeyName:
     Description: Provide of an existing EC2 KeyPair to enable SSH access to the instances
@@ -230,43 +230,43 @@ Parameters:
   AutoScaleraEnable:
     Description: Would you like to Enable Spotinst's ECS AutoScaler?
     Type: String
-    Default: 'true'
+    Default: "true"
     AllowedValues:
-      - 'true'
-      - 'false'
+      - "true"
+      - "false"
   AutoScalerHeadroomAutoConfig:
     Description: Provide an automated option to configure headroom (Ignore if
       not using AutoScaler)
     Type: String
-    Default: 'true'
+    Default: "true"
     AllowedValues:
-      - 'true'
-      - 'false'
+      - "true"
+      - "false"
   AutoScalerCooldown:
     Description: Provide the time in seconds, between scaling activities (Ignore if
       not using AutoScaler)
     Type: String
-    Default: '180'
+    Default: "180"
   AutoScalerEvaluationPeriods:
     Description: Provide the number of consecutive periods that should pass before
       scaling down (Ignore if not using AutoScaler)
     Type: String
-    Default: '3'
+    Default: "3"
   AutoScalerHeadroomUnitCount:
     Description: Provide the number of Headroom units to keep available at all times
       (Ignore if not using AutoScaler)
     Type: String
-    Default: '0'
+    Default: "0"
   AutoScalerHeadroomCPU:
     Description: Provide the amount of CPU units reserved in each Headroom unit (Ignore
       if not using AutoScaler)
     Type: String
-    Default: '0'
+    Default: "0"
   AutoScalerHeadroomRAM:
     Description: Provide the amount in memory (in MB) reserved in each Headroom unit
       (Ignore if not using AutoScaler)
     Type: String
-    Default: '0'
+    Default: "0"
 Mappings:
   AWSRegionToAMI:
     AMI:
@@ -488,7 +488,7 @@ Outputs:
     Value:
       Ref: ECSName
   SpotinstGroupId:
-   Description: A reference to Spotinst Elastigroup Id
-   Value:
-     Ref: SpotinstElastigroup
+    Description: A reference to Spotinst Elastigroup Id
+    Value:
+      Ref: SpotinstElastigroup
 ```

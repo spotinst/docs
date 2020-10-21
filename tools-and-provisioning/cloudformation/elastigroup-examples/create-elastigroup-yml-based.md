@@ -54,19 +54,19 @@ Parameters:
     Default: "us-west-1c"
   SpotinstToken:
     Type: String
-    Default: 'spotinst-token'
+    Default: "spotinst-token"
   SpotinstAccountId:
     Type: String
     Default: "act-12345"
 Resources:
   SpotinstElastigroup:
-    Type: 'Custom::elasticgroup'
+    Type: "Custom::elasticgroup"
     Properties:
-      ServiceToken: !Sub 'arn:aws:lambda:${AWS::Region}:178579023202:function:spotinst-cloudformation'
+      ServiceToken: !Sub "arn:aws:lambda:${AWS::Region}:178579023202:function:spotinst-cloudformation"
       accessToken: !Ref SpotinstToken
       accountId: !Ref SpotinstAccountId
       group:
-        name: 'CFN-elastigroup'
+        name: "CFN-elastigroup"
         strategy:
           risk: 100
           availabilityVsCost: costOriented
@@ -102,7 +102,7 @@ Resources:
           launchSpecification:
             monitoring: false
             imageId: !Ref LatestAMIId
-            securityGroupIds: [ !Ref SecurityGroups ]
+            securityGroupIds: [!Ref SecurityGroups]
           product: Linux/UNIX
         scheduling:
           tasks:

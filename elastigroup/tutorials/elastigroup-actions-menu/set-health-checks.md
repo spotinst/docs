@@ -8,14 +8,14 @@ Spot offers an option for you to use our own custom Health Check Service (HCS) i
 
 The Health Check Service window will open. Set the following parameters:
 
-* **Name**: Name your Health Check for convenience.
-* **ProxyAddress**: The public host/IP of your selected instance you installed service on. This will be set like http://publicip
-* **Protocol**: Which protocol will Spot use to check the healthiness of your instances. Supported for now are http / https.
-* **Endpoint**: The path of the Health Check in each instance.
-* **Interval**: The interval (in seconds) between the checks. Minimum of 10.
-* **Timeout**: The timeout (in seconds) to wait for each instance to answer the check. If it did not answer, we mark this attempt as `unhealthy`
-* **UnhealthyThreshold**: The number of consecutive failed health checks that must occur before declaring an instance `unhealthy`
-* **HealthyThreshold**: The number of consecutive successful health checks that must occur before declaring an instance `healthy`
+- **Name**: Name your Health Check for convenience.
+- **ProxyAddress**: The public host/IP of your selected instance you installed service on. This will be set like http://publicip
+- **Protocol**: Which protocol will Spot use to check the healthiness of your instances. Supported for now are http / https.
+- **Endpoint**: The path of the Health Check in each instance.
+- **Interval**: The interval (in seconds) between the checks. Minimum of 10.
+- **Timeout**: The timeout (in seconds) to wait for each instance to answer the check. If it did not answer, we mark this attempt as `unhealthy`
+- **UnhealthyThreshold**: The number of consecutive failed health checks that must occur before declaring an instance `unhealthy`
+- **HealthyThreshold**: The number of consecutive successful health checks that must occur before declaring an instance `healthy`
 
 <img src="/elastigroup/_media/set-health-checks_2.png" />
 

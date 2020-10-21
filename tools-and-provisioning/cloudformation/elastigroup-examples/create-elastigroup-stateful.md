@@ -17,55 +17,37 @@ Body
     "shouldUpdateTargetCapacity": {
       "Type": "String",
       "Default": "true",
-      "AllowedValues": [
-        "false",
-        "true"
-      ],
+      "AllowedValues": ["false", "true"],
       "Description": "Should update target capacity on group update"
     },
     "shouldResumeStateful": {
       "Type": "String",
       "Default": "false",
-      "AllowedValues": [
-        "false",
-        "true"
-      ],
+      "AllowedValues": ["false", "true"],
       "Description": "Should resume stateful instances on group update"
     },
     "shouldDeleteImages": {
       "Type": "String",
       "Default": "false",
-      "AllowedValues": [
-        "false",
-        "true"
-      ],
+      "AllowedValues": ["false", "true"],
       "Description": "Should delete images for stateful instances on group delete"
     },
     "shouldDeleteNetworkInterfaces": {
       "Type": "String",
       "Default": "false",
-      "AllowedValues": [
-        "false",
-        "true"
-      ],
+      "AllowedValues": ["false", "true"],
       "Description": "Should delete network interfaces for stateful instances on group delete"
     },
     "shouldDeleteVolumes": {
       "Type": "String",
       "Default": "false",
-      "AllowedValues": [
-        "false",
-        "true"
-      ],
+      "AllowedValues": ["false", "true"],
       "Description": "Should delete volumes for stateful instances on group delete"
     },
     "shouldDeleteSnapshots": {
       "Type": "String",
       "Default": "false",
-      "AllowedValues": [
-        "false",
-        "true"
-      ],
+      "AllowedValues": ["false", "true"],
       "Description": "Should delete snapshots for stateful instances on group delete"
     }
   },
@@ -96,7 +78,7 @@ Body
           },
           "shouldDeleteSnapshots": {
             "Ref": "shouldDeleteSnapshots"
-          }          
+          }
         },
         "group": {
           "name": "CloudFormation-Stateful",
@@ -120,12 +102,7 @@ Body
           "compute": {
             "instanceTypes": {
               "ondemand": "m3.large",
-              "spot": [
-                "m3.large",
-                "m4.large",
-                "c3.large",
-                "c4.large"
-              ]
+              "spot": ["m3.large", "m4.large", "c3.large", "c4.large"]
             },
             "availabilityZones": [
               {
@@ -137,9 +114,7 @@ Body
               "monitoring": false,
               "imageId": "ami-12345",
               "keyPair": "Assignment",
-              "securityGroupIds": [
-                "sg-12345"
-              ]
+              "securityGroupIds": ["sg-12345"]
             },
             "product": "Linux/UNIX"
           },
