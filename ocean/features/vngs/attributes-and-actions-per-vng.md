@@ -42,6 +42,8 @@ Ocean supports instance types with both Arm64 and x86 architectures in the same 
 
 Whenever you create a VNG having the Arm64 and x86 instance types, ensure that the workloads can run on both architectures. In addition, ensure by using node selectors that only the relevant pods will trigger a scale-up from this VNG. 
 
+Multiple architectures in the same VNG can be applied only in AWS Kubernetes and ECS. 
+
 </details><br>
 
 <details>
@@ -58,6 +60,7 @@ The following is a list of attributes customizable per VNG in Ocean for ECS. Som
 - Launch Instance
 - Manual Headroom
 - Metadata v2 (API only)
+- Multiple AMI Architectures in same VNG
 - Preferred Spot Instance Types (API only)
 - Restrict Scaledown
 - Roll
