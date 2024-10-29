@@ -54223,6 +54223,9 @@
                                   },
                                   "filters": {
                                     "$ref": "#/paths/~1ocean~1gcp~1k8s~1launchSpec~1%7BoceanLaunchSpecId%7D/put/requestBody/content/application~1json/schema/properties/launchSpec/properties/filters"
+                                  },
+                                  "preferredTypes": {
+                                    "$ref": "#/paths/~1ocean~1gcp~1k8s~1launchSpec/post/requestBody/content/application~1json/schema/allOf/0/properties/launchSpec/properties/preferredTypes"
                                   }
                                 }
                               },
@@ -56152,6 +56155,18 @@
                           },
                           "filters": {
                             "$ref": "#/paths/~1ocean~1gcp~1k8s~1launchSpec~1%7BoceanLaunchSpecId%7D/put/requestBody/content/application~1json/schema/properties/launchSpec/properties/filters"
+                          },
+                          "preferredTypes": {
+                            "type": "array",
+                            "description": "When Ocean scales up VMs, it prioritizes the preferred instance types for launching new nodes.  If launching nodes from this preferred list is not feasible, Ocean will then proceed to utilize the configured instance  types available within the cluster.  Note that the preferred types must be a subset of the instance types configured for the cluster/vng.\n",
+                            "title": "preferredTypes",
+                            "items": {
+                              "type": "string"
+                            },
+                            "example": [
+                              "c3d-standard-4",
+                              "c3d-standard-8"
+                            ]
                           },
                           "availabilityZones": {
                             "type": "array",
