@@ -53708,6 +53708,142 @@
             "description": "Bad Request"
           }
         }
+      },
+      "get": {
+        "summary": "Get Credentials for Azure",
+        "description": "Get the credentials connecting a Spot account to an Azure Cloud account.",
+        "operationId": "OrganizationsAndAccountsGetCloudCredentialsForAzure",
+        "tags": [
+          "Accounts"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/paths/~1azure~1costs/get/parameters/0"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Azure Credentials Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "allOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "request": {
+                              "type": "object",
+                              "description": "Original request properties\n",
+                              "properties": {
+                                "id": {
+                                  "type": "string",
+                                  "example": "46642c7d-bc29-417d-8ce4-79626f00c63c",
+                                  "description": "Unique ID associated with this request\n"
+                                },
+                                "url": {
+                                  "type": "string",
+                                  "example": "/azure/setup/credentials?accountId=act-123456",
+                                  "description": "The URL that was used for the request\n"
+                                },
+                                "method": {
+                                  "type": "string",
+                                  "example": "GET",
+                                  "description": "The HTTP **METHOD** used for the request\n"
+                                },
+                                "timestamp": {
+                                  "type": "string",
+                                  "example": "2018-11-19T13:49:11.911Z",
+                                  "description": "When the request was received by Spot\n"
+                                }
+                              }
+                            },
+                            "response": {
+                              "type": "object",
+                              "description": "Response package that includes, status, type and any relevant data.\n",
+                              "properties": {
+                                "status": {
+                                  "type": "object",
+                                  "properties": {
+                                    "code": {
+                                      "type": "integer",
+                                      "example": 200,
+                                      "description": "HTTP status code assigned to this response\n"
+                                    },
+                                    "message": {
+                                      "type": "string",
+                                      "example": "OK",
+                                      "description": "HTTP status message for the respective status code\n"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "response": {
+                              "type": "object",
+                              "properties": {
+                                "kind": {
+                                  "type": "string",
+                                  "example": "spotinst:azure:credentials",
+                                  "description": "The data type of each item in the response\n"
+                                },
+                                "items": {
+                                  "type": "array",
+                                  "description": "Array of data objects\n",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "clientId": {
+                                        "type": "string",
+                                        "description": "The application ID",
+                                        "example": 111111111
+                                      },
+                                      "tenantId": {
+                                        "type": "string",
+                                        "description": "The directory ID",
+                                        "example": "1321e1e3123er23"
+                                      },
+                                      "subscriptionId": {
+                                        "type": "string",
+                                        "description": "The subscription ID",
+                                        "example": "234r3141131"
+                                      }
+                                    }
+                                  },
+                                  "example": [
+                                    {
+                                      "clientId": 111111111,
+                                      "tenantId": "1321e1e3123er23",
+                                      "subscriptionId": "234r3141131"
+                                    }
+                                  ]
+                                },
+                                "count": {
+                                  "type": "integer",
+                                  "example": 1,
+                                  "description": "Size of the data object array\n"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
       }
     },
     "/azure/setup/credentials/validation": {
