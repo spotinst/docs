@@ -59470,17 +59470,19 @@
                                       "type": "string",
                                       "description": "The type of the scheduling task.\n",
                                       "enum": [
-                                        "clusterRoll"
+                                        "clusterRoll",
+                                        "autoUpgradeVersion"
                                       ],
                                       "example": "clusterRoll"
                                     },
                                     "parameters": {
                                       "type": "object",
                                       "description": "The parameters of the scheduling task. Each task type will have properties relevant only to it.\n",
-                                      "properties": {
-                                        "clusterRoll": {
+                                      "oneOf": [
+                                        {
                                           "type": "object",
                                           "description": "The parameters of the cluster roll scheduling task.\n",
+                                          "title": "Cluster Roll",
                                           "properties": {
                                             "batchSizePercentage": {
                                               "type": "integer",
@@ -59514,16 +59516,19 @@
                                             "vngIds": {
                                               "type": "array",
                                               "description": "List of Virtual Node Group IDs to be rolled. If not set or set to null, cluster roll will be applied.\n",
-                                              "items": {
-                                                "type": "string"
-                                              },
                                               "example": [
                                                 "vng-123456"
-                                              ]
+                                              ],
+                                              "items": {
+                                                "type": "string"
+                                              }
                                             }
                                           }
+                                        },
+                                        {
+                                          "$ref": "#/paths/~1ocean~1azure~1np~1cluster~1%7BoceanClusterId%7D~1autoUpgrade/post/requestBody/content/application~1json/schema/allOf/0"
                                         }
-                                      }
+                                      ]
                                     }
                                   }
                                 }
@@ -63928,6 +63933,193 @@
                       }
                     }
                   }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/ocean/azure/np/cluster/{oceanClusterId}/autoUpgrade": {
+      "summary": "Ocean for AKS",
+      "post": {
+        "summary": "Initiate Auto upgrade",
+        "description": "Update the Ocean AKS cluster's VNGs with the latest version of the control plane's version after upgrading by specifying the scope.  Performing this request will update the VNGs with a new version if available and run a cluster roll if set.  If the response is successful, the old and new versions will be included in the response along with the updated VNGs.  If a cluster roll is set in the request, the first response for a successful request will indicate the start of a roll.  In order to check the status of the roll, you can use the GET Roll API.\n",
+        "operationId": "oceanAksAutoUpgradeInit",
+        "tags": [
+          "Ocean AKS"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/paths/~1azure~1costs/get/parameters/0"
+          },
+          {
+            "$ref": "#/paths/~1ocean~1aws~1k8s~1cluster~1%7BoceanClusterId%7D/get/parameters/1"
+          },
+          {
+            "$ref": "#/paths/~1ocean~1azure~1np~1cluster~1aks~1import/post/parameters/1"
+          },
+          {
+            "$ref": "#/paths/~1ocean~1azure~1np~1cluster~1aks~1import/post/parameters/2"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "type": "object",
+                    "description": "The Configuration for scheduling automatic upgrades of your cluster to ensure it stays updated with the latest version.\n",
+                    "title": "Upgrade Config",
+                    "properties": {
+                      "applyRoll": {
+                        "type": "boolean",
+                        "description": "When set to True, a cluster roll will be initiated if a new version is available to upgrade in the dedicated virtual node groups.\n",
+                        "example": 20
+                      },
+                      "scopeVersion": {
+                        "type": "string",
+                        "description": "The scope of the upgrade version.\n",
+                        "enum": [
+                          "patch"
+                        ]
+                      },
+                      "rollParameters": {
+                        "type": "object",
+                        "description": "The parameters of the cluster roll that will be initiated.\n",
+                        "properties": {
+                          "batchSizePercentage": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 100,
+                            "description": "The percentage of the cluster that will be rolled at each batch.\n",
+                            "example": 20
+                          },
+                          "comment": {
+                            "type": "string",
+                            "description": "A comment to be added to the cluster roll.\n",
+                            "example": "Scheduled cluster roll"
+                          },
+                          "respectPdb": {
+                            "type": "boolean",
+                            "description": "During the roll, if the parameter is set to true we honor PDB during the instance replacement.\n",
+                            "example": true
+                          },
+                          "respectRestrictScaleDown": {
+                            "type": "boolean",
+                            "description": "During the roll, if the parameter is set to true we honor Restrict Scale Down label during the nodes replacement.\n",
+                            "example": true
+                          },
+                          "batchMinHealthyPercentage": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 100,
+                            "description": "The minimum percentage of the scaled nodes that should be healthy at each batch.\n",
+                            "example": 80
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ocean AKS Create Auto Upgrade Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/paths/~1healthCheck/get/responses/200/content/application~1json/schema/allOf/0"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "request": {
+                          "type": "object",
+                          "properties": {
+                            "url": {
+                              "example": "/ocean/azure/np/cluster/o-12345abc/autoUpgrade"
+                            },
+                            "method": {
+                              "example": "POST"
+                            }
+                          }
+                        },
+                        "response": {
+                          "type": "object",
+                          "properties": {
+                            "items": {
+                              "type": "array",
+                              "items": {
+                                "allOf": [
+                                  {
+                                    "type": "object",
+                                    "properties": {
+                                      "oceanId": {
+                                        "type": "string",
+                                        "description": "The identifier of the ocean cluster being upgraded.\n",
+                                        "example": "o-12e31234"
+                                      },
+                                      "scope": {
+                                        "type": "string",
+                                        "enum": [
+                                          "patch"
+                                        ],
+                                        "example": "Cluster"
+                                      },
+                                      "id": {
+                                        "type": "string",
+                                        "description": "The identifier of the cluster roll (if created).\n",
+                                        "example": "scr-12345abc"
+                                      },
+                                      "oldVersion": {
+                                        "type": "string",
+                                        "description": "The old version of the cluster's control plane.\n",
+                                        "example": "1.0.10"
+                                      },
+                                      "newVersion": {
+                                        "type": "string",
+                                        "description": "The newest available version.\n",
+                                        "example": "1.0.15"
+                                      },
+                                      "status": {
+                                        "type": "string",
+                                        "description": "The status of the upgrade.\n",
+                                        "enum": [
+                                          "COMPLETED",
+                                          "PARTLY_COMPLETED",
+                                          "FAILED"
+                                        ],
+                                        "example": "COMPLETED"
+                                      },
+                                      "createdAt": {
+                                        "type": "string",
+                                        "description": "The creation timestamp of the upgrade.\n",
+                                        "example": "2019-03-24T15:46:09.000Z"
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            },
+                            "kind": {
+                              "example": "spotinst:ocean:azure:np:autoUpgrade"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
                 }
               }
             }
