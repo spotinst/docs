@@ -39748,6 +39748,12 @@
                                   "description": "Set root volume size in GiB.",
                                   "example": 73
                                 },
+                                "reservedENIs": {
+                                  "type": "integer",
+                                  "description": "Specifies the count of ENIs to reserve per instance type for scaling purposes.\n",
+                                  "default": 0,
+                                  "example": 1
+                                },
                                 "instanceMetadataOptions": {
                                   "type": "object",
                                   "title": "instanceMetadataOptions",
@@ -42984,6 +42990,12 @@
                         "type": "integer",
                         "description": "Set root volume size (in GB). This field and blockDeviceMappings cannot be used in the same specification.\n",
                         "example": 8
+                      },
+                      "reservedENIs": {
+                        "type": "integer",
+                        "description": "Specifies the count of ENIs to reserve per instance type for scaling purposes.\n",
+                        "default": 0,
+                        "example": 1
                       },
                       "labels": {
                         "type": "array",
