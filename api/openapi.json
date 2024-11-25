@@ -15303,7 +15303,7 @@
       },
       "put": {
         "summary": "Start Deployment",
-        "description": "Deploy your Elastigroup (triggers Blue/Green Deployment that replaces the existing instances in the Elastigroup)",
+        "description": "Deploy your Elastigroup (triggers Blue/Green Deployment that replaces the existing instances in the Elastigroup).\\\nNote: If configured with health check, the grace period will be ignored\n",
         "operationId": "elastigroupAwsDeploy",
         "tags": [
           "Elastigroup AWS"
