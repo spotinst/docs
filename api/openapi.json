@@ -1511,10 +1511,9 @@
                                       "type": "string",
                                       "description": "The metric source.\n",
                                       "enum": [
-                                        "spectrum",
                                         "cloudWatch"
                                       ],
-                                      "example": "spectrum"
+                                      "example": "cloudWatch"
                                     },
                                     "metricName": {
                                       "type": "string",
@@ -1768,10 +1767,9 @@
                                       "type": "string",
                                       "description": "The metric source.\n",
                                       "enum": [
-                                        "spectrum",
                                         "cloudWatch"
                                       ],
-                                      "example": "spectrum"
+                                      "example": "cloudWatch"
                                     },
                                     "metricName": {
                                       "type": "string",
@@ -2149,11 +2147,10 @@
                                       "title": "Source",
                                       "description": "The source of the metric.\n",
                                       "enum": [
-                                        "cloudWatch",
-                                        "spectrum"
+                                        "cloudWatch"
                                       ],
                                       "type": "string",
-                                      "example": "spectrum"
+                                      "example": "cloudWatch"
                                     },
                                     "policyName": {
                                       "type": "string",
