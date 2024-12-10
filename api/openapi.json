@@ -241,6 +241,13 @@
         "Connect Workflows",
         "Connect Workspaces"
       ]
+    },
+    {
+      "name": "Spot Security",
+      "tags": [
+        "Compliance",
+        "Misconfiguration"
+      ]
     }
   ],
   "paths": {
@@ -85528,6 +85535,1330 @@
           }
         }
       }
+    },
+    "/security/v1/compliances": {
+      "get": {
+        "description": "A cyber security compliance determines how compliant an asset is. It checks against specific security standards.\nThis API returns list of all compliances supported in Spot.\nA compliance consists of one or more controls.",
+        "operationId": "get_compliances_v1_compliances_get",
+        "parameters": [
+          {
+            "description": "Token of the page to return.",
+            "in": "query",
+            "name": "paginationKey",
+            "required": false,
+            "schema": {
+              "description": "Token of the page to return.",
+              "title": "Paginationkey",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Number of items to return per page.",
+            "in": "query",
+            "name": "paginationSize",
+            "required": false,
+            "schema": {
+              "default": 100,
+              "description": "Number of items to return per page.",
+              "maximum": 100,
+              "minimum": 1,
+              "title": "Paginationsize",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "allOf": [
+                        {
+                          "properties": {
+                            "code": {
+                              "title": "Code",
+                              "type": "string"
+                            },
+                            "message": {
+                              "title": "Message",
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "code",
+                            "message"
+                          ],
+                          "title": "ErrorModel",
+                          "type": "object"
+                        }
+                      ],
+                      "title": "Error"
+                    },
+                    "request": {
+                      "properties": {
+                        "body": {
+                          "title": "Body",
+                          "type": "object"
+                        },
+                        "id": {
+                          "title": "Id",
+                          "type": "string"
+                        },
+                        "method": {
+                          "title": "Method",
+                          "type": "string"
+                        },
+                        "queryParameters": {
+                          "title": "Queryparameters",
+                          "type": "object"
+                        },
+                        "timestamp": {
+                          "title": "Timestamp",
+                          "type": "string"
+                        },
+                        "url": {
+                          "title": "Url",
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "url",
+                        "method",
+                        "queryParameters",
+                        "body",
+                        "timestamp"
+                      ],
+                      "title": "RequestModel",
+                      "type": "object"
+                    },
+                    "response": {
+                      "allOf": [
+                        {
+                          "properties": {
+                            "count": {
+                              "default": 0,
+                              "description": "The number of items.",
+                              "title": "Count",
+                              "type": "integer"
+                            },
+                            "items": {
+                              "description": "The array of objects in this response. The length of the array is according to the 'count' attribute.",
+                              "items": {
+                                "properties": {
+                                  "complianceName": {
+                                    "title": "Compliancename",
+                                    "type": "string"
+                                  }
+                                },
+                                "title": "ComplianceModel",
+                                "type": "object"
+                              },
+                              "title": "Items",
+                              "type": "array"
+                            },
+                            "paginationInfo": {
+                              "properties": {
+                                "nextKey": {
+                                  "description": "Each API call has a unique token. This is the token for the next page of results.",
+                                  "title": "Nextkey",
+                                  "type": "string"
+                                },
+                                "paginationSize": {
+                                  "description": "The maximum number of items in the page. The attribute 'item' indicates the actual number of items in the page.",
+                                  "title": "Paginationsize",
+                                  "type": "integer"
+                                },
+                                "previousKey": {
+                                  "description": "Each API call has a unique token. This is the token for the previous page of results.",
+                                  "title": "Previouskey",
+                                  "type": "string"
+                                }
+                              },
+                              "title": "PaginationModel",
+                              "type": "object"
+                            },
+                            "status": {
+                              "properties": {
+                                "code": {
+                                  "title": "Code",
+                                  "type": "integer"
+                                },
+                                "message": {
+                                  "title": "Message",
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "code",
+                                "message"
+                              ],
+                              "title": "StatusModel",
+                              "type": "object"
+                            }
+                          },
+                          "required": [
+                            "status",
+                            "items",
+                            "paginationInfo"
+                          ],
+                          "title": "PaginatedResponse[ComplianceModel]",
+                          "type": "object"
+                        }
+                      ]
+                    },
+                    "responseTime": {
+                      "title": "Responsetime",
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "request"
+                  ],
+                  "title": "SpotResponse[PaginatedResponse[ComplianceModel]]",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {},
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "detail": {
+                      "items": {
+                        "properties": {
+                          "loc": {
+                            "items": {
+                              "anyOf": [
+                                {
+                                  "type": "string"
+                                },
+                                {
+                                  "type": "integer"
+                                }
+                              ]
+                            },
+                            "title": "Location",
+                            "type": "array"
+                          },
+                          "msg": {
+                            "title": "Message",
+                            "type": "string"
+                          },
+                          "type": {
+                            "title": "Error Type",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "loc",
+                          "msg",
+                          "type"
+                        ],
+                        "title": "ValidationError",
+                        "type": "object"
+                      },
+                      "title": "Detail",
+                      "type": "array"
+                    }
+                  },
+                  "title": "HTTPValidationError",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Compliances",
+        "tags": [
+          "Compliance"
+        ]
+      },
+      "parameters": []
+    },
+    "/security/v1/compliances/count": {
+      "get": {
+        "description": "Get the total number of compliances.",
+        "operationId": "get_compliance_count_v1_compliances_count_get",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "allOf": [
+                        {
+                          "$ref": "#/paths/~1security~1v1~1compliances/get/responses/200/content/application~1json/schema/properties/error/allOf/0"
+                        }
+                      ],
+                      "title": "Error"
+                    },
+                    "request": {
+                      "$ref": "#/paths/~1security~1v1~1compliances/get/responses/200/content/application~1json/schema/properties/request"
+                    },
+                    "response": {
+                      "allOf": [
+                        {
+                          "properties": {
+                            "count": {
+                              "default": 0,
+                              "description": "The number of items.",
+                              "title": "Count",
+                              "type": "integer"
+                            },
+                            "items": {
+                              "description": "The array of objects in this response. The length of the array is according to the 'count' attribute.",
+                              "items": {
+                                "properties": {
+                                  "value": {
+                                    "description": "The number of items.",
+                                    "title": "Value",
+                                    "type": "integer"
+                                  }
+                                },
+                                "required": [
+                                  "value"
+                                ],
+                                "title": "CountModel",
+                                "type": "object"
+                              },
+                              "title": "Items",
+                              "type": "array"
+                            },
+                            "status": {
+                              "$ref": "#/paths/~1security~1v1~1compliances/get/responses/200/content/application~1json/schema/properties/response/allOf/0/properties/status"
+                            }
+                          },
+                          "required": [
+                            "status",
+                            "items"
+                          ],
+                          "title": "BaseResponse[CountModel]",
+                          "type": "object"
+                        }
+                      ]
+                    },
+                    "responseTime": {
+                      "title": "Responsetime",
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "request"
+                  ],
+                  "title": "SpotResponse[BaseResponse[CountModel]]",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {},
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "summary": "Get Compliance Count",
+        "tags": [
+          "Compliance"
+        ]
+      },
+      "parameters": []
+    },
+    "/security/v1/compliances/{complianceName}/controls": {
+      "get": {
+        "description": "A control is countermeasures to avoid, detect, counteract, or minimize security risks of cloud assets.\nA control may be part of one or more compliances. A control is verified in one or more rules.\nThis API returns the list of controls mapped to a specific compliance.",
+        "operationId": "get_compliance_controls_v1_compliances__complianceName__controls_get",
+        "parameters": [
+          {
+            "description": "The name of the cyber security compliance.",
+            "example": "SOC_2",
+            "in": "path",
+            "name": "complianceName",
+            "required": true,
+            "schema": {
+              "description": "The name of the cyber security compliance.",
+              "title": "Compliancename",
+              "type": "string"
+            }
+          },
+          {
+            "description": "If this is not a manual control, the value is True.",
+            "in": "query",
+            "name": "isAutomated",
+            "required": false,
+            "schema": {
+              "description": "If this is not a manual control, the value is True.",
+              "title": "Isautomated",
+              "type": "boolean"
+            }
+          },
+          {
+            "$ref": "#/paths/~1security~1v1~1compliances/get/parameters/0"
+          },
+          {
+            "$ref": "#/paths/~1security~1v1~1compliances/get/parameters/1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "allOf": [
+                        {
+                          "$ref": "#/paths/~1security~1v1~1compliances/get/responses/200/content/application~1json/schema/properties/error/allOf/0"
+                        }
+                      ],
+                      "title": "Error"
+                    },
+                    "request": {
+                      "$ref": "#/paths/~1security~1v1~1compliances/get/responses/200/content/application~1json/schema/properties/request"
+                    },
+                    "response": {
+                      "allOf": [
+                        {
+                          "properties": {
+                            "count": {
+                              "default": 0,
+                              "description": "The number of items.",
+                              "title": "Count",
+                              "type": "integer"
+                            },
+                            "items": {
+                              "description": "The array of objects in this response. The length of the array is according to the 'count' attribute.",
+                              "items": {
+                                "properties": {
+                                  "controlId": {
+                                    "title": "Controlid",
+                                    "type": "string"
+                                  },
+                                  "description": {
+                                    "title": "Description",
+                                    "type": "string"
+                                  },
+                                  "isAutomated": {
+                                    "title": "Isautomated",
+                                    "type": "boolean"
+                                  }
+                                },
+                                "title": "ControlModel",
+                                "type": "object"
+                              },
+                              "title": "Items",
+                              "type": "array"
+                            },
+                            "paginationInfo": {
+                              "$ref": "#/paths/~1security~1v1~1compliances/get/responses/200/content/application~1json/schema/properties/response/allOf/0/properties/paginationInfo"
+                            },
+                            "status": {
+                              "$ref": "#/paths/~1security~1v1~1compliances/get/responses/200/content/application~1json/schema/properties/response/allOf/0/properties/status"
+                            }
+                          },
+                          "required": [
+                            "status",
+                            "items",
+                            "paginationInfo"
+                          ],
+                          "title": "PaginatedResponse[ControlModel]",
+                          "type": "object"
+                        }
+                      ]
+                    },
+                    "responseTime": {
+                      "title": "Responsetime",
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "request"
+                  ],
+                  "title": "SpotResponse[PaginatedResponse[ControlModel]]",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {},
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1security~1v1~1compliances/get/responses/422/content/application~1json/schema"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Compliance Controls",
+        "tags": [
+          "Compliance"
+        ]
+      },
+      "parameters": []
+    },
+    "/security/v1/compliances/{complianceName}/controls/count": {
+      "get": {
+        "description": "Get the total number of controls for the selected compliance.",
+        "operationId": "get_compliance_controls_count_v1_compliances__complianceName__controls_count_get",
+        "parameters": [
+          {
+            "$ref": "#/paths/~1security~1v1~1compliances~1%7BcomplianceName%7D~1controls/get/parameters/0"
+          },
+          {
+            "$ref": "#/paths/~1security~1v1~1compliances~1%7BcomplianceName%7D~1controls/get/parameters/1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1security~1v1~1compliances~1count/get/responses/200/content/application~1json/schema"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {},
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1security~1v1~1compliances/get/responses/422/content/application~1json/schema"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Compliance Controls Count",
+        "tags": [
+          "Compliance"
+        ]
+      },
+      "parameters": []
+    },
+    "/security/v1/misconfigurations": {
+      "get": {
+        "description": "This API returns the list of assets that have misconfigurations.",
+        "operationId": "get_misconfigurations_v1_misconfigurations_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "cloud",
+            "required": true,
+            "schema": {
+              "description": "Enumeration of supported cloud providers.",
+              "enum": [
+                "aws",
+                "azure"
+              ],
+              "title": "CloudProvider",
+              "type": "string"
+            }
+          },
+          {
+            "description": "A comma-separated list of cloud account IDs. For AWS this is the account ID. For Azure, this is the subscription ID.",
+            "in": "query",
+            "name": "accountId",
+            "required": false,
+            "schema": {
+              "description": "A comma-separated list of cloud account IDs. For AWS this is the account ID. For Azure, this is the subscription ID.",
+              "title": "Accountid",
+              "type": "string"
+            }
+          },
+          {
+            "description": "A comma-separated list of cloud account IDs to exclude. For AWS this is the account ID. For Azure, this is the subscription ID.",
+            "in": "query",
+            "name": "notAccountId",
+            "required": false,
+            "schema": {
+              "description": "A comma-separated list of cloud account IDs to exclude. For AWS this is the account ID. For Azure, this is the subscription ID.",
+              "title": "Notaccountid",
+              "type": "string"
+            }
+          },
+          {
+            "description": "A comma-separated list of cloud account names.",
+            "in": "query",
+            "name": "accountName",
+            "required": false,
+            "schema": {
+              "description": "A comma-separated list of cloud account names.",
+              "title": "Accountname",
+              "type": "string"
+            }
+          },
+          {
+            "description": "A comma-separated list of cloud account names to exclude",
+            "in": "query",
+            "name": "notAccountName",
+            "required": false,
+            "schema": {
+              "description": "A comma-separated list of cloud account names to exclude",
+              "title": "Notaccountname",
+              "type": "string"
+            }
+          },
+          {
+            "description": "A comma-separated list of cloud regions.",
+            "example": "us-east-1",
+            "in": "query",
+            "name": "region",
+            "required": false,
+            "schema": {
+              "description": "A comma-separated list of cloud regions.",
+              "title": "Region",
+              "type": "string"
+            }
+          },
+          {
+            "description": "A comma-separated list of cloud regions to exclude.",
+            "example": "us-east-1",
+            "in": "query",
+            "name": "notRegion",
+            "required": false,
+            "schema": {
+              "description": "A comma-separated list of cloud regions to exclude.",
+              "title": "Notregion",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The date the finding was most recently found (YYYY-MM-DD).",
+            "example": "1997-11-11",
+            "in": "query",
+            "name": "date",
+            "required": false,
+            "schema": {
+              "description": "The date the finding was most recently found (YYYY-MM-DD).",
+              "format": "date",
+              "title": "Date",
+              "type": "string"
+            }
+          },
+          {
+            "description": "A comma-separated list of cloud services.",
+            "in": "query",
+            "name": "service",
+            "required": false,
+            "schema": {
+              "description": "A comma-separated list of cloud services.",
+              "title": "Service",
+              "type": "string"
+            }
+          },
+          {
+            "description": "A comma-separated list of cloud services to exclude.",
+            "in": "query",
+            "name": "notService",
+            "required": false,
+            "schema": {
+              "description": "A comma-separated list of cloud services to exclude.",
+              "title": "Notservice",
+              "type": "string"
+            }
+          },
+          {
+            "description": "A comma-separated list of cloud resources for the service.",
+            "in": "query",
+            "name": "assetType",
+            "required": false,
+            "schema": {
+              "description": "A comma-separated list of cloud resources for the service.",
+              "title": "Assettype",
+              "type": "string"
+            }
+          },
+          {
+            "description": "A comma-separated list of cloud resources for the service to exclude.",
+            "in": "query",
+            "name": "notAssetType",
+            "required": false,
+            "schema": {
+              "description": "A comma-separated list of cloud resources for the service to exclude.",
+              "title": "Notassettype",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique name of the rule.",
+            "in": "query",
+            "name": "ruleName",
+            "required": false,
+            "schema": {
+              "description": "The unique name of the rule.",
+              "title": "Rulename",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The asset's ID (a cloud resource).",
+            "in": "query",
+            "name": "assetId",
+            "required": false,
+            "schema": {
+              "description": "The asset's ID (a cloud resource).",
+              "title": "Assetid",
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/paths/~1security~1v1~1compliances/get/parameters/0"
+          },
+          {
+            "$ref": "#/paths/~1security~1v1~1compliances/get/parameters/1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "allOf": [
+                        {
+                          "$ref": "#/paths/~1security~1v1~1compliances/get/responses/200/content/application~1json/schema/properties/error/allOf/0"
+                        }
+                      ],
+                      "title": "Error"
+                    },
+                    "request": {
+                      "$ref": "#/paths/~1security~1v1~1compliances/get/responses/200/content/application~1json/schema/properties/request"
+                    },
+                    "response": {
+                      "allOf": [
+                        {
+                          "properties": {
+                            "count": {
+                              "default": 0,
+                              "description": "The number of items.",
+                              "title": "Count",
+                              "type": "integer"
+                            },
+                            "items": {
+                              "description": "The array of objects in this response. The length of the array is according to the 'count' attribute.",
+                              "items": {
+                                "properties": {
+                                  "organizationId": {
+                                    "description": "The Spot Organization ID.",
+                                    "title": "Organizationid",
+                                    "type": "string"
+                                  },
+                                  "what": {
+                                    "properties": {
+                                      "args": {
+                                        "description": "Certain misconfiguration rules have arguments. This field contains the arguments in the form of an comma separated array. Example: [\"MongoDB\", \"TCP\", \"27017\"]",
+                                        "items": {
+                                          "type": "string"
+                                        },
+                                        "title": "Args",
+                                        "type": "array"
+                                      },
+                                      "isSuppressed": {
+                                        "description": "If this finding is suppressed, the value is True.",
+                                        "title": "Issuppressed",
+                                        "type": "boolean"
+                                      },
+                                      "ruleDescription": {
+                                        "description": "Description of the rule.",
+                                        "title": "Ruledescription",
+                                        "type": "string"
+                                      },
+                                      "ruleName": {
+                                        "description": "The unique name of the rule.",
+                                        "title": "Rulename",
+                                        "type": "string"
+                                      },
+                                      "ruleTitle": {
+                                        "description": "The name of the rule.",
+                                        "title": "Ruletitle",
+                                        "type": "string"
+                                      },
+                                      "severity": {
+                                        "description": "The severity of the rule.",
+                                        "title": "Severity",
+                                        "type": "string"
+                                      },
+                                      "state": {
+                                        "description": "The state of the misconfiguration. It is either open or closed.",
+                                        "title": "State",
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "ruleName",
+                                      "ruleTitle",
+                                      "ruleDescription",
+                                      "args",
+                                      "severity",
+                                      "state",
+                                      "isSuppressed"
+                                    ],
+                                    "title": "MisconfigurationWhatModel",
+                                    "type": "object"
+                                  },
+                                  "when": {
+                                    "properties": {
+                                      "lastSeen": {
+                                        "description": "The date the finding was most recently found (YYYY-MM-DD).",
+                                        "title": "Lastseen",
+                                        "type": "string"
+                                      },
+                                      "suppressedAt": {
+                                        "description": "When the finding was suppressed.",
+                                        "format": "date-time",
+                                        "title": "Suppressedat",
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "lastSeen",
+                                      "suppressedAt"
+                                    ],
+                                    "title": "MisconfigurationWhenModel",
+                                    "type": "object"
+                                  },
+                                  "where": {
+                                    "properties": {
+                                      "accountId": {
+                                        "description": "A comma-separated list of cloud account IDs. For AWS this is the account ID. For Azure, this is the subscription ID.",
+                                        "title": "Accountid",
+                                        "type": "string"
+                                      },
+                                      "assetId": {
+                                        "description": "The asset's ID (a cloud resource).",
+                                        "title": "Assetid",
+                                        "type": "string"
+                                      },
+                                      "assetName": {
+                                        "description": "The name of the asset ID.",
+                                        "title": "Assetname",
+                                        "type": "string"
+                                      },
+                                      "assetType": {
+                                        "description": "A comma-separated list of cloud resources for the service.",
+                                        "title": "Assettype",
+                                        "type": "string"
+                                      },
+                                      "findingLocation": {
+                                        "description": "For a misconfiguration: the cloud resource or a subelement of the cloud resource.                        For a vulnerability: the cloud resource, an OS image, or a filename.",
+                                        "title": "Findinglocation",
+                                        "type": "string"
+                                      },
+                                      "region": {
+                                        "description": "A comma-separated list of cloud regions.",
+                                        "title": "Region",
+                                        "type": "string"
+                                      },
+                                      "service": {
+                                        "description": "The cloud service.",
+                                        "title": "Service",
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "accountId",
+                                      "service",
+                                      "assetId",
+                                      "assetName",
+                                      "assetType",
+                                      "region",
+                                      "findingLocation"
+                                    ],
+                                    "title": "MisconfigurationWhereModel",
+                                    "type": "object"
+                                  },
+                                  "who": {
+                                    "properties": {
+                                      "suppressedBy": {
+                                        "description": "The user who suppressed the finding.",
+                                        "title": "Suppressedby",
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "suppressedBy"
+                                    ],
+                                    "title": "MisconfigurationWhoModel",
+                                    "type": "object"
+                                  }
+                                },
+                                "required": [
+                                  "organizationId",
+                                  "when",
+                                  "what",
+                                  "where",
+                                  "who"
+                                ],
+                                "title": "MisconfigurationModel",
+                                "type": "object"
+                              },
+                              "title": "Items",
+                              "type": "array"
+                            },
+                            "paginationInfo": {
+                              "$ref": "#/paths/~1security~1v1~1compliances/get/responses/200/content/application~1json/schema/properties/response/allOf/0/properties/paginationInfo"
+                            },
+                            "status": {
+                              "$ref": "#/paths/~1security~1v1~1compliances/get/responses/200/content/application~1json/schema/properties/response/allOf/0/properties/status"
+                            }
+                          },
+                          "required": [
+                            "status",
+                            "items",
+                            "paginationInfo"
+                          ],
+                          "title": "PaginatedResponse[MisconfigurationModel]",
+                          "type": "object"
+                        }
+                      ]
+                    },
+                    "responseTime": {
+                      "title": "Responsetime",
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "request"
+                  ],
+                  "title": "SpotResponse[PaginatedResponse[MisconfigurationModel]]",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {},
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1security~1v1~1compliances/get/responses/422/content/application~1json/schema"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Misconfigurations",
+        "tags": [
+          "Misconfiguration"
+        ]
+      },
+      "parameters": []
+    },
+    "/security/v1/misconfigurations/count": {
+      "get": {
+        "description": "This API returns a count of assets that have misconfigurations.",
+        "operationId": "get_misconfigurations_count_v1_misconfigurations_count_get",
+        "parameters": [
+          {
+            "$ref": "#/paths/~1security~1v1~1misconfigurations/get/parameters/0"
+          },
+          {
+            "$ref": "#/paths/~1security~1v1~1misconfigurations/get/parameters/1"
+          },
+          {
+            "$ref": "#/paths/~1security~1v1~1misconfigurations/get/parameters/2"
+          },
+          {
+            "$ref": "#/paths/~1security~1v1~1misconfigurations/get/parameters/3"
+          },
+          {
+            "$ref": "#/paths/~1security~1v1~1misconfigurations/get/parameters/4"
+          },
+          {
+            "$ref": "#/paths/~1security~1v1~1misconfigurations/get/parameters/5"
+          },
+          {
+            "$ref": "#/paths/~1security~1v1~1misconfigurations/get/parameters/6"
+          },
+          {
+            "$ref": "#/paths/~1security~1v1~1misconfigurations/get/parameters/7"
+          },
+          {
+            "$ref": "#/paths/~1security~1v1~1misconfigurations/get/parameters/8"
+          },
+          {
+            "$ref": "#/paths/~1security~1v1~1misconfigurations/get/parameters/9"
+          },
+          {
+            "$ref": "#/paths/~1security~1v1~1misconfigurations/get/parameters/10"
+          },
+          {
+            "$ref": "#/paths/~1security~1v1~1misconfigurations/get/parameters/11"
+          },
+          {
+            "$ref": "#/paths/~1security~1v1~1misconfigurations/get/parameters/12"
+          },
+          {
+            "$ref": "#/paths/~1security~1v1~1misconfigurations/get/parameters/13"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1security~1v1~1compliances~1count/get/responses/200/content/application~1json/schema"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {},
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1security~1v1~1compliances/get/responses/422/content/application~1json/schema"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Misconfigurations Count",
+        "tags": [
+          "Misconfiguration"
+        ]
+      },
+      "parameters": []
+    },
+    "/security/v1/misconfigurations/rules": {
+      "get": {
+        "description": "Rules are configuration checks that detect misconfigurations in your cloud environment.\nRules are cloud service provider specific. A rule is mapped to one or more controls.\nThis API returns the list of rules that can determine the state of a specific control.",
+        "operationId": "get_rules_v1_misconfigurations_rules_get",
+        "parameters": [
+          {
+            "$ref": "#/paths/~1security~1v1~1misconfigurations/get/parameters/0"
+          },
+          {
+            "description": "The name of the cyber security compliance.",
+            "example": "SOC_2",
+            "in": "query",
+            "name": "complianceName",
+            "required": false,
+            "schema": {
+              "description": "The name of the cyber security compliance.",
+              "title": "Compliancename",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The ID of the control defined in the compliance.",
+            "example": "A1.2",
+            "in": "query",
+            "name": "controlId",
+            "required": false,
+            "schema": {
+              "description": "The ID of the control defined in the compliance.",
+              "title": "Controlid",
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/paths/~1security~1v1~1misconfigurations/get/parameters/8"
+          },
+          {
+            "$ref": "#/paths/~1security~1v1~1compliances/get/parameters/0"
+          },
+          {
+            "$ref": "#/paths/~1security~1v1~1compliances/get/parameters/1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "allOf": [
+                        {
+                          "$ref": "#/paths/~1security~1v1~1compliances/get/responses/200/content/application~1json/schema/properties/error/allOf/0"
+                        }
+                      ],
+                      "title": "Error"
+                    },
+                    "request": {
+                      "$ref": "#/paths/~1security~1v1~1compliances/get/responses/200/content/application~1json/schema/properties/request"
+                    },
+                    "response": {
+                      "allOf": [
+                        {
+                          "properties": {
+                            "count": {
+                              "default": 0,
+                              "description": "The number of items.",
+                              "title": "Count",
+                              "type": "integer"
+                            },
+                            "items": {
+                              "description": "The array of objects in this response. The length of the array is according to the 'count' attribute.",
+                              "items": {
+                                "properties": {
+                                  "args": {
+                                    "description": "Certain misconfiguration rules have arguments. This field contains the arguments in the form of an comma separated array. Example: [\"MongoDB\", \"TCP\", \"27017\"]",
+                                    "items": {
+                                      "type": "string"
+                                    },
+                                    "title": "Args",
+                                    "type": "array"
+                                  },
+                                  "cloud": {
+                                    "description": "The name of the cloud.",
+                                    "title": "Cloud",
+                                    "type": "string"
+                                  },
+                                  "complianceName": {
+                                    "description": "The name of the cyber security compliance.",
+                                    "items": {
+                                      "type": "string"
+                                    },
+                                    "title": "Compliancename",
+                                    "type": "array"
+                                  },
+                                  "controls": {
+                                    "description": "The ID of the control defined in the compliance.",
+                                    "items": {
+                                      "additionalProperties": {
+                                        "type": "string"
+                                      },
+                                      "type": "object"
+                                    },
+                                    "title": "Controls",
+                                    "type": "array"
+                                  },
+                                  "description": {
+                                    "description": "Description of the rule.",
+                                    "title": "Description",
+                                    "type": "string"
+                                  },
+                                  "effort": {
+                                    "allOf": [
+                                      {
+                                        "enum": [
+                                          "High",
+                                          "Medium",
+                                          "Low",
+                                          ""
+                                        ],
+                                        "title": "Effort",
+                                        "type": "string"
+                                      }
+                                    ],
+                                    "description": "The effort required to fix the finding."
+                                  },
+                                  "ruleName": {
+                                    "description": "The unique name of the rule.",
+                                    "title": "Rulename",
+                                    "type": "string"
+                                  },
+                                  "ruleTitle": {
+                                    "description": "The name of the rule.",
+                                    "title": "Ruletitle",
+                                    "type": "string"
+                                  },
+                                  "service": {
+                                    "description": "The cloud service.",
+                                    "title": "Service",
+                                    "type": "string"
+                                  },
+                                  "severity": {
+                                    "allOf": [
+                                      {
+                                        "enum": [
+                                          "Critical",
+                                          "High",
+                                          "Medium",
+                                          "Low"
+                                        ],
+                                        "title": "Severity",
+                                        "type": "string"
+                                      }
+                                    ],
+                                    "description": "The severity of the rule."
+                                  }
+                                },
+                                "required": [
+                                  "ruleName",
+                                  "ruleTitle",
+                                  "description",
+                                  "cloud",
+                                  "service",
+                                  "args",
+                                  "severity",
+                                  "effort",
+                                  "complianceName",
+                                  "controls"
+                                ],
+                                "title": "RulesModel",
+                                "type": "object"
+                              },
+                              "title": "Items",
+                              "type": "array"
+                            },
+                            "paginationInfo": {
+                              "$ref": "#/paths/~1security~1v1~1compliances/get/responses/200/content/application~1json/schema/properties/response/allOf/0/properties/paginationInfo"
+                            },
+                            "status": {
+                              "$ref": "#/paths/~1security~1v1~1compliances/get/responses/200/content/application~1json/schema/properties/response/allOf/0/properties/status"
+                            }
+                          },
+                          "required": [
+                            "status",
+                            "items",
+                            "paginationInfo"
+                          ],
+                          "title": "PaginatedResponse[RulesModel]",
+                          "type": "object"
+                        }
+                      ]
+                    },
+                    "responseTime": {
+                      "title": "Responsetime",
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "request"
+                  ],
+                  "title": "SpotResponse[PaginatedResponse[RulesModel]]",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {},
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1security~1v1~1compliances/get/responses/422/content/application~1json/schema"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Rules",
+        "tags": [
+          "Misconfiguration"
+        ]
+      },
+      "parameters": []
+    },
+    "/security/v1/misconfigurations/rules/count": {
+      "get": {
+        "description": "Rules are configuration checks that detect misconfigurations in your cloud environment.\nRules are cloud service provider specific. A rule is mapped to one or more controls.\nThis API returns the list of rules that can determine the state of a specific control.",
+        "operationId": "get_rules_count_v1_misconfigurations_rules_count_get",
+        "parameters": [
+          {
+            "$ref": "#/paths/~1security~1v1~1misconfigurations/get/parameters/0"
+          },
+          {
+            "$ref": "#/paths/~1security~1v1~1misconfigurations~1rules/get/parameters/1"
+          },
+          {
+            "$ref": "#/paths/~1security~1v1~1misconfigurations~1rules/get/parameters/2"
+          },
+          {
+            "$ref": "#/paths/~1security~1v1~1misconfigurations/get/parameters/8"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1security~1v1~1compliances~1count/get/responses/200/content/application~1json/schema"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {},
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1security~1v1~1compliances/get/responses/422/content/application~1json/schema"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Rules Count",
+        "tags": [
+          "Misconfiguration"
+        ]
+      },
+      "parameters": []
     }
   }
 }
