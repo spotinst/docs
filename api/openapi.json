@@ -86865,6 +86865,629 @@
         ]
       },
       "parameters": []
+    },
+    "/cbi/v1/setup/account": {
+      "post": {
+        "tags": [
+          "Accounts"
+        ],
+        "summary": "Setup Cost Intelligence",
+        "description": "Sets up and enables Cost Intelligence functionality on a Spot account. The Spot account must already have credentials and be linked to a valid cloud provider account (e.g. AWS account, Azure subscription, etc).",
+        "operationId": "setupAccountCbiV1SetupAccountPost",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "account": {
+                    "properties": {
+                      "accountId": {
+                        "type": "string",
+                        "description": "Spot account ID"
+                      }
+                    },
+                    "type": "object",
+                    "required": [
+                      "accountId"
+                    ],
+                    "title": "Account"
+                  }
+                },
+                "type": "object",
+                "required": [
+                  "account"
+                ],
+                "title": "CreateCIRegisteredAccountModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/paths/~1healthCheck/get/responses/200/content/application~1json/schema/allOf/0"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "request": {
+                          "type": "object",
+                          "properties": {
+                            "url": {
+                              "example": "/cbi/v1/setup/account"
+                            },
+                            "method": {
+                              "example": "POST"
+                            }
+                          }
+                        },
+                        "response": {
+                          "type": "object",
+                          "properties": {
+                            "items": {
+                              "type": "array",
+                              "items": {
+                                "properties": {
+                                  "organizationId": {
+                                    "type": "string",
+                                    "description": "Spot Organization ID.",
+                                    "example": "60100100100100"
+                                  },
+                                  "accountId": {
+                                    "type": "string",
+                                    "description": "Spot Account ID.",
+                                    "example": "act-012345"
+                                  },
+                                  "providerName": {
+                                    "$ref": "#/paths/~1cbi~1v1~1setup~1account/get/responses/200/content/application~1json/schema/allOf/1/properties/response/properties/items/items/properties/providerName",
+                                    "description": "Cloud provider of setup account.",
+                                    "example": "aws"
+                                  },
+                                  "externalProviderId": {
+                                    "type": "string",
+                                    "description": "Cloud provider of setup account.",
+                                    "example": "012345678901"
+                                  },
+                                  "enabledDate": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "description": "Date/time when Cost Intelligence was registered on the Spot account."
+                                  },
+                                  "updatedDate": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "description": "Date/time when the Cost Intelligence registration was updated on the Spot account."
+                                  }
+                                },
+                                "type": "object",
+                                "required": [
+                                  "organizationId",
+                                  "accountId",
+                                  "providerName",
+                                  "externalProviderId",
+                                  "enabledDate",
+                                  "updatedDate"
+                                ],
+                                "title": "CIRegisteredAccountResponse",
+                                "description": "Represents a Spot account on which Cost Intelligence has been registered / enabled. [kind/spotinst:cbi:inventory:ciRegisteredAccount]"
+                              }
+                            },
+                            "kind": {
+                              "example": "spotinst:cbi:inventory:ciRegisteredAccount"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1cbi~1v1~1setup~1account/get/responses/400/content/application~1json/schema"
+                }
+              }
+            },
+            "description": "Invalid request error response. Adjust the request before retrying."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1cbi~1v1~1setup~1account/get/responses/400/content/application~1json/schema"
+                }
+              }
+            },
+            "description": "Not found error response. The requested resource does not exist."
+          },
+          "422": {
+            "description": "Error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1cbi~1v1~1setup~1account/get/responses/400/content/application~1json/schema"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Accounts"
+        ],
+        "summary": "Get Cost Intelligence Registered Accounts",
+        "description": "Get list of Spot accounts where Cost Intelligence has been setup.",
+        "operationId": "getAccountsCbiV1SetupAccountGet",
+        "parameters": [
+          {
+            "name": "paginationSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "description": "Number of items to include in the response"
+            },
+            "description": "Number of items to include in the response"
+          },
+          {
+            "name": "paginationKey",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Key used to fetch a specific page of items"
+            },
+            "description": "Key used to fetch a specific page of items"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "allOf": [
+                        {
+                          "$ref": "#/paths/~1azure~1compute~1vm~1signal/post/responses/200/content/application~1json/schema/allOf/0"
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "response": {
+                              "type": "object",
+                              "properties": {
+                                "items": {
+                                  "type": "array",
+                                  "description": "Array of data objects.\n",
+                                  "items": {
+                                    "type": "object"
+                                  }
+                                },
+                                "count": {
+                                  "type": "integer",
+                                  "example": 1,
+                                  "description": "Size of the data object array.\n"
+                                },
+                                "kind": {
+                                  "type": "string",
+                                  "description": "The data type of each item in the response.\n"
+                                },
+                                "paginationInfo": {
+                                  "nullable": true,
+                                  "properties": {
+                                    "totalCount": {
+                                      "type": "integer",
+                                      "nullable": true,
+                                      "description": "[Optional/Not supported on all APIs] Total number of items (for all pages)."
+                                    },
+                                    "nextKey": {
+                                      "type": "string",
+                                      "nullable": true,
+                                      "description": "Key used to fetch next page of data (if any)."
+                                    },
+                                    "previousKey": {
+                                      "type": "string",
+                                      "nullable": true,
+                                      "description": "Key used to fetch previous page of data (if any)."
+                                    }
+                                  },
+                                  "type": "object",
+                                  "title": "PaginationInfo"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "request": {
+                          "type": "object",
+                          "properties": {
+                            "url": {
+                              "example": "/cbi/v1/setup/account"
+                            },
+                            "method": {
+                              "example": "GET"
+                            }
+                          }
+                        },
+                        "response": {
+                          "type": "object",
+                          "properties": {
+                            "items": {
+                              "type": "array",
+                              "items": {
+                                "properties": {
+                                  "organizationId": {
+                                    "type": "string",
+                                    "description": "Spot Organization ID.",
+                                    "example": "60100100100100"
+                                  },
+                                  "accountId": {
+                                    "type": "string",
+                                    "description": "Spot Account ID.",
+                                    "example": "act-012345"
+                                  },
+                                  "providerName": {
+                                    "description": "Cloud provider of setup account.",
+                                    "example": "aws",
+                                    "type": "string",
+                                    "enum": [
+                                      "aws",
+                                      "azure",
+                                      "gcp"
+                                    ],
+                                    "title": "CloudProvider"
+                                  },
+                                  "externalProviderId": {
+                                    "type": "string",
+                                    "description": "Cloud provider of setup account.",
+                                    "example": "012345678901"
+                                  },
+                                  "enabledDate": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "description": "Date/time when Cost Intelligence was registered on the Spot account."
+                                  },
+                                  "updatedDate": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "description": "Date/time when the Cost Intelligence registration was updated on the Spot account."
+                                  },
+                                  "statusSummary": {
+                                    "description": "Account status summary.",
+                                    "type": "string",
+                                    "enum": [
+                                      "connected",
+                                      "notConnected",
+                                      "partiallyConnected"
+                                    ],
+                                    "title": "AccountStatusSummary"
+                                  },
+                                  "status": {
+                                    "description": "Account status",
+                                    "type": "array",
+                                    "items": {
+                                      "properties": {
+                                        "productOffering": {
+                                          "description": "Product offering.",
+                                          "type": "string",
+                                          "enum": [
+                                            "common",
+                                            "cloudBilling",
+                                            "cbi"
+                                          ],
+                                          "title": "ProductOfferingEnum"
+                                        },
+                                        "statusType": {
+                                          "type": "string",
+                                          "description": "Status type."
+                                        },
+                                        "statusCode": {
+                                          "type": "string",
+                                          "description": "Status code."
+                                        },
+                                        "statusMessage": {
+                                          "description": "Status message.",
+                                          "type": "string",
+                                          "nullable": true
+                                        },
+                                        "statistics": {
+                                          "description": "Status statistics.",
+                                          "nullable": true,
+                                          "properties": {
+                                            "totalResourceTypeCount": {
+                                              "type": "integer",
+                                              "description": "Total number of resource types."
+                                            },
+                                            "failedResourceTypeCount": {
+                                              "type": "integer",
+                                              "description": "Failed number of resource types."
+                                            },
+                                            "successfulResourceTypes": {
+                                              "description": "Successful resource types.",
+                                              "type": "array",
+                                              "items": {
+                                                "type": "string"
+                                              },
+                                              "nullable": true
+                                            },
+                                            "failedResourceTypes": {
+                                              "description": "Failed resource types.",
+                                              "type": "array",
+                                              "items": {
+                                                "type": "string"
+                                              },
+                                              "nullable": true
+                                            }
+                                          },
+                                          "type": "object",
+                                          "required": [
+                                            "totalResourceTypeCount",
+                                            "failedResourceTypeCount"
+                                          ],
+                                          "title": "AccountStatusStatistic"
+                                        },
+                                        "statusTimestamp": {
+                                          "type": "string",
+                                          "format": "date-time",
+                                          "description": "Status timestamp."
+                                        }
+                                      },
+                                      "type": "object",
+                                      "required": [
+                                        "productOffering",
+                                        "statusType",
+                                        "statusCode",
+                                        "statusTimestamp"
+                                      ],
+                                      "title": "AccountStatusItem"
+                                    },
+                                    "nullable": true
+                                  }
+                                },
+                                "type": "object",
+                                "required": [
+                                  "organizationId",
+                                  "accountId",
+                                  "providerName",
+                                  "externalProviderId",
+                                  "enabledDate",
+                                  "updatedDate",
+                                  "statusSummary"
+                                ],
+                                "title": "CIRegisteredAccountWithStatusResponse"
+                              }
+                            },
+                            "kind": {
+                              "example": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/paths/~1azure~1compute~1vm~1signal/post/responses/200/content/application~1json/schema/allOf/0"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "response": {
+                          "type": "object",
+                          "properties": {
+                            "errors": {
+                              "type": "array",
+                              "description": "List of errors.",
+                              "items": {
+                                "properties": {
+                                  "code": {
+                                    "type": "string",
+                                    "description": "Error code."
+                                  },
+                                  "message": {
+                                    "type": "string",
+                                    "description": "Error message."
+                                  }
+                                },
+                                "type": "object",
+                                "required": [
+                                  "message"
+                                ],
+                                "title": "ErrorModel"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "Invalid request error response. Adjust the request before retrying."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1cbi~1v1~1setup~1account/get/responses/400/content/application~1json/schema"
+                }
+              }
+            },
+            "description": "Not found error response. The requested resource does not exist."
+          },
+          "422": {
+            "description": "Error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1cbi~1v1~1setup~1account/get/responses/400/content/application~1json/schema"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cbi/v1/setup/account/validation": {
+      "post": {
+        "tags": [
+          "Accounts"
+        ],
+        "summary": "Perform Cost Intelligence Setup Validations",
+        "description": "Validate that Cost Intelligence can be setup on the specified Spot Account.",
+        "operationId": "validateSetupAccountCbiV1SetupAccountValidationPost",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/paths/~1cbi~1v1~1setup~1account/post/requestBody/content/application~1json/schema"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/paths/~1healthCheck/get/responses/200/content/application~1json/schema/allOf/0"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "request": {
+                          "type": "object",
+                          "properties": {
+                            "url": {
+                              "example": "/cbi/v1/setup/account/validation"
+                            },
+                            "method": {
+                              "example": "POST"
+                            }
+                          }
+                        },
+                        "response": {
+                          "type": "object",
+                          "properties": {
+                            "items": {
+                              "type": "array",
+                              "items": {
+                                "properties": {
+                                  "id": {
+                                    "type": "string",
+                                    "description": "Unique ID of the validation step that was performed."
+                                  },
+                                  "description": {
+                                    "description": "Summary of the validation step (i.e. what validation check was performed).",
+                                    "type": "string",
+                                    "nullable": true
+                                  },
+                                  "status": {
+                                    "description": "Overall status of the validation step.",
+                                    "type": "string",
+                                    "enum": [
+                                      "success",
+                                      "failed",
+                                      "warning",
+                                      "skipped"
+                                    ],
+                                    "title": "ValidationStatus"
+                                  },
+                                  "validationInfo": {
+                                    "description": "Additional information about the reason the validation step failed.",
+                                    "type": "string",
+                                    "nullable": true
+                                  },
+                                  "validationInfoDetails": {
+                                    "description": "Validation info details",
+                                    "type": "object",
+                                    "nullable": true
+                                  }
+                                },
+                                "type": "object",
+                                "required": [
+                                  "id",
+                                  "status"
+                                ],
+                                "title": "ValidationModelResponse",
+                                "description": "[kind/spotinst:cbi:accountRegistrationValidation]"
+                              }
+                            },
+                            "kind": {
+                              "example": "spotinst:cbi:accountRegistrationValidation"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1cbi~1v1~1setup~1account/get/responses/400/content/application~1json/schema"
+                }
+              }
+            },
+            "description": "Invalid request error response. Adjust the request before retrying."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1cbi~1v1~1setup~1account/get/responses/400/content/application~1json/schema"
+                }
+              }
+            },
+            "description": "Not found error response. The requested resource does not exist."
+          },
+          "422": {
+            "description": "Error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1cbi~1v1~1setup~1account/get/responses/400/content/application~1json/schema"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
