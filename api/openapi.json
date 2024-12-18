@@ -87532,6 +87532,482 @@
           }
         }
       }
+    },
+    "/cloudBilling/v1/setup/account": {
+      "get": {
+        "tags": [
+          "Accounts"
+        ],
+        "summary": "Get Billing Engine Registered Accounts",
+        "description": "Get list of Spot accounts where Billing Engine has been setup.",
+        "operationId": "listAccountsCloudBillingV1SetupAccountGet",
+        "parameters": [
+          {
+            "name": "paginationSize",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "description": "Number of items to include in the response"
+            },
+            "description": "Number of items to include in the response"
+          },
+          {
+            "name": "paginationKey",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "description": "Key used to fetch a specific page of items"
+            },
+            "description": "Key used to fetch a specific page of items"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/paths/~1cbi~1v1~1setup~1account/get/responses/200/content/application~1json/schema/allOf/0"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "request": {
+                          "type": "object",
+                          "properties": {
+                            "url": {
+                              "example": "/cloudBilling/v1/setup/account"
+                            },
+                            "method": {
+                              "example": "GET"
+                            }
+                          }
+                        },
+                        "response": {
+                          "type": "object",
+                          "properties": {
+                            "items": {
+                              "type": "array",
+                              "items": {
+                                "properties": {
+                                  "accountId": {
+                                    "type": "string",
+                                    "description": "Spot Account ID.",
+                                    "example": "act-23432"
+                                  },
+                                  "organizationId": {
+                                    "description": "Spot Organization ID.",
+                                    "example": "634563908342",
+                                    "type": "string",
+                                    "nullable": true
+                                  },
+                                  "cloudProvider": {
+                                    "type": "string",
+                                    "description": "Cloud provider.",
+                                    "example": "aws"
+                                  },
+                                  "externalProviderId": {
+                                    "type": "string",
+                                    "description": "Cloud provider account ID.",
+                                    "example": "435345634"
+                                  },
+                                  "externalProviderName": {
+                                    "description": "Cloud provider account name.",
+                                    "example": "Provider account name 1",
+                                    "type": "string",
+                                    "nullable": true
+                                  },
+                                  "enabledDate": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "description": "Timestamp when the Spot account was onboarded to Billing Engine.",
+                                    "example": "2019-08-24T14:15:22Z"
+                                  },
+                                  "updatedDate": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "description": "Timestamp when Billing Engine config was last modified.",
+                                    "example": "2019-08-24T14:15:22Z"
+                                  },
+                                  "statusSummary": {
+                                    "$ref": "#/paths/~1cbi~1v1~1setup~1account/get/responses/200/content/application~1json/schema/allOf/1/properties/response/properties/items/items/properties/statusSummary",
+                                    "description": "Billing Engine account connection status."
+                                  },
+                                  "status": {
+                                    "description": "Billing Engine account status info.",
+                                    "type": "array",
+                                    "items": {
+                                      "$ref": "#/paths/~1cbi~1v1~1setup~1account/get/responses/200/content/application~1json/schema/allOf/1/properties/response/properties/items/items/properties/status/items"
+                                    },
+                                    "nullable": true
+                                  }
+                                },
+                                "type": "object",
+                                "required": [
+                                  "accountId",
+                                  "organizationId",
+                                  "cloudProvider",
+                                  "externalProviderId",
+                                  "externalProviderName",
+                                  "enabledDate",
+                                  "updatedDate",
+                                  "statusSummary"
+                                ],
+                                "title": "SetupBERegisteredAccountWithStatusResponse",
+                                "description": "Represents a Spot account on which Billing Engine has been registered / enabled. [kind/spotinst:cloudBilling:beRegisteredAccount]"
+                              }
+                            },
+                            "kind": {
+                              "example": "spotinst:cloudBilling:beRegisteredAccount"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1cbi~1v1~1setup~1account/get/responses/400/content/application~1json/schema"
+                }
+              }
+            },
+            "description": "Invalid request error response. Adjust the request before retrying."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1cbi~1v1~1setup~1account/get/responses/400/content/application~1json/schema"
+                }
+              }
+            },
+            "description": "Not found error response. The requested resource does not exist."
+          },
+          "422": {
+            "description": "Error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1cbi~1v1~1setup~1account/get/responses/400/content/application~1json/schema"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Accounts"
+        ],
+        "summary": "Setup Billing Engine",
+        "description": "Sets up and enables Billing Engine functionality on a Spot account. The Spot account must already have credentials and be linked to a valid cloud provider account (e.g. AWS account, Azure billing account, etc).",
+        "operationId": "setupAccountCloudBillingV1SetupAccountPost",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "accountId": {
+                    "type": "string",
+                    "description": "Spot Account ID.",
+                    "example": "act-23432"
+                  },
+                  "config": {
+                    "anyOf": [
+                      {
+                        "type": "object"
+                      },
+                      {
+                        "properties": {
+                          "billingSource": {
+                            "description": "Configuration settings used to collect AWS billing data.",
+                            "properties": {
+                              "bucket": {
+                                "type": "string",
+                                "description": "The name of the AWS S3 bucket where the AWS CUR is stored."
+                              },
+                              "region": {
+                                "type": "string",
+                                "description": "The AWS buckets AWS region (e.g. us-east-1)."
+                              },
+                              "pathPrefix": {
+                                "type": "string",
+                                "description": "The prefix path and report name generated for the AWS CUR you configured."
+                              }
+                            },
+                            "type": "object",
+                            "required": [
+                              "bucket",
+                              "region",
+                              "pathPrefix"
+                            ],
+                            "title": "BERegisteredSetupAccountAwsConfigBillingSource"
+                          }
+                        },
+                        "type": "object",
+                        "required": [
+                          "billingSource"
+                        ],
+                        "title": "BERegisteredSetupAccountAwsConfig",
+                        "description": "Configuration settings used to collect AWS billing data. Requires that the target Spot account is linked to an AWS account with billing data (e.g. master payer account)."
+                      },
+                      {
+                        "properties": {},
+                        "type": "object",
+                        "title": "BERegisteredSetupAccountAzureConfig",
+                        "description": "Configuration settings used to collect Azure billing data. Requires that the target Spot account is linked to an Azure billing account."
+                      }
+                    ],
+                    "description": "Configuration for the Billing Engine (e.g. location of the billing data)",
+                    "nullable": true
+                  }
+                },
+                "type": "object",
+                "required": [
+                  "accountId"
+                ],
+                "title": "BERegisteredSetupAccountUpdateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/paths/~1healthCheck/get/responses/200/content/application~1json/schema/allOf/0"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "request": {
+                          "type": "object",
+                          "properties": {
+                            "url": {
+                              "example": "/cloudBilling/v1/setup/account"
+                            },
+                            "method": {
+                              "example": "POST"
+                            }
+                          }
+                        },
+                        "response": {
+                          "type": "object",
+                          "properties": {
+                            "items": {
+                              "type": "array",
+                              "items": {
+                                "properties": {
+                                  "accountId": {
+                                    "type": "string",
+                                    "description": "Spot Account ID.",
+                                    "example": "act-23432"
+                                  },
+                                  "organizationId": {
+                                    "description": "Spot Organization ID",
+                                    "example": "634563908342",
+                                    "type": "string",
+                                    "nullable": true
+                                  },
+                                  "cloudProvider": {
+                                    "type": "string",
+                                    "description": "Cloud provider",
+                                    "example": "aws"
+                                  },
+                                  "externalProviderId": {
+                                    "type": "string",
+                                    "description": "Cloud provider account ID",
+                                    "example": "435345634"
+                                  },
+                                  "isBillingAccount": {
+                                    "type": "boolean",
+                                    "description": "True if Spot account is a billing account."
+                                  },
+                                  "enabledDate": {
+                                    "type": "string",
+                                    "description": "Timestamp when the Spot account was onboarded to Billing Engine.",
+                                    "example": "2019-08-24T14:15:22Z"
+                                  },
+                                  "updatedDate": {
+                                    "type": "string",
+                                    "description": "Timestamp when Billing Engine config was last modified.",
+                                    "example": "2019-08-24T14:15:22Z"
+                                  },
+                                  "config": {
+                                    "description": "Provider-specific configuration.",
+                                    "type": "object",
+                                    "nullable": true
+                                  }
+                                },
+                                "type": "object",
+                                "required": [
+                                  "accountId",
+                                  "organizationId",
+                                  "cloudProvider",
+                                  "externalProviderId",
+                                  "isBillingAccount",
+                                  "enabledDate",
+                                  "updatedDate"
+                                ],
+                                "title": "SetupCreateBERegisteredAccountResponse",
+                                "description": "Represents a Spot account on which Billing Engine has been registered / enabled. [kind/spotinst:cloudBilling:beRegisteredAccount]"
+                              }
+                            },
+                            "kind": {
+                              "example": "spotinst:cloudBilling:beRegisteredAccount"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1cbi~1v1~1setup~1account/get/responses/400/content/application~1json/schema"
+                }
+              }
+            },
+            "description": "Invalid request error response. Adjust the request before retrying."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1cbi~1v1~1setup~1account/get/responses/400/content/application~1json/schema"
+                }
+              }
+            },
+            "description": "Not found error response. The requested resource does not exist."
+          },
+          "422": {
+            "description": "Error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1cbi~1v1~1setup~1account/get/responses/400/content/application~1json/schema"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cloudBilling/v1/setup/account/validation": {
+      "post": {
+        "tags": [
+          "Accounts"
+        ],
+        "summary": "Perform Billing Engine Setup Validations",
+        "description": "Validate that Billing Engine can be setup on the specified Spot Account.",
+        "operationId": "validateSetupAccountCloudBillingV1SetupAccountValidationPost",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/paths/~1cloudBilling~1v1~1setup~1account/post/requestBody/content/application~1json/schema"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/paths/~1healthCheck/get/responses/200/content/application~1json/schema/allOf/0"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "request": {
+                          "type": "object",
+                          "properties": {
+                            "url": {
+                              "example": "/cloudBilling/v1/setup/account/validation"
+                            },
+                            "method": {
+                              "example": "POST"
+                            }
+                          }
+                        },
+                        "response": {
+                          "type": "object",
+                          "properties": {
+                            "items": {
+                              "type": "array",
+                              "items": {
+                                "$ref": "#/paths/~1cbi~1v1~1setup~1account~1validation/post/responses/200/content/application~1json/schema/allOf/1/properties/response/properties/items/items"
+                              }
+                            },
+                            "kind": {
+                              "example": "spotinst:cbi:accountRegistrationValidation"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1cbi~1v1~1setup~1account/get/responses/400/content/application~1json/schema"
+                }
+              }
+            },
+            "description": "Invalid request error response. Adjust the request before retrying."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1cbi~1v1~1setup~1account/get/responses/400/content/application~1json/schema"
+                }
+              }
+            },
+            "description": "Not found error response. The requested resource does not exist."
+          },
+          "422": {
+            "description": "Error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1cbi~1v1~1setup~1account/get/responses/400/content/application~1json/schema"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
