@@ -54101,6 +54101,19 @@
                               }
                             }
                           },
+                          "autoUpdate": {
+                            "type": "object",
+                            "title": "auto-update",
+                            "description": "The Ocean Kubernetes AutoUpdate object. If set to 'true', Ocean will ensure that your clusters have an up-to-date configuration according to the respective GKE cluster.",
+                            "properties": {
+                              "isEnabled": {
+                                "type": "boolean",
+                                "description": "Enable the Ocean Kubernetes AutoUpdate.",
+                                "default": true,
+                                "example": true
+                              }
+                            }
+                          },
                           "capacity": {
                             "type": "object",
                             "title": "Capacity Units",
@@ -54652,6 +54665,9 @@
                                   "autoScaler": {
                                     "$ref": "#/paths/~1ocean~1gcp~1k8s~1cluster/post/requestBody/content/application~1json/schema/allOf/0/properties/cluster/properties/autoScaler"
                                   },
+                                  "autoUpdate": {
+                                    "$ref": "#/paths/~1ocean~1gcp~1k8s~1cluster/post/requestBody/content/application~1json/schema/allOf/0/properties/cluster/properties/autoUpdate"
+                                  },
                                   "capacity": {
                                     "$ref": "#/paths/~1ocean~1gcp~1k8s~1cluster/post/requestBody/content/application~1json/schema/allOf/0/properties/cluster/properties/capacity"
                                   },
@@ -54925,6 +54941,9 @@
                           },
                           "autoScaler": {
                             "$ref": "#/paths/~1ocean~1gcp~1k8s~1cluster/post/requestBody/content/application~1json/schema/allOf/0/properties/cluster/properties/autoScaler"
+                          },
+                          "autoUpdate": {
+                            "$ref": "#/paths/~1ocean~1gcp~1k8s~1cluster/post/requestBody/content/application~1json/schema/allOf/0/properties/cluster/properties/autoUpdate"
                           },
                           "capacity": {
                             "$ref": "#/paths/~1ocean~1gcp~1k8s~1cluster/post/requestBody/content/application~1json/schema/allOf/0/properties/cluster/properties/capacity"
@@ -59116,6 +59135,9 @@
                                       },
                                       "autoScaler": {
                                         "$ref": "#/paths/~1ocean~1gcp~1k8s~1cluster/post/requestBody/content/application~1json/schema/allOf/0/properties/cluster/properties/autoScaler"
+                                      },
+                                      "autoUpdate": {
+                                        "$ref": "#/paths/~1ocean~1gcp~1k8s~1cluster/post/requestBody/content/application~1json/schema/allOf/0/properties/cluster/properties/autoUpdate"
                                       },
                                       "capacity": {
                                         "$ref": "#/paths/~1ocean~1gcp~1k8s~1cluster/post/requestBody/content/application~1json/schema/allOf/0/properties/cluster/properties/capacity"
