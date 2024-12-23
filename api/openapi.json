@@ -31920,7 +31920,7 @@
                                                   },
                                                   "httpPutResponseHopLimit": {
                                                     "type": "integer",
-                                                    "description": "An integer from 1 through 64.\nThe desired HTTP PUT response hop limit for instance metadata requests.\nThe larger the number, the further the instance metadata requests can travel.\n",
+                                                    "description": "An integer from 1 through 64.\nThe required HTTP PUT response hop limit for instance metadata requests.\nThe larger the number, the further the instance metadata requests can travel.\n",
                                                     "example": 12
                                                   },
                                                   "httpEndpoint": {
@@ -31931,6 +31931,16 @@
                                                       "enabled"
                                                     ],
                                                     "example": "disabled"
+                                                  },
+                                                  "instanceMetadataTags": {
+                                                    "title": "Instance Metadata Tags",
+                                                    "type": "string",
+                                                    "enum": [
+                                                      "Enabled",
+                                                      "Disabled"
+                                                    ],
+                                                    "description": "Indicates whether access to instance tags from the instance metadata is enabled or disabled.\nCan’t be null.\n",
+                                                    "example": "Enabled"
                                                   }
                                                 }
                                               }
