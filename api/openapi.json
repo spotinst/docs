@@ -57914,59 +57914,146 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "roll": {
+                "oneOf": [
+                  {
                     "type": "object",
-                    "description": "Settings for roll operation\n",
+                    "title": "Roll",
                     "properties": {
-                      "batchSizePercentage": {
-                        "type": "integer",
-                        "description": "Value in % to set the size of the batches in the roll. Valid values are 0-100\n",
-                        "example": 20
-                      },
-                      "comment": {
-                        "description": "Add a breif description or comment about the roll. The comment should be limited to 256 chars.\n",
-                        "type": "string",
-                        "example": "This is why I deployed my cluster."
-                      },
-                      "respectPdb": {
-                        "type": "boolean",
-                        "example": true,
-                        "default": false,
-                        "description": "During the roll, if the parameter is set to true we honor PDB during the instance replacement.\n"
-                      },
-                      "batchMinHealthyPercentage": {
-                        "type": "integer",
-                        "description": "Indicates the threshold of minimum healthy instances in single batch. If the amount of healthy instances in single batch is under the threshold, the cluster roll will fail. If exists, the parameter value will be in range of 1-100. In case of null as value, the default value in the backend will be 50%. Value of param should represent the number in percentage (%) of the batch.\n",
-                        "example": 100,
-                        "default": 50
-                      },
-                      "launchSpecIds": {
-                        "type": "array",
-                        "description": "List of virtual node group identifiers to be rolled. Each identifier is a string. Can be null. Cannot be used together with instanceName.\n",
-                        "items": {
-                          "type": "string",
-                          "example": [
-                            "ols-76694a7d",
-                            "ols-56694a76"
-                          ]
-                        }
-                      },
-                      "instanceNames": {
-                        "type": "array",
-                        "description": "List of instance names to be rolled. Each name is a string. instanceNames can be null. Cannot be used together with launchSpecIds.\n",
-                        "items": {
-                          "type": "string",
-                          "example": [
-                            "i-0003a99ffb566f039",
-                            "i-0567a99ffb566f765"
-                          ]
-                        }
+                      "roll": {
+                        "allOf": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "batchSizePercentage": {
+                                "type": "integer",
+                                "description": "Value is a percentage to set the size of a batch in a roll. Valid values are 0-100.\n",
+                                "example": 20
+                              }
+                            }
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "comment": {
+                                "type": "string",
+                                "description": "Add a comment description for the roll. The comment is limited to 256 chars.\n",
+                                "example": "This is why I deployed my cluster."
+                              }
+                            }
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "respectPdb": {
+                                "type": "boolean",
+                                "description": "During the roll, if the parameter is set to 'true', PDB is honored during the instance replacement.\n",
+                                "example": true,
+                                "default": false
+                              }
+                            }
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "batchMinHealthyPercentage": {
+                                "type": "integer",
+                                "description": "Indicates the threshold percentage of minimum healthy instances in a single batch. If the number is below the threshold, the cluster roll will fail. The parameter value has a range of 1-100 (default = 50%).\n",
+                                "example": 100,
+                                "default": 50
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "title": "Roll with instance ids",
+                    "properties": {
+                      "roll": {
+                        "allOf": [
+                          {
+                            "$ref": "#/paths/~1ocean~1gcp~1k8s~1cluster~1%7BoceanId%7D~1roll/post/requestBody/content/application~1json/schema/oneOf/0/properties/roll/allOf/0"
+                          },
+                          {
+                            "$ref": "#/paths/~1ocean~1gcp~1k8s~1cluster~1%7BoceanId%7D~1roll/post/requestBody/content/application~1json/schema/oneOf/0/properties/roll/allOf/1"
+                          },
+                          {
+                            "$ref": "#/paths/~1ocean~1gcp~1k8s~1cluster~1%7BoceanId%7D~1roll/post/requestBody/content/application~1json/schema/oneOf/0/properties/roll/allOf/2"
+                          },
+                          {
+                            "$ref": "#/paths/~1ocean~1gcp~1k8s~1cluster~1%7BoceanId%7D~1roll/post/requestBody/content/application~1json/schema/oneOf/0/properties/roll/allOf/3"
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "instanceIds": {
+                                "type": "array",
+                                "description": "List of instance identifiers to be rolled. Each identifier is a string. InstanceIds can be null, and cannot be used together with launchSpecIds.\n",
+                                "items": {
+                                  "type": "string"
+                                },
+                                "example": [
+                                  "i-0003a99ffb566f039",
+                                  "i-0567a99ffb566f765"
+                                ]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "type": "object",
+                    "title": "Roll with Virtual Node Group ids",
+                    "properties": {
+                      "roll": {
+                        "allOf": [
+                          {
+                            "$ref": "#/paths/~1ocean~1gcp~1k8s~1cluster~1%7BoceanId%7D~1roll/post/requestBody/content/application~1json/schema/oneOf/0/properties/roll/allOf/0"
+                          },
+                          {
+                            "$ref": "#/paths/~1ocean~1gcp~1k8s~1cluster~1%7BoceanId%7D~1roll/post/requestBody/content/application~1json/schema/oneOf/0/properties/roll/allOf/1"
+                          },
+                          {
+                            "$ref": "#/paths/~1ocean~1gcp~1k8s~1cluster~1%7BoceanId%7D~1roll/post/requestBody/content/application~1json/schema/oneOf/0/properties/roll/allOf/2"
+                          },
+                          {
+                            "$ref": "#/paths/~1ocean~1gcp~1k8s~1cluster~1%7BoceanId%7D~1roll/post/requestBody/content/application~1json/schema/oneOf/0/properties/roll/allOf/3"
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "launchSpecIds": {
+                                "type": "array",
+                                "description": "List of virtual node group identifiers to be rolled. Each identifier is a string. LaunchSpecIds can be null, and cannot be used together with instanceIds.\n",
+                                "items": {
+                                  "type": "string"
+                                },
+                                "example": [
+                                  "ols-76694a7d",
+                                  "ols-56694a76"
+                                ]
+                              }
+                            }
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "disableLaunchSpecAutoScaling": {
+                                "type": "boolean",
+                                "description": "When set to 'true' and virtual node group identifiers are defined to roll, the specified virtual node group(s) will be blocked from scaling up. Replacements will scale up in other virtual node groups that match the displaced pods instead. This applies to migrating nodes from one virtual node group to another.\n",
+                                "example": true
+                              }
+                            }
+                          }
+                        ]
                       }
                     }
                   }
-                }
+                ]
               }
             }
           }
@@ -57986,6 +58073,17 @@
                     "oceanId": {
                       "type": "string",
                       "example": "o-12e31234"
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "Cluster",
+                        "Vngs",
+                        "Vng",
+                        "Instances",
+                        "Instance"
+                      ],
+                      "example": "Cluster"
                     },
                     "status": {
                       "type": "string",
@@ -58162,6 +58260,17 @@
                               "id": {
                                 "type": "string",
                                 "example": "scr-5aaf854e"
+                              },
+                              "scope": {
+                                "type": "string",
+                                "enum": [
+                                  "Cluster",
+                                  "Vngs",
+                                  "Vng",
+                                  "Instances",
+                                  "Instance"
+                                ],
+                                "example": "Cluster"
                               },
                               "status": {
                                 "type": "string",
@@ -58363,6 +58472,17 @@
                     "numOfBatches": {
                       "type": "integer",
                       "example": 5
+                    },
+                    "scope": {
+                      "type": "string",
+                      "enum": [
+                        "Cluster",
+                        "Vngs",
+                        "Vng",
+                        "Instances",
+                        "Instance"
+                      ],
+                      "example": "Cluster"
                     },
                     "progress": {
                       "type": "object",
