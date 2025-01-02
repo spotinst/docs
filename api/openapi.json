@@ -85716,6 +85716,133 @@
         }
       }
     },
+    "/ocean/{oceanId}/rightSizing/cluster/configuration": {
+      "post": {
+        "summary": "Set Cluster Recommendations Percentile",
+        "description": "Set Recommendations Percentile for the Ocean Cluster.\n<br />\n<br />\n**This action can take a few minutes to complete.**\n",
+        "operationId": "SetClusterRecommendationsPercentile",
+        "tags": [
+          "Ocean Automatic Rightsizing"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/paths/~1ocean~1%7BoceanId%7D~1rightSizing~1rule/get/parameters/0"
+          },
+          {
+            "$ref": "#/paths/~1ocean~1%7BoceanId%7D~1rightSizing~1rollbacks~1acknowledge/post/parameters/1"
+          },
+          {
+            "$ref": "#/paths/~1azure~1costs/get/parameters/0"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "type": "object",
+                    "required": [
+                      "config"
+                    ],
+                    "properties": {
+                      "config": {
+                        "type": "object",
+                        "required": [
+                          "recommendationsPercentile"
+                        ],
+                        "properties": {
+                          "recommendationsPercentile": {
+                            "type": "integer",
+                            "description": "Change the percentile that the right-sizing recommendations calculation will take into account.",
+                            "example": 85,
+                            "enum": [
+                              85,
+                              90,
+                              95,
+                              99
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ocean Cluster Recommendations Percentile Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/paths/~1healthCheck/get/responses/200/content/application~1json/schema/allOf/0"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "request": {
+                          "type": "object",
+                          "properties": {
+                            "url": {
+                              "example": "/ocean/{oceanId}/rightSizing/cluster/configuration"
+                            },
+                            "method": {
+                              "example": "POST"
+                            }
+                          }
+                        },
+                        "response": {
+                          "type": "object",
+                          "properties": {
+                            "items": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "oceanId": {
+                                    "type": "string",
+                                    "example": "o-abcd1234"
+                                  },
+                                  "clusterIdentifier": {
+                                    "type": "string",
+                                    "example": "dev-cluster"
+                                  },
+                                  "config": {
+                                    "type": "object",
+                                    "properties": {
+                                      "recommendationsPercentile": {
+                                        "type": "integer",
+                                        "example": 85
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "kind": {
+                              "example": "mcs:ocean:rightSizing:clusterConfiguration"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
     "/security/v1/compliances": {
       "get": {
         "description": "A cyber security compliance determines how compliant an asset is. It checks against specific security standards.\nThis API returns list of all compliances supported in Spot.\nA compliance consists of one or more controls.",
