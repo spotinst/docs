@@ -39821,6 +39821,34 @@
                                   "minimum": 60,
                                   "default": 120,
                                   "example": 60
+                                },
+                                "startupTaints": {
+                                  "type": "array",
+                                  "description": "Temporary taints applied to a node during its initialization phase. \nFor a startup taint to work, it must also be set as a regular taint\nin the userData for the cluster.\n",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "key": {
+                                        "type": "string",
+                                        "description": "Set startup taint key.\n"
+                                      },
+                                      "value": {
+                                        "type": "string",
+                                        "description": "Set startup taint value.\n"
+                                      },
+                                      "effect": {
+                                        "type": "string",
+                                        "description": "Set startup taint effect.\n"
+                                      }
+                                    }
+                                  },
+                                  "example": [
+                                    {
+                                      "key": "node.cilium.io/agent-not-ready",
+                                      "value": true,
+                                      "effect": "NoSchedule"
+                                    }
+                                  ]
                                 }
                               }
                             }
@@ -43462,6 +43490,34 @@
                             "example": 12
                           }
                         }
+                      },
+                      "startupTaints": {
+                        "type": "array",
+                        "description": "Temporary taints applied to a node during its initialization phase. \nFor a startup taint to work, it must also be set as a regular taint\nin the userData for the VNG.\n",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "key": {
+                              "type": "string",
+                              "description": "Set startup taint key.\n"
+                            },
+                            "value": {
+                              "type": "string",
+                              "description": "Set startup taint value.\n"
+                            },
+                            "effect": {
+                              "type": "string",
+                              "description": "Set startup taint effect.\n"
+                            }
+                          }
+                        },
+                        "example": [
+                          {
+                            "key": "node.cilium.io/agent-not-ready",
+                            "value": true,
+                            "effect": "NoSchedule"
+                          }
+                        ]
                       }
                     }
                   }
