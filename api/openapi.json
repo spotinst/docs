@@ -246,7 +246,8 @@
       "name": "Spot Security",
       "tags": [
         "Compliance",
-        "Misconfiguration"
+        "Misconfiguration",
+        "Assets"
       ]
     }
   ],
@@ -87219,6 +87220,486 @@
         "summary": "Get Rules Count",
         "tags": [
           "Misconfiguration"
+        ]
+      },
+      "parameters": []
+    },
+    "/security/v1/assets/filters/{filterKey}": {
+      "get": {
+        "description": "Get a list of values in your organization for a specific filter type.\nFor example, if you select accountId, you'll get a list of all the account IDs in your organization.",
+        "operationId": "get_asset_sim_filter_v1_assets_filters__filterKey__get",
+        "parameters": [
+          {
+            "description": "The name of the filter.",
+            "in": "path",
+            "name": "filterKey",
+            "required": true,
+            "schema": {
+              "allOf": [
+                {
+                  "description": "The list of filter types, for example accountId, region, assetName.",
+                  "enum": [
+                    "accountId",
+                    "accountName",
+                    "region",
+                    "assetId",
+                    "assetName",
+                    "service",
+                    "assetType"
+                  ],
+                  "title": "AssetFilters",
+                  "type": "string"
+                }
+              ],
+              "description": "The name of the filter.",
+              "title": "Filterkey"
+            }
+          },
+          {
+            "$ref": "#/paths/~1security~1v1~1misconfigurations/get/parameters/0"
+          },
+          {
+            "$ref": "#/paths/~1security~1v1~1misconfigurations/get/parameters/1"
+          },
+          {
+            "$ref": "#/paths/~1security~1v1~1misconfigurations/get/parameters/2"
+          },
+          {
+            "$ref": "#/paths/~1security~1v1~1misconfigurations/get/parameters/3"
+          },
+          {
+            "$ref": "#/paths/~1security~1v1~1misconfigurations/get/parameters/4"
+          },
+          {
+            "$ref": "#/paths/~1security~1v1~1misconfigurations/get/parameters/5"
+          },
+          {
+            "$ref": "#/paths/~1security~1v1~1misconfigurations/get/parameters/6"
+          },
+          {
+            "$ref": "#/paths/~1security~1v1~1misconfigurations/get/parameters/7"
+          },
+          {
+            "$ref": "#/paths/~1security~1v1~1misconfigurations/get/parameters/8"
+          },
+          {
+            "$ref": "#/paths/~1security~1v1~1misconfigurations/get/parameters/9"
+          },
+          {
+            "$ref": "#/paths/~1security~1v1~1misconfigurations/get/parameters/10"
+          },
+          {
+            "$ref": "#/paths/~1security~1v1~1misconfigurations/get/parameters/11"
+          },
+          {
+            "$ref": "#/paths/~1security~1v1~1misconfigurations/get/parameters/13"
+          },
+          {
+            "description": "The name of the asset ID.",
+            "in": "query",
+            "name": "assetName",
+            "required": false,
+            "schema": {
+              "description": "The name of the asset ID.",
+              "title": "Assetname",
+              "type": "string"
+            }
+          },
+          {
+            "description": "If there are findings for the assets, the value is True.",
+            "example": "true",
+            "in": "query",
+            "name": "isRisky",
+            "required": false,
+            "schema": {
+              "description": "If there are findings for the assets, the value is True.",
+              "title": "Isrisky",
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "The sum of misconfigurations and vulnerabilities for today's date, and threats and anomalies identified that are still applicable today.\n        <br>\n        Enter either a number or prefix it with one of these operators:\n        <table>\n        <tr>\n        <th>Operator</th>\n        <th>Notation</th>\n        <th>Example</th>\n        </tr>\n        <tr>\n        <td>Equals</td>\n        <td>No prefix or \\~eq\\~</td>\n        <td>10 or \\~eq\\~10</td>\n        </tr>\n        <tr>\n        <td>Not equals</td>\n        <td>\\~neq\\~</td>\n        <td>\\~neq\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than</td>\n        <td>\\~gt\\~</td>\n        <td>\\~gt\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than equals</td>\n        <td>\\~gte\\~</td>\n        <td>\\~gte\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than</td>\n        <td>\\~lt\\~</td>\n        <td>\\~lt\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than equals</td>\n        <td>\\~lte\\~</td>\n        <td>\\~lte\\~10</td>\n        </tr>\n        <tr>\n        <td>Between two numbers</td>\n        <td>\\~bt\\~</td>\n        <td>\\~bt\\~10,20</td>\n        </tr>\n        </table>\n        ",
+            "in": "query",
+            "name": "allFindingsCount",
+            "required": false,
+            "schema": {
+              "description": "The sum of misconfigurations and vulnerabilities for today's date, and threats and anomalies identified that are still applicable today.\n        <br>\n        Enter either a number or prefix it with one of these operators:\n        <table>\n        <tr>\n        <th>Operator</th>\n        <th>Notation</th>\n        <th>Example</th>\n        </tr>\n        <tr>\n        <td>Equals</td>\n        <td>No prefix or \\~eq\\~</td>\n        <td>10 or \\~eq\\~10</td>\n        </tr>\n        <tr>\n        <td>Not equals</td>\n        <td>\\~neq\\~</td>\n        <td>\\~neq\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than</td>\n        <td>\\~gt\\~</td>\n        <td>\\~gt\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than equals</td>\n        <td>\\~gte\\~</td>\n        <td>\\~gte\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than</td>\n        <td>\\~lt\\~</td>\n        <td>\\~lt\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than equals</td>\n        <td>\\~lte\\~</td>\n        <td>\\~lte\\~10</td>\n        </tr>\n        <tr>\n        <td>Between two numbers</td>\n        <td>\\~bt\\~</td>\n        <td>\\~bt\\~10,20</td>\n        </tr>\n        </table>\n        ",
+              "title": "Allfindingscount",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The total number of vulnerabilities found for the asset.\n        <br>\n        Enter either a number or prefix it with one of these operators:\n        <table>\n        <tr>\n        <th>Operator</th>\n        <th>Notation</th>\n        <th>Example</th>\n        </tr>\n        <tr>\n        <td>Equals</td>\n        <td>No prefix or \\~eq\\~</td>\n        <td>10 or \\~eq\\~10</td>\n        </tr>\n        <tr>\n        <td>Not equals</td>\n        <td>\\~neq\\~</td>\n        <td>\\~neq\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than</td>\n        <td>\\~gt\\~</td>\n        <td>\\~gt\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than equals</td>\n        <td>\\~gte\\~</td>\n        <td>\\~gte\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than</td>\n        <td>\\~lt\\~</td>\n        <td>\\~lt\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than equals</td>\n        <td>\\~lte\\~</td>\n        <td>\\~lte\\~10</td>\n        </tr>\n        <tr>\n        <td>Between two numbers</td>\n        <td>\\~bt\\~</td>\n        <td>\\~bt\\~10,20</td>\n        </tr>\n        </table>\n        ",
+            "in": "query",
+            "name": "allVulnCount",
+            "required": false,
+            "schema": {
+              "description": "The total number of vulnerabilities found for the asset.\n        <br>\n        Enter either a number or prefix it with one of these operators:\n        <table>\n        <tr>\n        <th>Operator</th>\n        <th>Notation</th>\n        <th>Example</th>\n        </tr>\n        <tr>\n        <td>Equals</td>\n        <td>No prefix or \\~eq\\~</td>\n        <td>10 or \\~eq\\~10</td>\n        </tr>\n        <tr>\n        <td>Not equals</td>\n        <td>\\~neq\\~</td>\n        <td>\\~neq\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than</td>\n        <td>\\~gt\\~</td>\n        <td>\\~gt\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than equals</td>\n        <td>\\~gte\\~</td>\n        <td>\\~gte\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than</td>\n        <td>\\~lt\\~</td>\n        <td>\\~lt\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than equals</td>\n        <td>\\~lte\\~</td>\n        <td>\\~lte\\~10</td>\n        </tr>\n        <tr>\n        <td>Between two numbers</td>\n        <td>\\~bt\\~</td>\n        <td>\\~bt\\~10,20</td>\n        </tr>\n        </table>\n        ",
+              "title": "Allvulncount",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The number of critical vulnerabilities found for the asset.\n        <br>\n        Enter either a number or prefix it with one of these operators:\n        <table>\n        <tr>\n        <th>Operator</th>\n        <th>Notation</th>\n        <th>Example</th>\n        </tr>\n        <tr>\n        <td>Equals</td>\n        <td>No prefix or \\~eq\\~</td>\n        <td>10 or \\~eq\\~10</td>\n        </tr>\n        <tr>\n        <td>Not equals</td>\n        <td>\\~neq\\~</td>\n        <td>\\~neq\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than</td>\n        <td>\\~gt\\~</td>\n        <td>\\~gt\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than equals</td>\n        <td>\\~gte\\~</td>\n        <td>\\~gte\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than</td>\n        <td>\\~lt\\~</td>\n        <td>\\~lt\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than equals</td>\n        <td>\\~lte\\~</td>\n        <td>\\~lte\\~10</td>\n        </tr>\n        <tr>\n        <td>Between two numbers</td>\n        <td>\\~bt\\~</td>\n        <td>\\~bt\\~10,20</td>\n        </tr>\n        </table>\n        ",
+            "in": "query",
+            "name": "criticalVulnCount",
+            "required": false,
+            "schema": {
+              "description": "The number of critical vulnerabilities found for the asset.\n        <br>\n        Enter either a number or prefix it with one of these operators:\n        <table>\n        <tr>\n        <th>Operator</th>\n        <th>Notation</th>\n        <th>Example</th>\n        </tr>\n        <tr>\n        <td>Equals</td>\n        <td>No prefix or \\~eq\\~</td>\n        <td>10 or \\~eq\\~10</td>\n        </tr>\n        <tr>\n        <td>Not equals</td>\n        <td>\\~neq\\~</td>\n        <td>\\~neq\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than</td>\n        <td>\\~gt\\~</td>\n        <td>\\~gt\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than equals</td>\n        <td>\\~gte\\~</td>\n        <td>\\~gte\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than</td>\n        <td>\\~lt\\~</td>\n        <td>\\~lt\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than equals</td>\n        <td>\\~lte\\~</td>\n        <td>\\~lte\\~10</td>\n        </tr>\n        <tr>\n        <td>Between two numbers</td>\n        <td>\\~bt\\~</td>\n        <td>\\~bt\\~10,20</td>\n        </tr>\n        </table>\n        ",
+              "title": "Criticalvulncount",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The number of high vulnerabilities found for the asset.\n        <br>\n        Enter either a number or prefix it with one of these operators:\n        <table>\n        <tr>\n        <th>Operator</th>\n        <th>Notation</th>\n        <th>Example</th>\n        </tr>\n        <tr>\n        <td>Equals</td>\n        <td>No prefix or \\~eq\\~</td>\n        <td>10 or \\~eq\\~10</td>\n        </tr>\n        <tr>\n        <td>Not equals</td>\n        <td>\\~neq\\~</td>\n        <td>\\~neq\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than</td>\n        <td>\\~gt\\~</td>\n        <td>\\~gt\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than equals</td>\n        <td>\\~gte\\~</td>\n        <td>\\~gte\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than</td>\n        <td>\\~lt\\~</td>\n        <td>\\~lt\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than equals</td>\n        <td>\\~lte\\~</td>\n        <td>\\~lte\\~10</td>\n        </tr>\n        <tr>\n        <td>Between two numbers</td>\n        <td>\\~bt\\~</td>\n        <td>\\~bt\\~10,20</td>\n        </tr>\n        </table>\n        ",
+            "in": "query",
+            "name": "highVulnCount",
+            "required": false,
+            "schema": {
+              "description": "The number of high vulnerabilities found for the asset.\n        <br>\n        Enter either a number or prefix it with one of these operators:\n        <table>\n        <tr>\n        <th>Operator</th>\n        <th>Notation</th>\n        <th>Example</th>\n        </tr>\n        <tr>\n        <td>Equals</td>\n        <td>No prefix or \\~eq\\~</td>\n        <td>10 or \\~eq\\~10</td>\n        </tr>\n        <tr>\n        <td>Not equals</td>\n        <td>\\~neq\\~</td>\n        <td>\\~neq\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than</td>\n        <td>\\~gt\\~</td>\n        <td>\\~gt\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than equals</td>\n        <td>\\~gte\\~</td>\n        <td>\\~gte\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than</td>\n        <td>\\~lt\\~</td>\n        <td>\\~lt\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than equals</td>\n        <td>\\~lte\\~</td>\n        <td>\\~lte\\~10</td>\n        </tr>\n        <tr>\n        <td>Between two numbers</td>\n        <td>\\~bt\\~</td>\n        <td>\\~bt\\~10,20</td>\n        </tr>\n        </table>\n        ",
+              "title": "Highvulncount",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The number of medium vulnerabilities found for the asset.\n        <br>\n        Enter either a number or prefix it with one of these operators:\n        <table>\n        <tr>\n        <th>Operator</th>\n        <th>Notation</th>\n        <th>Example</th>\n        </tr>\n        <tr>\n        <td>Equals</td>\n        <td>No prefix or \\~eq\\~</td>\n        <td>10 or \\~eq\\~10</td>\n        </tr>\n        <tr>\n        <td>Not equals</td>\n        <td>\\~neq\\~</td>\n        <td>\\~neq\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than</td>\n        <td>\\~gt\\~</td>\n        <td>\\~gt\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than equals</td>\n        <td>\\~gte\\~</td>\n        <td>\\~gte\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than</td>\n        <td>\\~lt\\~</td>\n        <td>\\~lt\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than equals</td>\n        <td>\\~lte\\~</td>\n        <td>\\~lte\\~10</td>\n        </tr>\n        <tr>\n        <td>Between two numbers</td>\n        <td>\\~bt\\~</td>\n        <td>\\~bt\\~10,20</td>\n        </tr>\n        </table>\n        ",
+            "in": "query",
+            "name": "mediumVulnCount",
+            "required": false,
+            "schema": {
+              "description": "The number of medium vulnerabilities found for the asset.\n        <br>\n        Enter either a number or prefix it with one of these operators:\n        <table>\n        <tr>\n        <th>Operator</th>\n        <th>Notation</th>\n        <th>Example</th>\n        </tr>\n        <tr>\n        <td>Equals</td>\n        <td>No prefix or \\~eq\\~</td>\n        <td>10 or \\~eq\\~10</td>\n        </tr>\n        <tr>\n        <td>Not equals</td>\n        <td>\\~neq\\~</td>\n        <td>\\~neq\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than</td>\n        <td>\\~gt\\~</td>\n        <td>\\~gt\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than equals</td>\n        <td>\\~gte\\~</td>\n        <td>\\~gte\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than</td>\n        <td>\\~lt\\~</td>\n        <td>\\~lt\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than equals</td>\n        <td>\\~lte\\~</td>\n        <td>\\~lte\\~10</td>\n        </tr>\n        <tr>\n        <td>Between two numbers</td>\n        <td>\\~bt\\~</td>\n        <td>\\~bt\\~10,20</td>\n        </tr>\n        </table>\n        ",
+              "title": "Mediumvulncount",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The number of low vulnerabilities found for the asset.\n        <br>\n        Enter either a number or prefix it with one of these operators:\n        <table>\n        <tr>\n        <th>Operator</th>\n        <th>Notation</th>\n        <th>Example</th>\n        </tr>\n        <tr>\n        <td>Equals</td>\n        <td>No prefix or \\~eq\\~</td>\n        <td>10 or \\~eq\\~10</td>\n        </tr>\n        <tr>\n        <td>Not equals</td>\n        <td>\\~neq\\~</td>\n        <td>\\~neq\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than</td>\n        <td>\\~gt\\~</td>\n        <td>\\~gt\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than equals</td>\n        <td>\\~gte\\~</td>\n        <td>\\~gte\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than</td>\n        <td>\\~lt\\~</td>\n        <td>\\~lt\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than equals</td>\n        <td>\\~lte\\~</td>\n        <td>\\~lte\\~10</td>\n        </tr>\n        <tr>\n        <td>Between two numbers</td>\n        <td>\\~bt\\~</td>\n        <td>\\~bt\\~10,20</td>\n        </tr>\n        </table>\n        ",
+            "in": "query",
+            "name": "lowVulnCount",
+            "required": false,
+            "schema": {
+              "description": "The number of low vulnerabilities found for the asset.\n        <br>\n        Enter either a number or prefix it with one of these operators:\n        <table>\n        <tr>\n        <th>Operator</th>\n        <th>Notation</th>\n        <th>Example</th>\n        </tr>\n        <tr>\n        <td>Equals</td>\n        <td>No prefix or \\~eq\\~</td>\n        <td>10 or \\~eq\\~10</td>\n        </tr>\n        <tr>\n        <td>Not equals</td>\n        <td>\\~neq\\~</td>\n        <td>\\~neq\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than</td>\n        <td>\\~gt\\~</td>\n        <td>\\~gt\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than equals</td>\n        <td>\\~gte\\~</td>\n        <td>\\~gte\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than</td>\n        <td>\\~lt\\~</td>\n        <td>\\~lt\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than equals</td>\n        <td>\\~lte\\~</td>\n        <td>\\~lte\\~10</td>\n        </tr>\n        <tr>\n        <td>Between two numbers</td>\n        <td>\\~bt\\~</td>\n        <td>\\~bt\\~10,20</td>\n        </tr>\n        </table>\n        ",
+              "title": "Lowvulncount",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The number of informational vulnerabilities found for the asset.\n        <br>\n        Enter either a number or prefix it with one of these operators:\n        <table>\n        <tr>\n        <th>Operator</th>\n        <th>Notation</th>\n        <th>Example</th>\n        </tr>\n        <tr>\n        <td>Equals</td>\n        <td>No prefix or \\~eq\\~</td>\n        <td>10 or \\~eq\\~10</td>\n        </tr>\n        <tr>\n        <td>Not equals</td>\n        <td>\\~neq\\~</td>\n        <td>\\~neq\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than</td>\n        <td>\\~gt\\~</td>\n        <td>\\~gt\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than equals</td>\n        <td>\\~gte\\~</td>\n        <td>\\~gte\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than</td>\n        <td>\\~lt\\~</td>\n        <td>\\~lt\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than equals</td>\n        <td>\\~lte\\~</td>\n        <td>\\~lte\\~10</td>\n        </tr>\n        <tr>\n        <td>Between two numbers</td>\n        <td>\\~bt\\~</td>\n        <td>\\~bt\\~10,20</td>\n        </tr>\n        </table>\n        ",
+            "in": "query",
+            "name": "infoVulnCount",
+            "required": false,
+            "schema": {
+              "description": "The number of informational vulnerabilities found for the asset.\n        <br>\n        Enter either a number or prefix it with one of these operators:\n        <table>\n        <tr>\n        <th>Operator</th>\n        <th>Notation</th>\n        <th>Example</th>\n        </tr>\n        <tr>\n        <td>Equals</td>\n        <td>No prefix or \\~eq\\~</td>\n        <td>10 or \\~eq\\~10</td>\n        </tr>\n        <tr>\n        <td>Not equals</td>\n        <td>\\~neq\\~</td>\n        <td>\\~neq\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than</td>\n        <td>\\~gt\\~</td>\n        <td>\\~gt\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than equals</td>\n        <td>\\~gte\\~</td>\n        <td>\\~gte\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than</td>\n        <td>\\~lt\\~</td>\n        <td>\\~lt\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than equals</td>\n        <td>\\~lte\\~</td>\n        <td>\\~lte\\~10</td>\n        </tr>\n        <tr>\n        <td>Between two numbers</td>\n        <td>\\~bt\\~</td>\n        <td>\\~bt\\~10,20</td>\n        </tr>\n        </table>\n        ",
+              "title": "Infovulncount",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The total number of misconfigurations found for the asset.\n        <br>\n        Enter either a number or prefix it with one of these operators:\n        <table>\n        <tr>\n        <th>Operator</th>\n        <th>Notation</th>\n        <th>Example</th>\n        </tr>\n        <tr>\n        <td>Equals</td>\n        <td>No prefix or \\~eq\\~</td>\n        <td>10 or \\~eq\\~10</td>\n        </tr>\n        <tr>\n        <td>Not equals</td>\n        <td>\\~neq\\~</td>\n        <td>\\~neq\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than</td>\n        <td>\\~gt\\~</td>\n        <td>\\~gt\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than equals</td>\n        <td>\\~gte\\~</td>\n        <td>\\~gte\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than</td>\n        <td>\\~lt\\~</td>\n        <td>\\~lt\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than equals</td>\n        <td>\\~lte\\~</td>\n        <td>\\~lte\\~10</td>\n        </tr>\n        <tr>\n        <td>Between two numbers</td>\n        <td>\\~bt\\~</td>\n        <td>\\~bt\\~10,20</td>\n        </tr>\n        </table>\n        ",
+            "in": "query",
+            "name": "allMisconfigCount",
+            "required": false,
+            "schema": {
+              "description": "The total number of misconfigurations found for the asset.\n        <br>\n        Enter either a number or prefix it with one of these operators:\n        <table>\n        <tr>\n        <th>Operator</th>\n        <th>Notation</th>\n        <th>Example</th>\n        </tr>\n        <tr>\n        <td>Equals</td>\n        <td>No prefix or \\~eq\\~</td>\n        <td>10 or \\~eq\\~10</td>\n        </tr>\n        <tr>\n        <td>Not equals</td>\n        <td>\\~neq\\~</td>\n        <td>\\~neq\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than</td>\n        <td>\\~gt\\~</td>\n        <td>\\~gt\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than equals</td>\n        <td>\\~gte\\~</td>\n        <td>\\~gte\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than</td>\n        <td>\\~lt\\~</td>\n        <td>\\~lt\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than equals</td>\n        <td>\\~lte\\~</td>\n        <td>\\~lte\\~10</td>\n        </tr>\n        <tr>\n        <td>Between two numbers</td>\n        <td>\\~bt\\~</td>\n        <td>\\~bt\\~10,20</td>\n        </tr>\n        </table>\n        ",
+              "title": "Allmisconfigcount",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The number of high misconfigurations found for the asset.\n        <br>\n        Enter either a number or prefix it with one of these operators:\n        <table>\n        <tr>\n        <th>Operator</th>\n        <th>Notation</th>\n        <th>Example</th>\n        </tr>\n        <tr>\n        <td>Equals</td>\n        <td>No prefix or \\~eq\\~</td>\n        <td>10 or \\~eq\\~10</td>\n        </tr>\n        <tr>\n        <td>Not equals</td>\n        <td>\\~neq\\~</td>\n        <td>\\~neq\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than</td>\n        <td>\\~gt\\~</td>\n        <td>\\~gt\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than equals</td>\n        <td>\\~gte\\~</td>\n        <td>\\~gte\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than</td>\n        <td>\\~lt\\~</td>\n        <td>\\~lt\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than equals</td>\n        <td>\\~lte\\~</td>\n        <td>\\~lte\\~10</td>\n        </tr>\n        <tr>\n        <td>Between two numbers</td>\n        <td>\\~bt\\~</td>\n        <td>\\~bt\\~10,20</td>\n        </tr>\n        </table>\n        ",
+            "in": "query",
+            "name": "highMisconfigCount",
+            "required": false,
+            "schema": {
+              "description": "The number of high misconfigurations found for the asset.\n        <br>\n        Enter either a number or prefix it with one of these operators:\n        <table>\n        <tr>\n        <th>Operator</th>\n        <th>Notation</th>\n        <th>Example</th>\n        </tr>\n        <tr>\n        <td>Equals</td>\n        <td>No prefix or \\~eq\\~</td>\n        <td>10 or \\~eq\\~10</td>\n        </tr>\n        <tr>\n        <td>Not equals</td>\n        <td>\\~neq\\~</td>\n        <td>\\~neq\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than</td>\n        <td>\\~gt\\~</td>\n        <td>\\~gt\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than equals</td>\n        <td>\\~gte\\~</td>\n        <td>\\~gte\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than</td>\n        <td>\\~lt\\~</td>\n        <td>\\~lt\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than equals</td>\n        <td>\\~lte\\~</td>\n        <td>\\~lte\\~10</td>\n        </tr>\n        <tr>\n        <td>Between two numbers</td>\n        <td>\\~bt\\~</td>\n        <td>\\~bt\\~10,20</td>\n        </tr>\n        </table>\n        ",
+              "title": "Highmisconfigcount",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The number of medium misconfigurations found for the asset.\n        <br>\n        Enter either a number or prefix it with one of these operators:\n        <table>\n        <tr>\n        <th>Operator</th>\n        <th>Notation</th>\n        <th>Example</th>\n        </tr>\n        <tr>\n        <td>Equals</td>\n        <td>No prefix or \\~eq\\~</td>\n        <td>10 or \\~eq\\~10</td>\n        </tr>\n        <tr>\n        <td>Not equals</td>\n        <td>\\~neq\\~</td>\n        <td>\\~neq\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than</td>\n        <td>\\~gt\\~</td>\n        <td>\\~gt\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than equals</td>\n        <td>\\~gte\\~</td>\n        <td>\\~gte\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than</td>\n        <td>\\~lt\\~</td>\n        <td>\\~lt\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than equals</td>\n        <td>\\~lte\\~</td>\n        <td>\\~lte\\~10</td>\n        </tr>\n        <tr>\n        <td>Between two numbers</td>\n        <td>\\~bt\\~</td>\n        <td>\\~bt\\~10,20</td>\n        </tr>\n        </table>\n        ",
+            "in": "query",
+            "name": "mediumMisconfigCount",
+            "required": false,
+            "schema": {
+              "description": "The number of medium misconfigurations found for the asset.\n        <br>\n        Enter either a number or prefix it with one of these operators:\n        <table>\n        <tr>\n        <th>Operator</th>\n        <th>Notation</th>\n        <th>Example</th>\n        </tr>\n        <tr>\n        <td>Equals</td>\n        <td>No prefix or \\~eq\\~</td>\n        <td>10 or \\~eq\\~10</td>\n        </tr>\n        <tr>\n        <td>Not equals</td>\n        <td>\\~neq\\~</td>\n        <td>\\~neq\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than</td>\n        <td>\\~gt\\~</td>\n        <td>\\~gt\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than equals</td>\n        <td>\\~gte\\~</td>\n        <td>\\~gte\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than</td>\n        <td>\\~lt\\~</td>\n        <td>\\~lt\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than equals</td>\n        <td>\\~lte\\~</td>\n        <td>\\~lte\\~10</td>\n        </tr>\n        <tr>\n        <td>Between two numbers</td>\n        <td>\\~bt\\~</td>\n        <td>\\~bt\\~10,20</td>\n        </tr>\n        </table>\n        ",
+              "title": "Mediummisconfigcount",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The number of low misconfigurations found for the asset.\n        <br>\n        Enter either a number or prefix it with one of these operators:\n        <table>\n        <tr>\n        <th>Operator</th>\n        <th>Notation</th>\n        <th>Example</th>\n        </tr>\n        <tr>\n        <td>Equals</td>\n        <td>No prefix or \\~eq\\~</td>\n        <td>10 or \\~eq\\~10</td>\n        </tr>\n        <tr>\n        <td>Not equals</td>\n        <td>\\~neq\\~</td>\n        <td>\\~neq\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than</td>\n        <td>\\~gt\\~</td>\n        <td>\\~gt\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than equals</td>\n        <td>\\~gte\\~</td>\n        <td>\\~gte\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than</td>\n        <td>\\~lt\\~</td>\n        <td>\\~lt\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than equals</td>\n        <td>\\~lte\\~</td>\n        <td>\\~lte\\~10</td>\n        </tr>\n        <tr>\n        <td>Between two numbers</td>\n        <td>\\~bt\\~</td>\n        <td>\\~bt\\~10,20</td>\n        </tr>\n        </table>\n        ",
+            "in": "query",
+            "name": "lowMisconfigCount",
+            "required": false,
+            "schema": {
+              "description": "The number of low misconfigurations found for the asset.\n        <br>\n        Enter either a number or prefix it with one of these operators:\n        <table>\n        <tr>\n        <th>Operator</th>\n        <th>Notation</th>\n        <th>Example</th>\n        </tr>\n        <tr>\n        <td>Equals</td>\n        <td>No prefix or \\~eq\\~</td>\n        <td>10 or \\~eq\\~10</td>\n        </tr>\n        <tr>\n        <td>Not equals</td>\n        <td>\\~neq\\~</td>\n        <td>\\~neq\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than</td>\n        <td>\\~gt\\~</td>\n        <td>\\~gt\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than equals</td>\n        <td>\\~gte\\~</td>\n        <td>\\~gte\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than</td>\n        <td>\\~lt\\~</td>\n        <td>\\~lt\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than equals</td>\n        <td>\\~lte\\~</td>\n        <td>\\~lte\\~10</td>\n        </tr>\n        <tr>\n        <td>Between two numbers</td>\n        <td>\\~bt\\~</td>\n        <td>\\~bt\\~10,20</td>\n        </tr>\n        </table>\n        ",
+              "title": "Lowmisconfigcount",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The total number of events found for the asset.\n        <br>\n        Enter either a number or prefix it with one of these operators:\n        <table>\n        <tr>\n        <th>Operator</th>\n        <th>Notation</th>\n        <th>Example</th>\n        </tr>\n        <tr>\n        <td>Equals</td>\n        <td>No prefix or \\~eq\\~</td>\n        <td>10 or \\~eq\\~10</td>\n        </tr>\n        <tr>\n        <td>Not equals</td>\n        <td>\\~neq\\~</td>\n        <td>\\~neq\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than</td>\n        <td>\\~gt\\~</td>\n        <td>\\~gt\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than equals</td>\n        <td>\\~gte\\~</td>\n        <td>\\~gte\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than</td>\n        <td>\\~lt\\~</td>\n        <td>\\~lt\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than equals</td>\n        <td>\\~lte\\~</td>\n        <td>\\~lte\\~10</td>\n        </tr>\n        <tr>\n        <td>Between two numbers</td>\n        <td>\\~bt\\~</td>\n        <td>\\~bt\\~10,20</td>\n        </tr>\n        </table>\n        ",
+            "in": "query",
+            "name": "allEventsCount",
+            "required": false,
+            "schema": {
+              "description": "The total number of events found for the asset.\n        <br>\n        Enter either a number or prefix it with one of these operators:\n        <table>\n        <tr>\n        <th>Operator</th>\n        <th>Notation</th>\n        <th>Example</th>\n        </tr>\n        <tr>\n        <td>Equals</td>\n        <td>No prefix or \\~eq\\~</td>\n        <td>10 or \\~eq\\~10</td>\n        </tr>\n        <tr>\n        <td>Not equals</td>\n        <td>\\~neq\\~</td>\n        <td>\\~neq\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than</td>\n        <td>\\~gt\\~</td>\n        <td>\\~gt\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than equals</td>\n        <td>\\~gte\\~</td>\n        <td>\\~gte\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than</td>\n        <td>\\~lt\\~</td>\n        <td>\\~lt\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than equals</td>\n        <td>\\~lte\\~</td>\n        <td>\\~lte\\~10</td>\n        </tr>\n        <tr>\n        <td>Between two numbers</td>\n        <td>\\~bt\\~</td>\n        <td>\\~bt\\~10,20</td>\n        </tr>\n        </table>\n        ",
+              "title": "Alleventscount",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The number of configuration events found for the asset.\n        <br>\n        Enter either a number or prefix it with one of these operators:\n        <table>\n        <tr>\n        <th>Operator</th>\n        <th>Notation</th>\n        <th>Example</th>\n        </tr>\n        <tr>\n        <td>Equals</td>\n        <td>No prefix or \\~eq\\~</td>\n        <td>10 or \\~eq\\~10</td>\n        </tr>\n        <tr>\n        <td>Not equals</td>\n        <td>\\~neq\\~</td>\n        <td>\\~neq\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than</td>\n        <td>\\~gt\\~</td>\n        <td>\\~gt\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than equals</td>\n        <td>\\~gte\\~</td>\n        <td>\\~gte\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than</td>\n        <td>\\~lt\\~</td>\n        <td>\\~lt\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than equals</td>\n        <td>\\~lte\\~</td>\n        <td>\\~lte\\~10</td>\n        </tr>\n        <tr>\n        <td>Between two numbers</td>\n        <td>\\~bt\\~</td>\n        <td>\\~bt\\~10,20</td>\n        </tr>\n        </table>\n        ",
+            "in": "query",
+            "name": "configEventsCount",
+            "required": false,
+            "schema": {
+              "description": "The number of configuration events found for the asset.\n        <br>\n        Enter either a number or prefix it with one of these operators:\n        <table>\n        <tr>\n        <th>Operator</th>\n        <th>Notation</th>\n        <th>Example</th>\n        </tr>\n        <tr>\n        <td>Equals</td>\n        <td>No prefix or \\~eq\\~</td>\n        <td>10 or \\~eq\\~10</td>\n        </tr>\n        <tr>\n        <td>Not equals</td>\n        <td>\\~neq\\~</td>\n        <td>\\~neq\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than</td>\n        <td>\\~gt\\~</td>\n        <td>\\~gt\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than equals</td>\n        <td>\\~gte\\~</td>\n        <td>\\~gte\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than</td>\n        <td>\\~lt\\~</td>\n        <td>\\~lt\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than equals</td>\n        <td>\\~lte\\~</td>\n        <td>\\~lte\\~10</td>\n        </tr>\n        <tr>\n        <td>Between two numbers</td>\n        <td>\\~bt\\~</td>\n        <td>\\~bt\\~10,20</td>\n        </tr>\n        </table>\n        ",
+              "title": "Configeventscount",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The number of critical events found for the asset.\n        <br>\n        Enter either a number or prefix it with one of these operators:\n        <table>\n        <tr>\n        <th>Operator</th>\n        <th>Notation</th>\n        <th>Example</th>\n        </tr>\n        <tr>\n        <td>Equals</td>\n        <td>No prefix or \\~eq\\~</td>\n        <td>10 or \\~eq\\~10</td>\n        </tr>\n        <tr>\n        <td>Not equals</td>\n        <td>\\~neq\\~</td>\n        <td>\\~neq\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than</td>\n        <td>\\~gt\\~</td>\n        <td>\\~gt\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than equals</td>\n        <td>\\~gte\\~</td>\n        <td>\\~gte\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than</td>\n        <td>\\~lt\\~</td>\n        <td>\\~lt\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than equals</td>\n        <td>\\~lte\\~</td>\n        <td>\\~lte\\~10</td>\n        </tr>\n        <tr>\n        <td>Between two numbers</td>\n        <td>\\~bt\\~</td>\n        <td>\\~bt\\~10,20</td>\n        </tr>\n        </table>\n        ",
+            "in": "query",
+            "name": "criticalEventsCount",
+            "required": false,
+            "schema": {
+              "description": "The number of critical events found for the asset.\n        <br>\n        Enter either a number or prefix it with one of these operators:\n        <table>\n        <tr>\n        <th>Operator</th>\n        <th>Notation</th>\n        <th>Example</th>\n        </tr>\n        <tr>\n        <td>Equals</td>\n        <td>No prefix or \\~eq\\~</td>\n        <td>10 or \\~eq\\~10</td>\n        </tr>\n        <tr>\n        <td>Not equals</td>\n        <td>\\~neq\\~</td>\n        <td>\\~neq\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than</td>\n        <td>\\~gt\\~</td>\n        <td>\\~gt\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than equals</td>\n        <td>\\~gte\\~</td>\n        <td>\\~gte\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than</td>\n        <td>\\~lt\\~</td>\n        <td>\\~lt\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than equals</td>\n        <td>\\~lte\\~</td>\n        <td>\\~lte\\~10</td>\n        </tr>\n        <tr>\n        <td>Between two numbers</td>\n        <td>\\~bt\\~</td>\n        <td>\\~bt\\~10,20</td>\n        </tr>\n        </table>\n        ",
+              "title": "Criticaleventscount",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The number of data change events found for the asset.\n        <br>\n        Enter either a number or prefix it with one of these operators:\n        <table>\n        <tr>\n        <th>Operator</th>\n        <th>Notation</th>\n        <th>Example</th>\n        </tr>\n        <tr>\n        <td>Equals</td>\n        <td>No prefix or \\~eq\\~</td>\n        <td>10 or \\~eq\\~10</td>\n        </tr>\n        <tr>\n        <td>Not equals</td>\n        <td>\\~neq\\~</td>\n        <td>\\~neq\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than</td>\n        <td>\\~gt\\~</td>\n        <td>\\~gt\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than equals</td>\n        <td>\\~gte\\~</td>\n        <td>\\~gte\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than</td>\n        <td>\\~lt\\~</td>\n        <td>\\~lt\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than equals</td>\n        <td>\\~lte\\~</td>\n        <td>\\~lte\\~10</td>\n        </tr>\n        <tr>\n        <td>Between two numbers</td>\n        <td>\\~bt\\~</td>\n        <td>\\~bt\\~10,20</td>\n        </tr>\n        </table>\n        ",
+            "in": "query",
+            "name": "dataChangeEventsCount",
+            "required": false,
+            "schema": {
+              "description": "The number of data change events found for the asset.\n        <br>\n        Enter either a number or prefix it with one of these operators:\n        <table>\n        <tr>\n        <th>Operator</th>\n        <th>Notation</th>\n        <th>Example</th>\n        </tr>\n        <tr>\n        <td>Equals</td>\n        <td>No prefix or \\~eq\\~</td>\n        <td>10 or \\~eq\\~10</td>\n        </tr>\n        <tr>\n        <td>Not equals</td>\n        <td>\\~neq\\~</td>\n        <td>\\~neq\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than</td>\n        <td>\\~gt\\~</td>\n        <td>\\~gt\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than equals</td>\n        <td>\\~gte\\~</td>\n        <td>\\~gte\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than</td>\n        <td>\\~lt\\~</td>\n        <td>\\~lt\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than equals</td>\n        <td>\\~lte\\~</td>\n        <td>\\~lte\\~10</td>\n        </tr>\n        <tr>\n        <td>Between two numbers</td>\n        <td>\\~bt\\~</td>\n        <td>\\~bt\\~10,20</td>\n        </tr>\n        </table>\n        ",
+              "title": "Datachangeeventscount",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The number of IAM change events found for the asset.\n        <br>\n        Enter either a number or prefix it with one of these operators:\n        <table>\n        <tr>\n        <th>Operator</th>\n        <th>Notation</th>\n        <th>Example</th>\n        </tr>\n        <tr>\n        <td>Equals</td>\n        <td>No prefix or \\~eq\\~</td>\n        <td>10 or \\~eq\\~10</td>\n        </tr>\n        <tr>\n        <td>Not equals</td>\n        <td>\\~neq\\~</td>\n        <td>\\~neq\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than</td>\n        <td>\\~gt\\~</td>\n        <td>\\~gt\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than equals</td>\n        <td>\\~gte\\~</td>\n        <td>\\~gte\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than</td>\n        <td>\\~lt\\~</td>\n        <td>\\~lt\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than equals</td>\n        <td>\\~lte\\~</td>\n        <td>\\~lte\\~10</td>\n        </tr>\n        <tr>\n        <td>Between two numbers</td>\n        <td>\\~bt\\~</td>\n        <td>\\~bt\\~10,20</td>\n        </tr>\n        </table>\n        ",
+            "in": "query",
+            "name": "iamChangeEventsCount",
+            "required": false,
+            "schema": {
+              "description": "The number of IAM change events found for the asset.\n        <br>\n        Enter either a number or prefix it with one of these operators:\n        <table>\n        <tr>\n        <th>Operator</th>\n        <th>Notation</th>\n        <th>Example</th>\n        </tr>\n        <tr>\n        <td>Equals</td>\n        <td>No prefix or \\~eq\\~</td>\n        <td>10 or \\~eq\\~10</td>\n        </tr>\n        <tr>\n        <td>Not equals</td>\n        <td>\\~neq\\~</td>\n        <td>\\~neq\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than</td>\n        <td>\\~gt\\~</td>\n        <td>\\~gt\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than equals</td>\n        <td>\\~gte\\~</td>\n        <td>\\~gte\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than</td>\n        <td>\\~lt\\~</td>\n        <td>\\~lt\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than equals</td>\n        <td>\\~lte\\~</td>\n        <td>\\~lte\\~10</td>\n        </tr>\n        <tr>\n        <td>Between two numbers</td>\n        <td>\\~bt\\~</td>\n        <td>\\~bt\\~10,20</td>\n        </tr>\n        </table>\n        ",
+              "title": "Iamchangeeventscount",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The number of related assets affected by the finding.\n        <br>\n        Enter either a number or prefix it with one of these operators:\n        <table>\n        <tr>\n        <th>Operator</th>\n        <th>Notation</th>\n        <th>Example</th>\n        </tr>\n        <tr>\n        <td>Equals</td>\n        <td>No prefix or \\~eq\\~</td>\n        <td>10 or \\~eq\\~10</td>\n        </tr>\n        <tr>\n        <td>Not equals</td>\n        <td>\\~neq\\~</td>\n        <td>\\~neq\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than</td>\n        <td>\\~gt\\~</td>\n        <td>\\~gt\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than equals</td>\n        <td>\\~gte\\~</td>\n        <td>\\~gte\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than</td>\n        <td>\\~lt\\~</td>\n        <td>\\~lt\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than equals</td>\n        <td>\\~lte\\~</td>\n        <td>\\~lte\\~10</td>\n        </tr>\n        <tr>\n        <td>Between two numbers</td>\n        <td>\\~bt\\~</td>\n        <td>\\~bt\\~10,20</td>\n        </tr>\n        </table>\n        ",
+            "in": "query",
+            "name": "affectedAssetsCount",
+            "required": false,
+            "schema": {
+              "description": "The number of related assets affected by the finding.\n        <br>\n        Enter either a number or prefix it with one of these operators:\n        <table>\n        <tr>\n        <th>Operator</th>\n        <th>Notation</th>\n        <th>Example</th>\n        </tr>\n        <tr>\n        <td>Equals</td>\n        <td>No prefix or \\~eq\\~</td>\n        <td>10 or \\~eq\\~10</td>\n        </tr>\n        <tr>\n        <td>Not equals</td>\n        <td>\\~neq\\~</td>\n        <td>\\~neq\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than</td>\n        <td>\\~gt\\~</td>\n        <td>\\~gt\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than equals</td>\n        <td>\\~gte\\~</td>\n        <td>\\~gte\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than</td>\n        <td>\\~lt\\~</td>\n        <td>\\~lt\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than equals</td>\n        <td>\\~lte\\~</td>\n        <td>\\~lte\\~10</td>\n        </tr>\n        <tr>\n        <td>Between two numbers</td>\n        <td>\\~bt\\~</td>\n        <td>\\~bt\\~10,20</td>\n        </tr>\n        </table>\n        ",
+              "title": "Affectedassetscount",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The total number of anomalies found for the asset identified that are still applicable today.\n        <br>\n        Enter either a number or prefix it with one of these operators:\n        <table>\n        <tr>\n        <th>Operator</th>\n        <th>Notation</th>\n        <th>Example</th>\n        </tr>\n        <tr>\n        <td>Equals</td>\n        <td>No prefix or \\~eq\\~</td>\n        <td>10 or \\~eq\\~10</td>\n        </tr>\n        <tr>\n        <td>Not equals</td>\n        <td>\\~neq\\~</td>\n        <td>\\~neq\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than</td>\n        <td>\\~gt\\~</td>\n        <td>\\~gt\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than equals</td>\n        <td>\\~gte\\~</td>\n        <td>\\~gte\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than</td>\n        <td>\\~lt\\~</td>\n        <td>\\~lt\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than equals</td>\n        <td>\\~lte\\~</td>\n        <td>\\~lte\\~10</td>\n        </tr>\n        <tr>\n        <td>Between two numbers</td>\n        <td>\\~bt\\~</td>\n        <td>\\~bt\\~10,20</td>\n        </tr>\n        </table>\n        ",
+            "in": "query",
+            "name": "allAnomaliesCount",
+            "required": false,
+            "schema": {
+              "description": "The total number of anomalies found for the asset identified that are still applicable today.\n        <br>\n        Enter either a number or prefix it with one of these operators:\n        <table>\n        <tr>\n        <th>Operator</th>\n        <th>Notation</th>\n        <th>Example</th>\n        </tr>\n        <tr>\n        <td>Equals</td>\n        <td>No prefix or \\~eq\\~</td>\n        <td>10 or \\~eq\\~10</td>\n        </tr>\n        <tr>\n        <td>Not equals</td>\n        <td>\\~neq\\~</td>\n        <td>\\~neq\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than</td>\n        <td>\\~gt\\~</td>\n        <td>\\~gt\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than equals</td>\n        <td>\\~gte\\~</td>\n        <td>\\~gte\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than</td>\n        <td>\\~lt\\~</td>\n        <td>\\~lt\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than equals</td>\n        <td>\\~lte\\~</td>\n        <td>\\~lte\\~10</td>\n        </tr>\n        <tr>\n        <td>Between two numbers</td>\n        <td>\\~bt\\~</td>\n        <td>\\~bt\\~10,20</td>\n        </tr>\n        </table>\n        ",
+              "title": "Allanomaliescount",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The total number of threats found for the asset identified that are still applicable today.\n        <br>\n        Enter either a number or prefix it with one of these operators:\n        <table>\n        <tr>\n        <th>Operator</th>\n        <th>Notation</th>\n        <th>Example</th>\n        </tr>\n        <tr>\n        <td>Equals</td>\n        <td>No prefix or \\~eq\\~</td>\n        <td>10 or \\~eq\\~10</td>\n        </tr>\n        <tr>\n        <td>Not equals</td>\n        <td>\\~neq\\~</td>\n        <td>\\~neq\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than</td>\n        <td>\\~gt\\~</td>\n        <td>\\~gt\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than equals</td>\n        <td>\\~gte\\~</td>\n        <td>\\~gte\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than</td>\n        <td>\\~lt\\~</td>\n        <td>\\~lt\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than equals</td>\n        <td>\\~lte\\~</td>\n        <td>\\~lte\\~10</td>\n        </tr>\n        <tr>\n        <td>Between two numbers</td>\n        <td>\\~bt\\~</td>\n        <td>\\~bt\\~10,20</td>\n        </tr>\n        </table>\n        ",
+            "in": "query",
+            "name": "allThreatsCount",
+            "required": false,
+            "schema": {
+              "description": "The total number of threats found for the asset identified that are still applicable today.\n        <br>\n        Enter either a number or prefix it with one of these operators:\n        <table>\n        <tr>\n        <th>Operator</th>\n        <th>Notation</th>\n        <th>Example</th>\n        </tr>\n        <tr>\n        <td>Equals</td>\n        <td>No prefix or \\~eq\\~</td>\n        <td>10 or \\~eq\\~10</td>\n        </tr>\n        <tr>\n        <td>Not equals</td>\n        <td>\\~neq\\~</td>\n        <td>\\~neq\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than</td>\n        <td>\\~gt\\~</td>\n        <td>\\~gt\\~10</td>\n        </tr>\n        <tr>\n        <td>Greater than equals</td>\n        <td>\\~gte\\~</td>\n        <td>\\~gte\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than</td>\n        <td>\\~lt\\~</td>\n        <td>\\~lt\\~10</td>\n        </tr>\n        <tr>\n        <td>Less than equals</td>\n        <td>\\~lte\\~</td>\n        <td>\\~lte\\~10</td>\n        </tr>\n        <tr>\n        <td>Between two numbers</td>\n        <td>\\~bt\\~</td>\n        <td>\\~bt\\~10,20</td>\n        </tr>\n        </table>\n        ",
+              "title": "Allthreatscount",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The field to sort the results by.",
+            "in": "query",
+            "name": "ordering",
+            "required": false,
+            "schema": {
+              "allOf": [
+                {
+                  "description": "The order you want to sort the assets.",
+                  "enum": [
+                    "item",
+                    "-item",
+                    "accId",
+                    "-accId",
+                    "service",
+                    "-service",
+                    "assetType",
+                    "-assetType",
+                    "isRisky",
+                    "-isRisky",
+                    "colDate",
+                    "-colDate",
+                    "region",
+                    "-region",
+                    "allFindingsCount",
+                    "-allFindingsCount",
+                    "allVulnCount",
+                    "-allVulnCount",
+                    "criticalVulnCount",
+                    "-criticalVulnCount",
+                    "highVulnCount",
+                    "-highVulnCount",
+                    "mediumVulnCount",
+                    "-mediumVulnCount",
+                    "lowVulnCount",
+                    "-lowVulnCount",
+                    "infoVulnCount",
+                    "-infoVulnCount",
+                    "allMisconfigCount",
+                    "-allMisconfigCount",
+                    "highMisconfigCount",
+                    "-highMisconfigCount",
+                    "mediumMisconfigCount",
+                    "-mediumMisconfigCount",
+                    "lowMisconfigCount",
+                    "-lowMisconfigCount",
+                    "allEventsCount",
+                    "-allEventsCount",
+                    "configEventsCount",
+                    "-configEventsCount",
+                    "criticalEventsCount",
+                    "-criticalEventsCount",
+                    "dataChangeEventsCount",
+                    "-dataChangeEventsCount",
+                    "iamChangeEventsCount",
+                    "-iamChangeEventsCount",
+                    "affectedAssetsCount",
+                    "-affectedAssetsCount",
+                    "allAnomaliesCount",
+                    "-allAnomaliesCount",
+                    "allThreatsCount"
+                  ],
+                  "title": "Ordering",
+                  "type": "string"
+                }
+              ],
+              "default": "-allMisconfigCount",
+              "description": "The field to sort the results by.",
+              "title": "Ordering"
+            }
+          },
+          {
+            "$ref": "#/paths/~1security~1v1~1compliances/get/parameters/0"
+          },
+          {
+            "$ref": "#/paths/~1security~1v1~1compliances/get/parameters/1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "allOf": [
+                        {
+                          "$ref": "#/paths/~1security~1v1~1compliances/get/responses/200/content/application~1json/schema/properties/error/allOf/0"
+                        }
+                      ],
+                      "title": "Error"
+                    },
+                    "request": {
+                      "$ref": "#/paths/~1security~1v1~1compliances/get/responses/200/content/application~1json/schema/properties/request"
+                    },
+                    "response": {
+                      "allOf": [
+                        {
+                          "properties": {
+                            "count": {
+                              "default": 0,
+                              "description": "The number of items.",
+                              "title": "Count",
+                              "type": "integer"
+                            },
+                            "items": {
+                              "description": "The array of objects in this response. The length of the array is according to the 'count' attribute.",
+                              "items": {
+                                "properties": {
+                                  "value": {
+                                    "description": "The list of values in your organization for the filter type you selected.",
+                                    "title": "Value",
+                                    "type": "string"
+                                  }
+                                },
+                                "title": "AssetSimFilterResponseModel",
+                                "type": "object"
+                              },
+                              "title": "Items",
+                              "type": "array"
+                            },
+                            "paginationInfo": {
+                              "$ref": "#/paths/~1security~1v1~1compliances/get/responses/200/content/application~1json/schema/properties/response/allOf/0/properties/paginationInfo"
+                            },
+                            "status": {
+                              "$ref": "#/paths/~1security~1v1~1compliances/get/responses/200/content/application~1json/schema/properties/response/allOf/0/properties/status"
+                            }
+                          },
+                          "required": [
+                            "status",
+                            "items",
+                            "paginationInfo"
+                          ],
+                          "title": "PaginatedResponse[AssetSimFilterResponseModel]",
+                          "type": "object"
+                        }
+                      ]
+                    },
+                    "responseTime": {
+                      "title": "Responsetime",
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "request"
+                  ],
+                  "title": "SpotResponse[PaginatedResponse[AssetSimFilterResponseModel]]",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "400": {
+            "content": {},
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1security~1v1~1compliances/get/responses/422/content/application~1json/schema"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Asset Sim Filter",
+        "tags": [
+          "Assets"
         ]
       },
       "parameters": []
