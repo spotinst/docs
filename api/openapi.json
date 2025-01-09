@@ -60406,7 +60406,7 @@
                               },
                               "tags": {
                                 "type": "object",
-                                "description": "A maximum of 10 unique key-value pairs for VM tags in the virtual node group.\n"
+                                "description": "A maximum of 20 unique key-value pairs for VM tags in the virtual node group.\nNote: Azure has a tag limit of 50 per node pool.\n"
                               },
                               "vmSizes": {
                                 "$ref": "#/paths/~1ocean~1azure~1np~1virtualNodeGroup~1%7BvirtualNodeGroupId%7D/put/requestBody/content/application~1json/schema/properties/virtualNodeGroup/properties/vmSizes"
@@ -61819,7 +61819,7 @@
                       },
                       "tags": {
                         "type": "object",
-                        "description": "A maximum of 10 unique key-value pairs for VM tags in the virtual node group.\n"
+                        "description": "A maximum of 20 unique key-value pairs for VM tags in the virtual node group.\nNote: Azure has a tag limit of 50 per node pool.\n"
                       },
                       "vmSizes": {
                         "type": "object",
