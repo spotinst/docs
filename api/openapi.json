@@ -48937,12 +48937,12 @@
                     "properties": {
                       "firstName": {
                         "type": "string",
-                        "description": "The first name of the user",
+                        "description": "The first name of the user. Note: names cannot include these characters: + = @\n",
                         "example": "Test"
                       },
                       "lastName": {
                         "type": "string",
-                        "description": "The last name of the user",
+                        "description": "The last name of the user. Note: names cannot include these characters: + = @\n",
                         "example": "Test"
                       },
                       "email": {
@@ -50807,7 +50807,7 @@
                       },
                       "name": {
                         "type": "string",
-                        "description": "Name of the programmatic user.",
+                        "description": "Name of the programmatic user. Note: names cannot include these characters: + = @\n",
                         "example": "testProgrammaticApi"
                       },
                       "accounts": {
@@ -51625,7 +51625,7 @@
                         "properties": {
                           "name": {
                             "type": "string",
-                            "description": "Name of the Policy",
+                            "description": "Name of the Policy. Note: names cannot include these characters: + = @\n",
                             "example": "my policy"
                           },
                           "description": {
@@ -52434,7 +52434,7 @@
                       },
                       "name": {
                         "type": "string",
-                        "description": "user group name",
+                        "description": "Name of the user group. Note: names cannot include these characters: + = @\n",
                         "example": "Developers"
                       },
                       "description": {
