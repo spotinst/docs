@@ -71923,6 +71923,23 @@
                                         "description": "List of Kubernetes namespaces that Spark applications can run in. The default namespace `spark-apps` is always included in the list.\n"
                                       }
                                     }
+                                  },
+                                  "workspaces": {
+                                    "type": "object",
+                                    "description": "The object specifying the Ocean Spark Workspaces configuration.\n",
+                                    "properties": {
+                                      "storageClassOverride": {
+                                        "allOf": [
+                                          {
+                                            "$ref": "#/paths/~1ocean~1spark~1cluster~1%7BclusterId%7D~1job~1%7BjobId%7D/get/parameters/2/schema/allOf/0"
+                                          },
+                                          {
+                                            "example": "my-custom-storage-class",
+                                            "description": "The storage class to use for Ocean Spark workspaces. If not set, the cluster's default storage class will \nbe used.\n"
+                                          }
+                                        ]
+                                      }
+                                    }
                                   }
                                 }
                               }
