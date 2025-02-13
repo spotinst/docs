@@ -88010,6 +88010,674 @@
       },
       "parameters": []
     },
+    "/cbi/v1/access/policy": {
+      "get": {
+        "tags": [
+          "Organizations"
+        ],
+        "summary": "Get FinOps Authorization Policies",
+        "description": "Get all available FinOps authorization policies.",
+        "parameters": [
+          {
+            "name": "targetOrganizationId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "paginationSize",
+            "in": "query",
+            "description": "number of items to include in the response",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "paginationKey",
+            "in": "query",
+            "description": "key used to fetch the next page of items",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "allOf": [
+                        {
+                          "$ref": "#/paths/~1azure~1compute~1vm~1signal/post/responses/200/content/application~1json/schema/allOf/0"
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "response": {
+                              "type": "object",
+                              "properties": {
+                                "items": {
+                                  "type": "array",
+                                  "description": "Array of data objects.\n",
+                                  "items": {
+                                    "type": "object"
+                                  }
+                                },
+                                "count": {
+                                  "type": "integer",
+                                  "example": 1,
+                                  "description": "Size of the data object array.\n"
+                                },
+                                "kind": {
+                                  "type": "string",
+                                  "description": "The data type of each item in the response.\n"
+                                },
+                                "paginationInfo": {
+                                  "nullable": true,
+                                  "properties": {
+                                    "totalCount": {
+                                      "type": "integer",
+                                      "nullable": true,
+                                      "description": "[Optional/Not supported on all APIs] Total number of items (for all pages)."
+                                    },
+                                    "nextKey": {
+                                      "type": "string",
+                                      "nullable": true,
+                                      "description": "Key used to fetch next page of data (if any)."
+                                    },
+                                    "previousKey": {
+                                      "type": "string",
+                                      "nullable": true,
+                                      "description": "Key used to fetch previous page of data (if any)."
+                                    }
+                                  },
+                                  "type": "object",
+                                  "title": "PaginationInfo"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "request": {
+                          "type": "object",
+                          "properties": {
+                            "url": {
+                              "example": "/cbi/v1/access/policy"
+                            },
+                            "method": {
+                              "example": "GET"
+                            }
+                          }
+                        },
+                        "response": {
+                          "type": "object",
+                          "properties": {
+                            "items": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "policyId": {
+                                    "type": "string",
+                                    "description": "Policy's unique ID.",
+                                    "nullable": true,
+                                    "example": "BE-ViewAllOnly"
+                                  },
+                                  "policyName": {
+                                    "type": "string",
+                                    "description": "Policy's name.",
+                                    "nullable": true,
+                                    "example": "Billing Engine View All Only"
+                                  },
+                                  "policyDescription": {
+                                    "type": "string",
+                                    "description": "Policy's description.",
+                                    "nullable": true,
+                                    "example": "Grants authorization to view all features in Billing Engine. This policy requires and will automatically grant access to all accounts within Billing Engine."
+                                  },
+                                  "requiresAccessToAllAccounts": {
+                                    "type": "boolean",
+                                    "description": "True if the policy requires the caller to have access to all accounts.",
+                                    "example": true
+                                  }
+                                },
+                                "additionalProperties": false,
+                                "description": "The authorization policy response model. [kind/spotinst:cbi:authorization:policy]"
+                              }
+                            },
+                            "kind": {
+                              "example": "spotinst:cbi:authorization:policy"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request error response. Adjust the request before retrying.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/paths/~1azure~1compute~1vm~1signal/post/responses/200/content/application~1json/schema/allOf/0"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "response": {
+                          "type": "object",
+                          "properties": {
+                            "errors": {
+                              "type": "array",
+                              "description": "List of errors.",
+                              "items": {
+                                "properties": {
+                                  "code": {
+                                    "type": "string",
+                                    "description": "Error code."
+                                  },
+                                  "message": {
+                                    "type": "string",
+                                    "description": "Error message."
+                                  }
+                                },
+                                "type": "object",
+                                "required": [
+                                  "message"
+                                ],
+                                "title": "ErrorModel"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error response. Not permitted to call this API.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1cbi~1v1~1access~1policy/get/responses/400/content/application~1json/schema"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error response. Please try again later.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1cbi~1v1~1access~1policy/get/responses/400/content/application~1json/schema"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cbi/v1/access/user/{userId}": {
+      "get": {
+        "tags": [
+          "Organizations"
+        ],
+        "summary": "Get FinOps Authorization For User",
+        "description": "Get the user-level FinOps authorization configuration for the specified user.",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The userId to retrieve.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "includeChildOrgs",
+            "in": "query",
+            "description": "Include the configurations for child organizations.",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/paths/~1healthCheck/get/responses/200/content/application~1json/schema/allOf/0"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "request": {
+                          "type": "object",
+                          "properties": {
+                            "url": {
+                              "example": "/cbi/v1/access/user/{userId}"
+                            },
+                            "method": {
+                              "example": "GET"
+                            }
+                          }
+                        },
+                        "response": {
+                          "type": "object",
+                          "properties": {
+                            "items": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "organizationId": {
+                                    "type": "string",
+                                    "description": "User's Spot organization ID.",
+                                    "nullable": true,
+                                    "example": "11111111111111"
+                                  },
+                                  "userId": {
+                                    "type": "string",
+                                    "description": "User's unique ID.",
+                                    "nullable": true,
+                                    "example": "u-12345678"
+                                  },
+                                  "costTypes": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "string",
+                                          "description": "Cost type's unique ID.",
+                                          "nullable": true,
+                                          "example": "Effective"
+                                        },
+                                        "name": {
+                                          "type": "string",
+                                          "description": "Cost type's name.",
+                                          "nullable": true,
+                                          "example": "Effective Cost"
+                                        }
+                                      },
+                                      "additionalProperties": false,
+                                      "description": "A FinOps cost type."
+                                    },
+                                    "description": "Cost types assigned to this user.",
+                                    "nullable": true
+                                  },
+                                  "accounts": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "string",
+                                          "description": "Provider account ID. This is the unique ID from the service provider, such as AWS, Azure.",
+                                          "nullable": true,
+                                          "example": "aws~11111111111111"
+                                        },
+                                        "name": {
+                                          "type": "string",
+                                          "description": "Provider account's Name.",
+                                          "nullable": true,
+                                          "example": "Test"
+                                        }
+                                      },
+                                      "additionalProperties": false,
+                                      "description": "A cloud provider account ID."
+                                    },
+                                    "description": "Provider account IDs assigned to this user.",
+                                    "nullable": true,
+                                    "example": [
+                                      {
+                                        "id": "aws~11111111111111",
+                                        "name": "Test"
+                                      }
+                                    ]
+                                  },
+                                  "policies": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "string",
+                                          "description": "Policy's unique ID.",
+                                          "nullable": true,
+                                          "example": "BE-ViewAllOnly"
+                                        },
+                                        "name": {
+                                          "type": "string",
+                                          "description": "Policy's name.",
+                                          "nullable": true,
+                                          "example": "Billing Engine View All Only"
+                                        }
+                                      },
+                                      "additionalProperties": false,
+                                      "description": "A FinOps authorization policy."
+                                    },
+                                    "description": "Authorization policies assigned to this user.",
+                                    "nullable": true,
+                                    "example": [
+                                      {
+                                        "id": "BE-ViewAllOnly",
+                                        "name": "Billing Engine View All Only"
+                                      }
+                                    ]
+                                  }
+                                },
+                                "additionalProperties": false,
+                                "description": "The user's FinOps authorization configuration response model. [kind/spotinst:cbi:authorization:user]"
+                              }
+                            },
+                            "kind": {
+                              "example": "spotinst:cbi:authorization:user"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request error response. Adjust the request before retrying.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1cbi~1v1~1access~1policy/get/responses/400/content/application~1json/schema"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error response. Not permitted to call this API.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1cbi~1v1~1access~1policy/get/responses/400/content/application~1json/schema"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error response. The requested resource does not exist.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1cbi~1v1~1access~1policy/get/responses/400/content/application~1json/schema"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error response. Please try again later.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1cbi~1v1~1access~1policy/get/responses/400/content/application~1json/schema"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Organizations"
+        ],
+        "summary": "Update FinOps Authorization For User",
+        "description": "Update the FinOps authorization configuration for a user.",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/paths/~1cbi~1v1~1access~1user~1%7BuserId%7D/post/requestBody/content/text~1json/schema"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/paths/~1cbi~1v1~1access~1user~1%7BuserId%7D/post/requestBody/content/text~1json/schema"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "authChanges": {
+                    "type": "object",
+                    "properties": {
+                      "resetCostTypes": {
+                        "type": "boolean",
+                        "description": "If true, the existing list of cost types is emptied prior to performing the changes requested."
+                      },
+                      "costTypeChanges": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "enum": [
+                                "None",
+                                "Provider",
+                                "List",
+                                "Billed",
+                                "Effective"
+                              ],
+                              "type": "string"
+                            },
+                            "action": {
+                              "$ref": "#/paths/~1cbi~1v1~1access~1user~1%7BuserId%7D/post/requestBody/content/text~1json/schema/properties/authChanges/properties/policyChanges/items/properties/action"
+                            }
+                          },
+                          "additionalProperties": false,
+                          "description": "The information for a cost type list modification."
+                        },
+                        "description": "List of cost types to add/remove.\r\nCost type applies to all accounts assigned to the user (regardless of how the user has access to the account).\r\nIf the user already has an existing list of cost types, the requested actions are applied to this existing\r\nlist unless resetCostTypes is true (which will clear all existing cost types first).",
+                        "nullable": true
+                      },
+                      "organizationId": {
+                        "type": "string",
+                        "description": "ID of the target Spot organization where the authorization configuration should be applied.\r\nOptional: Defaults to the caller's current Spot organization.\r\nIf specified, the ID must be one of these:\r\n- The caller's current Spot organization\r\n- A child Spot organization of the caller's current Spot organization",
+                        "nullable": true
+                      },
+                      "resetAccounts": {
+                        "type": "boolean",
+                        "description": "If true, the existing list of accounts is emptied prior to performing the \r\nchanges requested."
+                      },
+                      "accountChanges": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/paths/~1cbi~1v1~1access~1user~1%7BuserId%7D/post/requestBody/content/text~1json/schema/properties/authChanges/properties/policyChanges/items"
+                        },
+                        "description": "List of accounts to add/remove.\r\nIf user or group already has an existing list of accounts, the requested actions will be applied to this existing \r\nlist unless resetAccounts is true (which will clear all existing accounts first).",
+                        "nullable": true
+                      },
+                      "resetPolicies": {
+                        "type": "boolean",
+                        "description": "If true, the existing list of policies is emptied prior to performing the changes requested."
+                      },
+                      "policyChanges": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "description": "The entity's ID.",
+                              "nullable": true
+                            },
+                            "action": {
+                              "enum": [
+                                "Add",
+                                "Remove"
+                              ],
+                              "type": "string",
+                              "description": "An action for managing items in a list."
+                            }
+                          },
+                          "additionalProperties": false,
+                          "description": "Represents the basic information for a list modification."
+                        },
+                        "description": "List of policies to add/remove.\r\nIf user or group already has an existing list of policies, the requested actions will be applied to this existing \r\nlist unless resetPolicies is true (which will clear all existing policies first).",
+                        "nullable": true
+                      }
+                    },
+                    "additionalProperties": false,
+                    "description": "The FinOps authorization changes for a user."
+                  }
+                },
+                "additionalProperties": false,
+                "description": "Request to update the FinOps authorization configuration for a specific user."
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/paths/~1cbi~1v1~1access~1user~1%7BuserId%7D/post/requestBody/content/text~1json/schema"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/paths/~1healthCheck/get/responses/200/content/application~1json/schema/allOf/0"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "request": {
+                          "type": "object",
+                          "properties": {
+                            "url": {
+                              "example": "/cbi/v1/access/user/{userId}"
+                            },
+                            "method": {
+                              "example": "POST"
+                            }
+                          }
+                        },
+                        "response": {
+                          "type": "object",
+                          "properties": {
+                            "items": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "userId": {
+                                    "type": "string",
+                                    "description": "User's unique ID.",
+                                    "nullable": true,
+                                    "example": "u-12345678"
+                                  },
+                                  "beforeChanges": {
+                                    "$ref": "#/paths/~1cbi~1v1~1access~1user~1%7BuserId%7D/get/responses/200/content/application~1json/schema/allOf/1/properties/response/properties/items/items"
+                                  },
+                                  "afterChanges": {
+                                    "$ref": "#/paths/~1cbi~1v1~1access~1user~1%7BuserId%7D/get/responses/200/content/application~1json/schema/allOf/1/properties/response/properties/items/items"
+                                  }
+                                },
+                                "additionalProperties": false,
+                                "description": "The FinOps authorization configuration for a specific user (before and after changes). [kind/spotinst:cbi:authorization:user]"
+                              }
+                            },
+                            "kind": {
+                              "example": "spotinst:cbi:authorization:user"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request error response. Adjust the request before retrying.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1cbi~1v1~1access~1policy/get/responses/400/content/application~1json/schema"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden error response. Not permitted to call this API.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1cbi~1v1~1access~1policy/get/responses/400/content/application~1json/schema"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found error response. The requested resource does not exist.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1cbi~1v1~1access~1policy/get/responses/400/content/application~1json/schema"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error response. Please try again later.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/paths/~1cbi~1v1~1access~1policy/get/responses/400/content/application~1json/schema"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/cbi/v1/setup/account": {
       "post": {
         "tags": [
@@ -88138,7 +88806,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/paths/~1cbi~1v1~1setup~1account/get/responses/400/content/application~1json/schema"
+                  "$ref": "#/paths/~1cbi~1v1~1access~1policy/get/responses/400/content/application~1json/schema"
                 }
               }
             },
@@ -88148,7 +88816,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/paths/~1cbi~1v1~1setup~1account/get/responses/400/content/application~1json/schema"
+                  "$ref": "#/paths/~1cbi~1v1~1access~1policy/get/responses/400/content/application~1json/schema"
                 }
               }
             },
@@ -88159,7 +88827,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/paths/~1cbi~1v1~1setup~1account/get/responses/400/content/application~1json/schema"
+                  "$ref": "#/paths/~1cbi~1v1~1access~1policy/get/responses/400/content/application~1json/schema"
                 }
               }
             }
@@ -88203,59 +88871,7 @@
                 "schema": {
                   "allOf": [
                     {
-                      "allOf": [
-                        {
-                          "$ref": "#/paths/~1azure~1compute~1vm~1signal/post/responses/200/content/application~1json/schema/allOf/0"
-                        },
-                        {
-                          "type": "object",
-                          "properties": {
-                            "response": {
-                              "type": "object",
-                              "properties": {
-                                "items": {
-                                  "type": "array",
-                                  "description": "Array of data objects.\n",
-                                  "items": {
-                                    "type": "object"
-                                  }
-                                },
-                                "count": {
-                                  "type": "integer",
-                                  "example": 1,
-                                  "description": "Size of the data object array.\n"
-                                },
-                                "kind": {
-                                  "type": "string",
-                                  "description": "The data type of each item in the response.\n"
-                                },
-                                "paginationInfo": {
-                                  "nullable": true,
-                                  "properties": {
-                                    "totalCount": {
-                                      "type": "integer",
-                                      "nullable": true,
-                                      "description": "[Optional/Not supported on all APIs] Total number of items (for all pages)."
-                                    },
-                                    "nextKey": {
-                                      "type": "string",
-                                      "nullable": true,
-                                      "description": "Key used to fetch next page of data (if any)."
-                                    },
-                                    "previousKey": {
-                                      "type": "string",
-                                      "nullable": true,
-                                      "description": "Key used to fetch previous page of data (if any)."
-                                    }
-                                  },
-                                  "type": "object",
-                                  "title": "PaginationInfo"
-                                }
-                              }
-                            }
-                          }
-                        }
-                      ]
+                      "$ref": "#/paths/~1cbi~1v1~1access~1policy/get/responses/200/content/application~1json/schema/allOf/0"
                     },
                     {
                       "type": "object",
@@ -88435,42 +89051,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "allOf": [
-                    {
-                      "$ref": "#/paths/~1azure~1compute~1vm~1signal/post/responses/200/content/application~1json/schema/allOf/0"
-                    },
-                    {
-                      "type": "object",
-                      "properties": {
-                        "response": {
-                          "type": "object",
-                          "properties": {
-                            "errors": {
-                              "type": "array",
-                              "description": "List of errors.",
-                              "items": {
-                                "properties": {
-                                  "code": {
-                                    "type": "string",
-                                    "description": "Error code."
-                                  },
-                                  "message": {
-                                    "type": "string",
-                                    "description": "Error message."
-                                  }
-                                },
-                                "type": "object",
-                                "required": [
-                                  "message"
-                                ],
-                                "title": "ErrorModel"
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  ]
+                  "$ref": "#/paths/~1cbi~1v1~1access~1policy/get/responses/400/content/application~1json/schema"
                 }
               }
             },
@@ -88480,7 +89061,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/paths/~1cbi~1v1~1setup~1account/get/responses/400/content/application~1json/schema"
+                  "$ref": "#/paths/~1cbi~1v1~1access~1policy/get/responses/400/content/application~1json/schema"
                 }
               }
             },
@@ -88491,7 +89072,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/paths/~1cbi~1v1~1setup~1account/get/responses/400/content/application~1json/schema"
+                  "$ref": "#/paths/~1cbi~1v1~1access~1policy/get/responses/400/content/application~1json/schema"
                 }
               }
             }
@@ -88604,7 +89185,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/paths/~1cbi~1v1~1setup~1account/get/responses/400/content/application~1json/schema"
+                  "$ref": "#/paths/~1cbi~1v1~1access~1policy/get/responses/400/content/application~1json/schema"
                 }
               }
             },
@@ -88614,7 +89195,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/paths/~1cbi~1v1~1setup~1account/get/responses/400/content/application~1json/schema"
+                  "$ref": "#/paths/~1cbi~1v1~1access~1policy/get/responses/400/content/application~1json/schema"
                 }
               }
             },
@@ -88625,7 +89206,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/paths/~1cbi~1v1~1setup~1account/get/responses/400/content/application~1json/schema"
+                  "$ref": "#/paths/~1cbi~1v1~1access~1policy/get/responses/400/content/application~1json/schema"
                 }
               }
             }
@@ -88671,7 +89252,7 @@
                 "schema": {
                   "allOf": [
                     {
-                      "$ref": "#/paths/~1cbi~1v1~1setup~1account/get/responses/200/content/application~1json/schema/allOf/0"
+                      "$ref": "#/paths/~1cbi~1v1~1access~1policy/get/responses/200/content/application~1json/schema/allOf/0"
                     },
                     {
                       "type": "object",
@@ -88777,7 +89358,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/paths/~1cbi~1v1~1setup~1account/get/responses/400/content/application~1json/schema"
+                  "$ref": "#/paths/~1cbi~1v1~1access~1policy/get/responses/400/content/application~1json/schema"
                 }
               }
             },
@@ -88787,7 +89368,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/paths/~1cbi~1v1~1setup~1account/get/responses/400/content/application~1json/schema"
+                  "$ref": "#/paths/~1cbi~1v1~1access~1policy/get/responses/400/content/application~1json/schema"
                 }
               }
             },
@@ -88798,7 +89379,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/paths/~1cbi~1v1~1setup~1account/get/responses/400/content/application~1json/schema"
+                  "$ref": "#/paths/~1cbi~1v1~1access~1policy/get/responses/400/content/application~1json/schema"
                 }
               }
             }
@@ -89018,7 +89599,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/paths/~1cbi~1v1~1setup~1account/get/responses/400/content/application~1json/schema"
+                  "$ref": "#/paths/~1cbi~1v1~1access~1policy/get/responses/400/content/application~1json/schema"
                 }
               }
             },
@@ -89028,7 +89609,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/paths/~1cbi~1v1~1setup~1account/get/responses/400/content/application~1json/schema"
+                  "$ref": "#/paths/~1cbi~1v1~1access~1policy/get/responses/400/content/application~1json/schema"
                 }
               }
             },
@@ -89039,7 +89620,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/paths/~1cbi~1v1~1setup~1account/get/responses/400/content/application~1json/schema"
+                  "$ref": "#/paths/~1cbi~1v1~1access~1policy/get/responses/400/content/application~1json/schema"
                 }
               }
             }
@@ -89114,7 +89695,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/paths/~1cbi~1v1~1setup~1account/get/responses/400/content/application~1json/schema"
+                  "$ref": "#/paths/~1cbi~1v1~1access~1policy/get/responses/400/content/application~1json/schema"
                 }
               }
             },
@@ -89124,7 +89705,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/paths/~1cbi~1v1~1setup~1account/get/responses/400/content/application~1json/schema"
+                  "$ref": "#/paths/~1cbi~1v1~1access~1policy/get/responses/400/content/application~1json/schema"
                 }
               }
             },
@@ -89135,7 +89716,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/paths/~1cbi~1v1~1setup~1account/get/responses/400/content/application~1json/schema"
+                  "$ref": "#/paths/~1cbi~1v1~1access~1policy/get/responses/400/content/application~1json/schema"
                 }
               }
             }
