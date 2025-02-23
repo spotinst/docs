@@ -54432,6 +54432,16 @@
                                   "PREEMPTIBLE"
                                 ]
                               },
+                              "scalingOrientation": {
+                                "type": "string",
+                                "default": "BALANCED",
+                                "description": "Control the approach that Ocean takes while launching nodes by configuring this value.\n",
+                                "enum": [
+                                  "COST",
+                                  "AVAILABILITY",
+                                  "BALANCED"
+                                ]
+                              },
                               "preemptiblePercentage": {
                                 "type": "integer",
                                 "minimum": 0,
@@ -57904,6 +57914,16 @@
                         "default": 100,
                         "description": "The desired percentage of Spot/Preemptible instances out of all running instances for this VNG.\\\nOnly available when the field is **not** set in the cluster directly (cluster.strategy.preemptiblePercentage).\n",
                         "example": 80
+                      },
+                      "scalingOrientation": {
+                        "type": "string",
+                        "default": "BALANCED",
+                        "description": "Control the approach that Ocean takes while launching nodes by configuring this value.\n",
+                        "enum": [
+                          "COST",
+                          "AVAILABILITY",
+                          "BALANCED"
+                        ]
                       },
                       "shouldUtilizeCommitments": {
                         "type": "boolean",
