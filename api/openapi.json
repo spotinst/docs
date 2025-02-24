@@ -86183,14 +86183,6 @@
                         "example": "2025-01-30T11:30:01.745Z",
                         "description": "End date value using either the date format \"yyyy-MM-dd'T'HH:mm:ss'Z'\" or ms \"1494751821472\".\n"
                       },
-                      "benchmark": {
-                        "type": "string",
-                        "description": "The benchmark to compare the savings against. The default is ORIGINAL.\n",
-                        "enum": [
-                          "ORIGINAL",
-                          "CURRENT"
-                        ]
-                      },
                       "workloads": {
                         "title": "Ocean Right-Sizing Savings Workloads",
                         "description": "Determines the Ocean Savings filtering by the combinations of namespace::workload\n",
