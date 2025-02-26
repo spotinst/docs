@@ -85261,7 +85261,7 @@
                                     "description": "The name of the workload",
                                     "example": "kube-proxy"
                                   },
-                                  "type": {
+                                  "workloadType": {
                                     "type": "string",
                                     "description": "The type of the workload",
                                     "example": "Deployment"
@@ -85272,24 +85272,19 @@
                                     "example": "spotinst*"
                                   }
                                 }
-                              }
-                            }
-                          },
-                          "example": [
-                            {
-                              "namespacesName": "kube-system",
-                              "workloads": [
+                              },
+                              "example": [
                                 {
                                   "name": "kube-proxy",
-                                  "type": "Deployment"
+                                  "workloadType": "DaemonSet"
                                 },
                                 {
                                   "regexName": "spotinst*",
-                                  "type": "Deployment"
+                                  "workloadType": "Deployment"
                                 }
                               ]
                             }
-                          ]
+                          }
                         }
                       }
                     }
