@@ -60061,7 +60061,7 @@
                                           }
                                         },
                                         {
-                                          "$ref": "#/paths/~1ocean~1azure~1np~1cluster~1%7BoceanClusterId%7D~1autoUpgrade/post/requestBody/content/application~1json/schema/allOf/0"
+                                          "$ref": "#/paths/~1ocean~1azure~1np~1cluster~1%7BoceanClusterId%7D~1autoUpgrade/post/requestBody/content/application~1json/schema/allOf/0/properties/upgradeConfig"
                                         }
                                       ]
                                     }
@@ -64548,53 +64548,61 @@
                 "allOf": [
                   {
                     "type": "object",
-                    "description": "The Configuration for scheduling automatic upgrades of your cluster to ensure it stays updated with the latest version.\n",
-                    "title": "Upgrade Config",
+                    "required": [
+                      "upgradeConfig"
+                    ],
                     "properties": {
-                      "applyRoll": {
-                        "type": "boolean",
-                        "description": "When set to True, a cluster roll will be initiated if a new version is available to upgrade in the dedicated virtual node groups.\n",
-                        "example": 20
-                      },
-                      "scopeVersion": {
-                        "type": "string",
-                        "description": "The scope of the upgrade version.\n",
-                        "enum": [
-                          "patch"
-                        ]
-                      },
-                      "rollParameters": {
+                      "upgradeConfig": {
                         "type": "object",
-                        "description": "The parameters of the cluster roll that will be initiated.\n",
+                        "description": "The Configuration for scheduling automatic upgrades of your cluster to ensure it stays updated with the latest version.\n",
+                        "title": "Upgrade Config",
                         "properties": {
-                          "batchSizePercentage": {
-                            "type": "integer",
-                            "minimum": 1,
-                            "maximum": 100,
-                            "description": "The percentage of the cluster that will be rolled at each batch.\n",
-                            "example": 20
+                          "applyRoll": {
+                            "type": "boolean",
+                            "description": "When set to True, a cluster roll will be initiated if a new version is available to upgrade in the dedicated virtual node groups.\n",
+                            "example": true
                           },
-                          "comment": {
+                          "scopeVersion": {
                             "type": "string",
-                            "description": "A comment to be added to the cluster roll.\n",
-                            "example": "Scheduled cluster roll"
+                            "description": "The scope of the upgrade version.\n",
+                            "enum": [
+                              "patch"
+                            ]
                           },
-                          "respectPdb": {
-                            "type": "boolean",
-                            "description": "During the roll, if the parameter is set to true we honor PDB during the instance replacement.\n",
-                            "example": true
-                          },
-                          "respectRestrictScaleDown": {
-                            "type": "boolean",
-                            "description": "During the roll, if the parameter is set to true we honor Restrict Scale Down label during the nodes replacement.\n",
-                            "example": true
-                          },
-                          "batchMinHealthyPercentage": {
-                            "type": "integer",
-                            "minimum": 1,
-                            "maximum": 100,
-                            "description": "The minimum percentage of the scaled nodes that should be healthy at each batch.\n",
-                            "example": 80
+                          "rollParameters": {
+                            "type": "object",
+                            "description": "The parameters of the cluster roll that will be initiated.\n",
+                            "properties": {
+                              "batchSizePercentage": {
+                                "type": "integer",
+                                "minimum": 1,
+                                "maximum": 100,
+                                "description": "The percentage of the cluster that will be rolled at each batch.\n",
+                                "example": 20
+                              },
+                              "comment": {
+                                "type": "string",
+                                "description": "A comment to be added to the cluster roll.\n",
+                                "example": "Auto-upgrade the control plane to the latest patch version."
+                              },
+                              "respectPdb": {
+                                "type": "boolean",
+                                "description": "During the roll, if the parameter is set to true we honor PDB during the instance replacement.\n",
+                                "example": true
+                              },
+                              "respectRestrictScaleDown": {
+                                "type": "boolean",
+                                "description": "During the roll, if the parameter is set to true we honor Restrict Scale Down label during the nodes replacement.\n",
+                                "example": true
+                              },
+                              "batchMinHealthyPercentage": {
+                                "type": "integer",
+                                "minimum": 1,
+                                "maximum": 100,
+                                "description": "The minimum percentage of the scaled nodes that should be healthy at each batch.\n",
+                                "example": 80
+                              }
+                            }
                           }
                         }
                       }
