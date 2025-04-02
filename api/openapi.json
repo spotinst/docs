@@ -43589,6 +43589,22 @@
                             "minimum": 300,
                             "example": 300,
                             "default": 300
+                          },
+                          "orientation": {
+                            "type": "object",
+                            "properties": {
+                              "availabilityVsCost": {
+                                "type": "string",
+                                "description": "Set this value to control the approach that Ocean takes while launching nodes.\n",
+                                "enum": [
+                                  "costOriented",
+                                  "balanced",
+                                  "cheapest"
+                                ],
+                                "example": "balanced",
+                                "default": "balanced"
+                              }
+                            }
                           }
                         }
                       },
