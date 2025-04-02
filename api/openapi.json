@@ -2,11 +2,11 @@
   "openapi": "3.0.0",
   "info": {
     "version": "1.0",
-    "description": "Welcome to the Spot by NetApp OpenAPI Specification.\nHere you will find REST definitions for all Spot products and platform administration tasks.\n\nThe API is hosted at `https://api.spotinst.io` and requires Bearer Token\nAuthentication.\n\nFor more information on how to use the Spot platform, including user guides,\ndeveloper guides, concepts, and tutorials, see the external [Spot Documentation](https://docs.spot.io/).\n",
-    "title": "Spot by NetApp API",
+    "description": "Welcome to the Spot by Flexera OpenAPI Specification.\nHere you will find REST definitions for all Spot products and platform administration tasks.\n\nThe API is hosted at `https://api.spotinst.io` and requires Bearer Token\nAuthentication.\n\nFor more information on how to use the Spot platform, including user guides,\ndeveloper guides, concepts, and tutorials, see the external [Spot Documentation](https://docs.spot.io/).\n",
+    "title": "Spot by Flexera API",
     "x-logo": {
-      "url": "https://docs.spot.io/_media/images/spot.png",
-      "altText": "SpotByNetAppLogo",
+      "url": "https://docs.spot.io/_media/images/flexera-spot.png",
+      "altText": "SpotByFlexeraLogo",
       "href": "https://docs.spot.io/api"
     },
     "contact": {
@@ -29,7 +29,7 @@
   "components": {
     "securitySchemes": {
       "auth": {
-        "description": "To generate bearer tokens and understand more about Spot by NetApp\nauthentication see the howto for\n[token creation](https://docs.spot.io/administration/api/create-api-token)\non the Spot Help site.\n\n### Organizations and Accounts\n\nEach Spot account is assigned to an organization and a set of environment Accounts.\nAn account is then linked to a specific cloud provider account.\n\nSpot accounts are given an ID in the format `act-123abcd` that is sent as a query parameter while performing API calls.\n\nTo locate the account ID navigate to Settings -> Account in the Spot console.\n\n### Organizations with a Single Account\nEach API call you make can be used with or without the account ID.\n\n### Organizations with Multiple Accounts\nEach API call you make should be appended to the account ID. For example:\n\nGET `https://api.spotinst.io/aws/ec2/group?accountId=act-123de678`\nThis call will return the list of Elastigroups for the specific Account used.\n\n> NOTE: If no `accountId` is provided, the default (dldest) account for the Organization will be used.\n",
+        "description": "To generate bearer tokens and understand more about Spot by Flexera\nauthentication see the howto for\n[token creation](https://docs.spot.io/administration/api/create-api-token)\non the Spot Help site.\n\n### Organizations and Accounts\n\nEach Spot account is assigned to an organization and a set of environment Accounts.\nAn account is then linked to a specific cloud provider account.\n\nSpot accounts are given an ID in the format `act-123abcd` that is sent as a query parameter while performing API calls.\n\nTo locate the account ID navigate to Settings -> Account in the Spot console.\n\n### Organizations with a Single Account\nEach API call you make can be used with or without the account ID.\n\n### Organizations with Multiple Accounts\nEach API call you make should be appended to the account ID. For example:\n\nGET `https://api.spotinst.io/aws/ec2/group?accountId=act-123de678`\nThis call will return the list of Elastigroups for the specific Account used.\n\n> NOTE: If no `accountId` is provided, the default (dldest) account for the Organization will be used.\n",
         "type": "http",
         "scheme": "bearer"
       }
@@ -28115,11 +28115,11 @@
                                     "description": "You can use secure boot when you launch VMs using Elastigroup. This helps you comply with your security policies. In the instance configuration, use ‘secureBootEnabled’ set to True to enforce UEFI with secure boot. Elastigroup provisions VMs with secure boot, as long as the images supports UEFI.",
                                     "properties": {
                                       "enableSecureBoot": {
-                                        "type": "Boolean",
+                                        "type": "boolean",
                                         "default": false
                                       },
                                       "enableIntegrityMonitoring": {
-                                        "type": "Boolean",
+                                        "type": "boolean",
                                         "default": false
                                       }
                                     }
@@ -29093,11 +29093,11 @@
                                     "description": "You can use secure boot when you launch VMs using Elastigroup. This helps you comply with your security policies. In the instance configuration, use ‘secureBootEnabled’ set to True to enforce UEFI with secure boot. Elastigroup provisions VMs with secure boot, as long as the images supports UEFI.",
                                     "properties": {
                                       "enableSecureBoot": {
-                                        "type": "Boolean",
+                                        "type": "boolean",
                                         "default": false
                                       },
                                       "enableIntegrityMonitoring": {
-                                        "type": "Boolean",
+                                        "type": "boolean",
                                         "default": false
                                       }
                                     }
@@ -72204,7 +72204,7 @@
                                       "collectAppLogs": {
                                         "type": "boolean",
                                         "default": true,
-                                        "description": "Enable/Disable collecting driver and executor logs. When enabled, logs are stored by NetApp and can be downloaded from \nthe Spot console web interface. The logs are deleted after 30 days.\n"
+                                        "description": "Enable/Disable collecting driver and executor logs. When enabled, logs are stored by Flexera and can be downloaded from \nthe Spot console web interface. The logs are deleted after 30 days.\n"
                                       }
                                     }
                                   },
