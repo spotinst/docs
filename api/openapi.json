@@ -53900,7 +53900,8 @@
                       "clientId",
                       "clientSecret",
                       "tenantId",
-                      "subscriptionId"
+                      "subscriptionId",
+                      "expirationDate"
                     ],
                     "properties": {
                       "clientId": {
