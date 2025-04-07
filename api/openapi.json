@@ -40094,6 +40094,9 @@
                                 },
                                 "instanceStorePolicy": {
                                   "$ref": "#/paths/~1ocean~1aws~1k8s~1launchSpec~1%7BlaunchSpecId%7D/put/requestBody/content/application~1json/schema/properties/launchSpec/properties/instanceStorePolicy"
+                                },
+                                "gpu": {
+                                  "$ref": "#/paths/~1ocean~1aws~1k8s~1launchSpec~1%7BlaunchSpecId%7D/put/requestBody/content/application~1json/schema/properties/launchSpec/properties/gpu"
                                 }
                               }
                             }
@@ -43792,6 +43795,51 @@
                             ],
                             "example": "RAID0"
                           }
+                        }
+                      },
+                      "gpu": {
+                        "type": "object",
+                        "description": "GPU configuration",
+                        "properties": {
+                          "sharing": {
+                            "type": "array",
+                            "maximum": 1,
+                            "description": "List of configurations for GPU sharing. You can get up to 1 configuration.\n",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "gpuSharingType": {
+                                  "type": "string",
+                                  "enum": [
+                                    "timeSlicing"
+                                  ],
+                                  "description": "Type of GPU sharing.\n",
+                                  "example": "timeSlicing"
+                                },
+                                "config": {
+                                  "type": "object",
+                                  "properties": {
+                                    "replicas": {
+                                      "minimum": 1,
+                                      "type": "integer",
+                                      "description": "Number of shared replicas for the GPU sharing configuration.\n",
+                                      "example": 2
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "example": {
+                          "sharing": [
+                            {
+                              "gpuSharingType": "timeSlicing",
+                              "config": {
+                                "replicas": 2
+                              }
+                            }
+                          ]
                         }
                       }
                     }
