@@ -16937,7 +16937,7 @@
                                   },
                                   "spotSizes": {
                                     "type": "array",
-                                    "description": "Available Spot-VM sizes.\n",
+                                    "description": "Available spot VM sizes.\n",
                                     "items": {
                                       "type": "string",
                                       "example": "standard_a2_v2"
@@ -16949,6 +16949,20 @@
                                     "items": {
                                       "type": "string",
                                       "example": "standard_a2_v2"
+                                    }
+                                  },
+                                  "spotSizeAttributes": {
+                                    "$ref": "#/paths/~1azure~1compute~1group/post/requestBody/content/application~1json/schema/allOf/0/properties/group/properties/compute/properties/vmSizes/properties/spotSizeAttributes"
+                                  },
+                                  "excludedVmSizes": {
+                                    "type": "array",
+                                    "description": "Exclude these spot VM sizes when using attribute-based VM sizes.\n",
+                                    "example": [
+                                      "standard_a2_v2",
+                                      "standard_d2s_v3"
+                                    ],
+                                    "items": {
+                                      "type": "string"
                                     }
                                   }
                                 }
@@ -19009,6 +19023,63 @@
                                       "type": "string",
                                       "example": "standard_a2_v2"
                                     }
+                                  },
+                                  "spotSizeAttributes": {
+                                    "type": "object",
+                                    "title": "Elastigroup spot size attributes",
+                                    "description": "The values and ranges for spot size attributes when launching VMs.  \n <a style=color:red>Required if spotSizes isn't specified.</a>\n",
+                                    "properties": {
+                                      "minCpu": {
+                                        "type": "integer",
+                                        "description": "Minimum instance CPU units.\n",
+                                        "example": 2
+                                      },
+                                      "maxCpu": {
+                                        "type": "integer",
+                                        "description": "Maximum instance CPU units.\n",
+                                        "example": 8
+                                      },
+                                      "minStorage": {
+                                        "type": "integer",
+                                        "description": "Minimum instance storage (GiB).\n",
+                                        "example": 5
+                                      },
+                                      "maxStorage": {
+                                        "type": "integer",
+                                        "description": "Maximum instance storage (GiB).\n",
+                                        "example": 50
+                                      },
+                                      "minMemory": {
+                                        "type": "integer",
+                                        "description": "Minimum instance memory (GiB).\n",
+                                        "example": 2
+                                      },
+                                      "maxMemory": {
+                                        "type": "integer",
+                                        "description": "Maximum instance memory (GiB).\n",
+                                        "example": 2
+                                      },
+                                      "cpuArchitecture": {
+                                        "type": "string",
+                                        "description": "Required CPU architecture.\n",
+                                        "enum": [
+                                          "X64",
+                                          "ARM64"
+                                        ],
+                                        "example": "X64"
+                                      }
+                                    }
+                                  },
+                                  "excludedVmSizes": {
+                                    "type": "array",
+                                    "description": "Exclude these spot VM sizes when using attribute-based VM sizes.\n",
+                                    "example": [
+                                      "standard_a2_v2",
+                                      "standard_d2s_v3"
+                                    ],
+                                    "items": {
+                                      "type": "string"
+                                    }
                                   }
                                 }
                               },
@@ -20249,7 +20320,7 @@
                                           },
                                           "spotSizes": {
                                             "type": "array",
-                                            "description": "Available Spot-VM sizes.\n",
+                                            "description": "Available spot VM sizes.\n",
                                             "items": {
                                               "type": "string",
                                               "example": "standard_a2_v2"
@@ -20261,6 +20332,20 @@
                                             "items": {
                                               "type": "string",
                                               "example": "standard_a2_v2"
+                                            }
+                                          },
+                                          "spotSizeAttributes": {
+                                            "$ref": "#/paths/~1azure~1compute~1group/post/requestBody/content/application~1json/schema/allOf/0/properties/group/properties/compute/properties/vmSizes/properties/spotSizeAttributes"
+                                          },
+                                          "excludedVmSizes": {
+                                            "type": "array",
+                                            "description": "Exclude these spot VM sizes when using attribute-based VM sizes.\n",
+                                            "example": [
+                                              "standard_a2_v2",
+                                              "standard_d2s_v3"
+                                            ],
+                                            "items": {
+                                              "type": "string"
                                             }
                                           }
                                         }
@@ -23185,7 +23270,7 @@
                                   },
                                   "spotSizes": {
                                     "type": "array",
-                                    "description": "Defines the spot-VM sizes to use when launching VMs.\n<a style=color:red>Required if spotSizeAttributes isn't specified.</a>\n",
+                                    "description": "Defines the spot VM sizes to use when launching VMs.\n<a style=color:red>Required if spotSizeAttributes isn't specified.</a>\n",
                                     "items": {
                                       "type": "string",
                                       "example": "standard_a2_v2"
@@ -23193,7 +23278,7 @@
                                   },
                                   "spotSizeAttributes": {
                                     "type": "object",
-                                    "description": "Defines values and ranges for attributes of the spot sizes to use when launching VMs.\n <a style=color:red>Required if spotSizes isn't specified.</a>\n",
+                                    "description": "The values and ranges for spot size attributes when launching VMs.\n <a style=color:red>Required if spotSizes isn't specified.</a>\n",
                                     "properties": {
                                       "minCpu": {
                                         "type": "integer",
@@ -23229,7 +23314,7 @@
                                   },
                                   "excludedVmSizes": {
                                     "type": "array",
-                                    "description": "Defines the VM sizes to exclude when defining spot types with spotSizeAttributes.\n",
+                                    "description": "Exclude these spot VM sizes when using attribute-based VM sizes.\n",
                                     "items": {
                                       "type": "string",
                                       "example": "standard_a2_v2"
@@ -24664,7 +24749,7 @@
                                   },
                                   "spotSizeAttributes": {
                                     "type": "object",
-                                    "description": "Defines values and ranges for attributes of the spot sizes to use when launching VMs.\n<a style=color:red>Required if spotSizes isn't specified.</a>\n",
+                                    "description": "The values and ranges for spot size attributes when launching VMs.\n <a style=color:red>Required if spotSizes isn't specified.</a>\n",
                                     "properties": {
                                       "minCpu": {
                                         "type": "integer",
@@ -24700,7 +24785,7 @@
                                   },
                                   "excludedVmSizes": {
                                     "type": "array",
-                                    "description": "Defines the VM sizes to exclude when defining spot types with spotSizeAttributes.\n",
+                                    "description": "Exclude these spot VM sizes when using attribute-based VM sizes.\n",
                                     "items": {
                                       "type": "string",
                                       "example": "standard_a2_v2"
