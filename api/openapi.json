@@ -17600,12 +17600,17 @@
                                         "type": "boolean",
                                         "description": "Confidential disk encryption binds the disk encryption keys to the VM's TPM, ensuring VM-only access.\nThe security type must be \"ConfidentialVM\" to enable defining this preference as “true”.\n",
                                         "example": false
+                                      },
+                                      "encryptionAtHost": {
+                                        "type": "boolean",
+                                        "description": "Enables host encryption for the virtual machine. Encryption at host can only be enabled if this property is set to true for the resource.\n",
+                                        "example": true
                                       }
                                     }
                                   },
                                   "proximityPlacementGroups": {
                                     "type": "array",
-                                    "description": "Defines the proximity placement group in which the VM will be launched.",
+                                    "description": "The proximity placement group where the VM is launched.",
                                     "items": {
                                       "type": "object",
                                       "required": [
@@ -19752,12 +19757,17 @@
                                         "type": "boolean",
                                         "description": "Confidential disk encryption binds the disk encryption keys to the VM's TPM, ensuring VM-only access.\nThe security type must be \"ConfidentialVM\" to enable defining this preference as “true”.\n",
                                         "example": false
+                                      },
+                                      "encryptionAtHost": {
+                                        "type": "boolean",
+                                        "description": "Enables host encryption for the virtual machine. Encryption at host can only be enabled if this property is set to true for the resource.\n",
+                                        "example": true
                                       }
                                     }
                                   },
                                   "proximityPlacementGroups": {
                                     "type": "array",
-                                    "description": "Defines the proximity placement group in which the VM will be launched.",
+                                    "description": "The proximity placement group where the VM is launched.",
                                     "items": {
                                       "type": "object",
                                       "required": [
@@ -20395,6 +20405,11 @@
                                                 "type": "boolean",
                                                 "description": "Confidential disk encryption binds the disk encryption keys to the VM's TPM, ensuring VM-only access.\nThe security type must be \"ConfidentialVM\" to enable defining this preference as “true”.\n",
                                                 "example": false
+                                              },
+                                              "encryptionAtHost": {
+                                                "type": "boolean",
+                                                "description": "Enables host encryption for the virtual machine. Encryption at host can only be enabled if this property is set to true for the resource.\n",
+                                                "example": true
                                               }
                                             }
                                           },
@@ -24090,7 +24105,7 @@
                                   },
                                   "proximityPlacementGroups": {
                                     "type": "array",
-                                    "description": "Defines the proximity placement group in which the VM will be launched.",
+                                    "description": "The proximity placement group where the VM is launched.",
                                     "items": {
                                       "type": "object",
                                       "required": [
@@ -25552,7 +25567,7 @@
                                   },
                                   "proximityPlacementGroups": {
                                     "type": "array",
-                                    "description": "Defines the proximity placement group in which the VM will be launched.",
+                                    "description": "The proximity placement group where the VM is launched.",
                                     "items": {
                                       "type": "object",
                                       "required": [
