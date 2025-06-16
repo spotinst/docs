@@ -19063,15 +19063,6 @@
                                         "type": "integer",
                                         "description": "Maximum instance memory (GiB).\n",
                                         "example": 2
-                                      },
-                                      "cpuArchitecture": {
-                                        "type": "string",
-                                        "description": "Required CPU architecture.\n",
-                                        "enum": [
-                                          "X64",
-                                          "ARM64"
-                                        ],
-                                        "example": "X64"
                                       }
                                     }
                                   },
@@ -40081,7 +40072,7 @@
                                 },
                                 "associateIpv6Address": {
                                   "type": "boolean",
-                                  "description": "Configure IPv6 address allocation.",
+                                  "description": "Configure IPv6 address allocation. \\\nNot required if the subnet is configured to “auto assign ipv6 addresses”.\n",
                                   "default": false,
                                   "example": false
                                 },
