@@ -178,8 +178,12 @@
       }
     },
     {
-      "name": "Notifications Service",
-      "description": "A Spot Notifications service enables you a fast, flexible, fully managed push notification service that lets you know about major events that happened in your Spot account.ֿ Spot Notifications makes it simple and cost-effective to get push notifications to your email address, HTTP, HTTPS or AWS SNS (Simple Notifications Service).\n"
+      "name": "Notification Subscription Service",
+      "description": "The Spot notification service enables you a fast, flexible, fully managed push notification service that lets you know about major events that happened in your Spot account.ֿ Spot Notifications makes it simple and cost-effective to get push notifications to your email address, HTTP, HTTPS or AWS SNS (Simple Notifications Service).\n\n> **Note**: This service is deprecated. Use the\n[Notification Center Service](https://docs.spot.io/api/#tag/Notification-Center-Service).\n"
+    },
+    {
+      "name": "Notification Center Service",
+      "description": "Manage your compute notification policies. You can create new policies, apply updates, or delete the policy entirely.\n"
     },
     {
       "name": "Insights Service"
@@ -227,8 +231,9 @@
       "tags": [
         "Audit Service",
         "Health Check Service",
-        "Notifications Service",
-        "Insights Service"
+        "Notification Center Service",
+        "Insights Service",
+        "Notification Subscription Service"
       ]
     },
     {
@@ -47497,10 +47502,10 @@
     "/events/notification/accountPolicy": {
       "put": {
         "summary": "Update Account Notification Policy",
-        "description": "Update the account notification policy\n",
+        "description": "Update the account notification policy\n  > **Note:** This service is deprecated. Use the \n  [Notification Center Service](https://docs.spot.io/api/#tag/Notification-Center-Service).\n",
         "operationId": "NotificationsServiceUpdateAccountNotificationPolicy",
         "tags": [
-          "Notifications Service"
+          "Notification Subscription Service"
         ],
         "parameters": [
           {
@@ -47657,10 +47662,10 @@
       },
       "get": {
         "summary": "Get Account Notification Policy",
-        "description": "Get the account notification policy\n",
+        "description": "Get the account notification policy\n  > **Note:** This service is deprecated. Use the \n  [Notification Center Service](https://docs.spot.io/api/#tag/Notification-Center-Service).\n",
         "operationId": "NotificationsServiceGetAccountNotificationPolicy",
         "tags": [
-          "Notifications Service"
+          "Notification Subscription Service"
         ],
         "parameters": [
           {
@@ -47704,13 +47709,799 @@
         }
       }
     },
+    "/notificationCenter/compute/event": {
+      "get": {
+        "summary": "Get Events Types",
+        "description": "Gets all available event types for the notification policies, depending on your account provider.\n",
+        "operationId": "EventTypeList",
+        "tags": [
+          "Notification Center Service"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/paths/~1azure~1costs/get/parameters/0"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Event Type List Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/paths/~1healthCheck/get/responses/200/content/application~1json/schema/allOf/0"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "request": {
+                          "type": "object",
+                          "properties": {
+                            "url": {
+                              "example": "/notificationCenter/compute/event/act-123456789"
+                            },
+                            "method": {
+                              "example": "GET"
+                            }
+                          }
+                        },
+                        "response": {
+                          "type": "object",
+                          "properties": {
+                            "items": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "description": "Event type for the notification policy.\n",
+                                "properties": {
+                                  "event": {
+                                    "type": "string",
+                                    "description": "The event name.",
+                                    "example": "Missing configuration"
+                                  },
+                                  "type": {
+                                    "type": "string",
+                                    "description": "The severity level of the event.",
+                                    "example": "error"
+                                  }
+                                }
+                              }
+                            },
+                            "kind": {
+                              "example": "spotinst:notification:compute:event"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/notificationCenter/compute/resource": {
+      "get": {
+        "summary": "Get Account Resources",
+        "description": "Gets a list of all resources for a specific account.   \n",
+        "operationId": "AccountResourceList",
+        "tags": [
+          "Notification Center Service"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/paths/~1azure~1costs/get/parameters/0"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Account Resource List Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/paths/~1healthCheck/get/responses/200/content/application~1json/schema/allOf/0"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "request": {
+                          "type": "object",
+                          "properties": {
+                            "url": {
+                              "example": "/notificationCenter/compute/resource/act-123456789"
+                            },
+                            "method": {
+                              "example": "GET"
+                            }
+                          }
+                        },
+                        "response": {
+                          "type": "object",
+                          "properties": {
+                            "items": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "description": "Account Resource.\n",
+                                "properties": {
+                                  "Id": {
+                                    "type": "string",
+                                    "description": "The unique identifier of the account.",
+                                    "example": "act-123456789"
+                                  },
+                                  "name": {
+                                    "type": "string",
+                                    "description": "The name of the account.",
+                                    "example": "Example for account name"
+                                  },
+                                  "type": {
+                                    "type": "string",
+                                    "description": "The type of the resource.",
+                                    "example": "ocean"
+                                  }
+                                }
+                              }
+                            },
+                            "kind": {
+                              "example": "spotinst:notification:compute:accountResource"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/notificationCenter/policy": {
+      "post": {
+        "summary": "Create Notification Policy",
+        "description": "Creates a notification policy. Only for Compute policies.\n",
+        "operationId": "notificationPolicyCreate",
+        "tags": [
+          "Notification Center Service"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/paths/~1azure~1costs/get/parameters/0"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "type": "object",
+                    "required": [
+                      "computePolicyConfig",
+                      "privacyLevel"
+                    ],
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "description": "The name of the notification policy.",
+                        "example": "Test Notification Policy"
+                      },
+                      "description": {
+                        "type": "string",
+                        "description": "A brief description of the notification policy. Can be null or not empty.",
+                        "example": "A description of the notification policy."
+                      },
+                      "privacyLevel": {
+                        "type": "string",
+                        "description": "The privacy level of the notification policy.",
+                        "enum": [
+                          "public",
+                          "private"
+                        ],
+                        "example": "public"
+                      },
+                      "subscriptions": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "type": {
+                              "type": "string",
+                              "enum": [
+                                "email",
+                                "webhook",
+                                "slack",
+                                "sns"
+                              ],
+                              "example": "email"
+                            },
+                            "endpoint": {
+                              "type": "string",
+                              "example": "endpoint@example.com"
+                            }
+                          }
+                        }
+                      },
+                      "registeredUsers": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "userEmail": {
+                              "type": "string",
+                              "description": "User's email address. The user must be part of the organization.",
+                              "example": "user@example.com"
+                            },
+                            "subscriptionTypes": {
+                              "type": "array",
+                              "items": {
+                                "type": "string",
+                                "enum": [
+                                  "email",
+                                  "console"
+                                ],
+                                "example": [
+                                  "email",
+                                  "console"
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "isActive": {
+                        "type": "boolean",
+                        "example": true
+                      },
+                      "computePolicyConfig": {
+                        "type": "object",
+                        "description": "Use only one of these parameters: a non-empty resourceIds, a non-empty dynamicRules, or shouldIncludeAllResources set to true.\n",
+                        "required": [
+                          "events"
+                        ],
+                        "properties": {
+                          "events": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "event": {
+                                  "type": "string",
+                                  "example": "Event Name"
+                                },
+                                "type": {
+                                  "type": "string",
+                                  "enum": [
+                                    "INFO",
+                                    "WARN",
+                                    "ERROR"
+                                  ],
+                                  "example": "INFO"
+                                }
+                              }
+                            }
+                          },
+                          "shouldIncludeAllResources": {
+                            "type": "boolean",
+                            "example": false
+                          },
+                          "resourceIds": {
+                            "type": "array",
+                            "description": "Manually specified resource IDs to include in the policy. Must be resources related to the account.\n",
+                            "example": [
+                              "act-123456789",
+                              "act-987654321"
+                            ],
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "dynamicRules": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "filterConditions": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "identifier": {
+                                        "type": "string",
+                                        "enum": [
+                                          "resource_name",
+                                          "resource_id",
+                                          "region",
+                                          "image",
+                                          "tag",
+                                          "load_balancer",
+                                          "availability_zones",
+                                          "security_groups"
+                                        ],
+                                        "example": "resource_name"
+                                      },
+                                      "operator": {
+                                        "type": "string",
+                                        "enum": [
+                                          "equals",
+                                          "not_equals",
+                                          "contains",
+                                          "not_contains",
+                                          "start_with",
+                                          "end_with"
+                                        ],
+                                        "example": "equals"
+                                      },
+                                      "expression": {
+                                        "type": "string",
+                                        "example": "value"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Notification Policy Create Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/paths/~1healthCheck/get/responses/200/content/application~1json/schema/allOf/0"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "request": {
+                          "type": "object",
+                          "properties": {
+                            "url": {
+                              "example": "/notificationCenter/policy/accountId=act-123456789"
+                            },
+                            "method": {
+                              "example": "POST"
+                            }
+                          }
+                        },
+                        "response": {
+                          "type": "object",
+                          "properties": {
+                            "items": {
+                              "type": "array",
+                              "items": {
+                                "allOf": [
+                                  {
+                                    "type": "object",
+                                    "properties": {
+                                      "Id": {
+                                        "type": "string",
+                                        "description": "The unique identifier of the notification policy.",
+                                        "example": "snp-1a2b3c4d"
+                                      }
+                                    }
+                                  },
+                                  {
+                                    "$ref": "#/paths/~1notificationCenter~1policy/post/requestBody/content/application~1json/schema/allOf/0"
+                                  }
+                                ]
+                              }
+                            },
+                            "kind": {
+                              "example": "spotinst:notificationPolicy"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "get": {
+        "summary": "Get User Notification Policies",
+        "description": "Retrieves a list of all notification policies for a specific user.\n",
+        "operationId": "userNotificationPolicyList",
+        "tags": [
+          "Notification Center Service"
+        ],
+        "responses": {
+          "200": {
+            "description": "Notification Policy List Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/paths/~1healthCheck/get/responses/200/content/application~1json/schema/allOf/0"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "request": {
+                          "type": "object",
+                          "properties": {
+                            "url": {
+                              "example": "/notificationCenter/policy"
+                            },
+                            "method": {
+                              "example": "GET"
+                            }
+                          }
+                        },
+                        "response": {
+                          "type": "object",
+                          "properties": {
+                            "items": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "description": "Notification policy item.\n",
+                                "properties": {
+                                  "policyId": {
+                                    "type": "string",
+                                    "description": "The unique identifier of the notification policy.",
+                                    "example": "snp-12345"
+                                  },
+                                  "type": {
+                                    "type": "string",
+                                    "description": "The type of the notification policy.",
+                                    "example": "compute"
+                                  },
+                                  "name": {
+                                    "type": "string",
+                                    "description": "The name of the notification policy.",
+                                    "example": "Test Notification Policy"
+                                  },
+                                  "description": {
+                                    "type": "string",
+                                    "description": "A brief description of the notification policy.",
+                                    "example": "A description of the notification policy."
+                                  },
+                                  "owner": {
+                                    "type": "string",
+                                    "description": "The owner of the notification policy.",
+                                    "example": "user@example.com"
+                                  },
+                                  "registeredUsersCount": {
+                                    "type": "integer",
+                                    "description": "The number of registered users for the notification policy.",
+                                    "example": 2
+                                  },
+                                  "isActive": {
+                                    "type": "boolean",
+                                    "description": "The status of the notification policy.",
+                                    "example": true
+                                  },
+                                  "isRegistered": {
+                                    "type": "boolean",
+                                    "description": "Indicates if the user is registered for the notification policy.",
+                                    "example": true
+                                  },
+                                  "accountId": {
+                                    "type": "string",
+                                    "description": "The unique identifier of the account.",
+                                    "example": "act-123456789"
+                                  },
+                                  "notificationMethod": {
+                                    "type": "array",
+                                    "description": "The notification methods used for the policy.",
+                                    "items": {
+                                      "type": "string",
+                                      "example": [
+                                        "email",
+                                        "console"
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "kind": {
+                              "example": "spotinst:notification:userNotificationPolicy"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/notificationCenter/policy/{policyId}": {
+      "get": {
+        "summary": "Get Notification Policy",
+        "description": "Get configuration for a notification policy.\n",
+        "operationId": "notificationPolicyGet",
+        "tags": [
+          "Notification Center Service"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "policyId",
+            "example": "snp-1a2b3c4d",
+            "description": "ID for the notification policy.\n",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Notification Policy Get Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/paths/~1healthCheck/get/responses/200/content/application~1json/schema/allOf/0"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "request": {
+                          "type": "object",
+                          "properties": {
+                            "url": {
+                              "example": "/notificationCenter/policy/{policyId}"
+                            },
+                            "method": {
+                              "example": "GET"
+                            }
+                          }
+                        },
+                        "response": {
+                          "type": "object",
+                          "properties": {
+                            "items": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "description": "The notification policy.\n",
+                                "properties": {
+                                  "id": {
+                                    "type": "string",
+                                    "readOnly": true,
+                                    "description": "The unique identifier of the notification policy.",
+                                    "example": "snp-12345"
+                                  },
+                                  "name": {
+                                    "type": "string",
+                                    "description": "The name of the notification policy.",
+                                    "example": "Test Notification Policy"
+                                  },
+                                  "description": {
+                                    "type": "string",
+                                    "description": "A brief description of the notification policy.",
+                                    "example": "A description of the notification policy."
+                                  },
+                                  "owner": {
+                                    "type": "string",
+                                    "readOnly": true,
+                                    "description": "The owner of the notification policy.",
+                                    "example": "user@example.com"
+                                  },
+                                  "privacyLevel": {
+                                    "type": "string",
+                                    "description": "The privacy level of the notification policy.",
+                                    "enum": [
+                                      "public",
+                                      "private"
+                                    ],
+                                    "example": "public"
+                                  },
+                                  "subscriptions": {
+                                    "$ref": "#/paths/~1notificationCenter~1policy/post/requestBody/content/application~1json/schema/allOf/0/properties/subscriptions"
+                                  },
+                                  "registeredUsers": {
+                                    "$ref": "#/paths/~1notificationCenter~1policy/post/requestBody/content/application~1json/schema/allOf/0/properties/registeredUsers"
+                                  },
+                                  "isActive": {
+                                    "type": "boolean",
+                                    "example": true
+                                  },
+                                  "type": {
+                                    "type": "string",
+                                    "enum": [
+                                      "compute"
+                                    ],
+                                    "example": "compute"
+                                  },
+                                  "computePolicyConfig": {
+                                    "type": "array",
+                                    "items": {
+                                      "allOf": [
+                                        {
+                                          "$ref": "#/paths/~1notificationCenter~1policy/post/requestBody/content/application~1json/schema/allOf/0/properties/computePolicyConfig"
+                                        },
+                                        {
+                                          "type": "object",
+                                          "properties": {
+                                            "accountId": {
+                                              "type": "string",
+                                              "description": "The unique identifier of the account.",
+                                              "example": "acc-123456789"
+                                            }
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "kind": {
+                              "example": "spotinst:notificationPolicy"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update Notification Policy",
+        "description": "Update a notification policy (only for Compute policies). You can do a partial update of just the fields you want to.\n",
+        "operationId": "notificationPolicyUpdate",
+        "tags": [
+          "Notification Center Service"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/paths/~1notificationCenter~1policy~1%7BpolicyId%7D/get/parameters/0"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "description": "The name of the notification policy.",
+                        "example": "Test Notification Policy"
+                      },
+                      "description": {
+                        "type": "string",
+                        "description": "A brief description of the notification policy. Can be null or not empty.",
+                        "example": "A description of the notification policy."
+                      },
+                      "subscriptions": {
+                        "$ref": "#/paths/~1notificationCenter~1policy/post/requestBody/content/application~1json/schema/allOf/0/properties/subscriptions"
+                      },
+                      "registeredUsers": {
+                        "$ref": "#/paths/~1notificationCenter~1policy/post/requestBody/content/application~1json/schema/allOf/0/properties/registeredUsers"
+                      },
+                      "isActive": {
+                        "type": "boolean",
+                        "example": true
+                      },
+                      "computePolicyConfig": {
+                        "$ref": "#/paths/~1notificationCenter~1policy/post/requestBody/content/application~1json/schema/allOf/0/properties/computePolicyConfig"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ok"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete Notification Policy",
+        "description": "Delete a notification policy.\n",
+        "operationId": "notificationPolicyDelete",
+        "tags": [
+          "Notification Center Service"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/paths/~1notificationCenter~1policy~1%7BpolicyId%7D/get/parameters/0"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Notification Policy Delete Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/paths/~1azure~1compute~1vm~1signal/post/responses/200/content/application~1json/schema/allOf/0"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "request": {
+                          "type": "object",
+                          "properties": {
+                            "url": {
+                              "example": "/notificationCenter/policy/snp-a1b2c3d4"
+                            },
+                            "method": {
+                              "example": "DELETE"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
     "/events/subscription": {
       "post": {
         "summary": "Subscribe",
-        "description": "Create a notification for your resources\n",
+        "description": "Create a notification for your resources\n  > **Note:** This service is deprecated. Use the \n  [Notification Center Service](https://docs.spot.io/api/#tag/Notification-Center-Service).\n",
         "operationId": "notificationsServiceSubscriptionsSubscribe",
         "tags": [
-          "Notifications Service"
+          "Notification Subscription Service"
         ],
         "parameters": [
           {
@@ -48005,10 +48796,10 @@
       },
       "get": {
         "summary": "List Subscriptions",
-        "description": "List all subscriptions and their information\n",
+        "description": "List all subscriptions and their information\n  > **Note:** This service is deprecated. Use the \n  [Notification Center Service](https://docs.spot.io/api/#tag/Notification-Center-Service).\n",
         "operationId": "notificationsServiceSubscriptionsList",
         "tags": [
-          "Notifications Service"
+          "Notification Subscription Service"
         ],
         "parameters": [
           {
@@ -48153,10 +48944,10 @@
     "/events/subscription/{subscriptionId}": {
       "delete": {
         "summary": "Unsubscribe",
-        "description": "Delete an existing page\n",
+        "description": "Delete an existing page\n  > **Note:** This service is deprecated. Use the \n  [Notification Center Service](https://docs.spot.io/api/#tag/Notification-Center-Service).\n",
         "operationId": "notificationsServiceSubscriptionsUnsubscribe",
         "tags": [
-          "Notifications Service"
+          "Notification Subscription Service"
         ],
         "parameters": [
           {
@@ -48184,10 +48975,10 @@
       },
       "get": {
         "summary": "Get Subscription",
-        "description": "Get a specific notification and its information\n",
+        "description": "Get a specific notification and its information\n  > **Note:** This service is deprecated. Use the \n  [Notification Center Service](https://docs.spot.io/api/#tag/Notification-Center-Service).\n",
         "operationId": "notificationsServiceSubscriptionsGet",
         "tags": [
-          "Notifications Service"
+          "Notification Subscription Service"
         ],
         "parameters": [
           {
@@ -48222,10 +49013,10 @@
       },
       "put": {
         "summary": "Update Subscription",
-        "description": "Update existing notification\n",
+        "description": "Update existing notification\n  > **Note:** This service is deprecated. Use the \n  [Notification Center Service](https://docs.spot.io/api/#tag/Notification-Center-Service).\n",
         "operationId": "notificationsServiceSubscriptionsUpdate",
         "tags": [
-          "Notifications Service"
+          "Notification Subscription Service"
         ],
         "parameters": [
           {
