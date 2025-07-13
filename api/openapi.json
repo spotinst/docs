@@ -65516,6 +65516,100 @@
     },
     "/ocean/azure/np/cluster/{oceanClusterId}/autoUpgrade": {
       "summary": "Ocean for AKS",
+      "get": {
+        "summary": "Get all auto-upgrades",
+        "description": "Returns a list of all auto-upgrade operations for the specified Ocean AKS cluster.\n",
+        "operationId": "oceanAksGetAutoUpgrades",
+        "tags": [
+          "Ocean AKS"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/paths/~1azure~1costs/get/parameters/0"
+          },
+          {
+            "$ref": "#/paths/~1ocean~1aws~1k8s~1cluster~1%7BoceanClusterId%7D/get/parameters/1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of auto upgrade.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "oceanId": {
+                        "type": "string",
+                        "description": "The identifier of the ocean cluster being upgraded.\n",
+                        "example": "o-12e31234"
+                      },
+                      "scope": {
+                        "type": "string",
+                        "enum": [
+                          "patch"
+                        ],
+                        "example": "Cluster"
+                      },
+                      "rollId": {
+                        "type": "string",
+                        "description": "The identifier of the cluster roll (if created).\n",
+                        "example": "scr-12345abc"
+                      },
+                      "systemNodePoolsOperationId": {
+                        "type": "string",
+                        "description": "The identifier of the system node pool upgrade operation (if created).\n",
+                        "example": "snpo-12345abc"
+                      },
+                      "oldVersion": {
+                        "type": "string",
+                        "description": "The old version of the cluster's control plane.\n",
+                        "example": "1.0.10"
+                      },
+                      "newVersion": {
+                        "type": "string",
+                        "description": "The newest available version.\n",
+                        "example": "1.0.15"
+                      },
+                      "status": {
+                        "type": "string",
+                        "description": "The status of the upgrade.\n",
+                        "enum": [
+                          "START",
+                          "UPGRADE_CONTROL_PLANE",
+                          "VALIDATE_CONTROL_PLANE_UPGRADE",
+                          "CREATE_SYSTEM_NODE_POOLS_UPDATE",
+                          "CREATE_ROLL",
+                          "AWAIT_NODE_POOLS_UPGRADE",
+                          "COMPLETED",
+                          "PARTIALLY_COMPLETED",
+                          "FAILED"
+                        ],
+                        "example": "COMPLETED"
+                      },
+                      "description": {
+                        "type": "string",
+                        "description": "The description of the upgrade, including any errors or issues found during the process.\n",
+                        "example": "Failed to upgrade the control plane to the latest patch version. Could not create roll."
+                      },
+                      "createdAt": {
+                        "type": "string",
+                        "description": "The creation timestamp of the upgrade.\n",
+                        "example": "2019-03-24T15:46:09.000Z"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
       "post": {
         "summary": "Initiate Auto upgrade",
         "description": "Update the Ocean AKS cluster's VNGs with the latest version of the control plane's version after upgrading by specifying the scope.  Performing this request will update the VNGs with a new version if available and run a cluster roll if set.  If the response is successful, the old and new versions will be included in the response along with the updated VNGs.  If a cluster roll is set in the request, the first response for a successful request will indicate the start of a roll.  In order to check the status of the roll, you can use the GET Roll API.\n",
@@ -65600,6 +65694,22 @@
                                 "example": 80
                               }
                             }
+                          },
+                          "upgradeSystemNodePools": {
+                            "type": "boolean",
+                            "description": "When set to True, the system node pools will be updated with the new Kubernetes version as part of the upgrade.\n",
+                            "example": true
+                          },
+                          "systemNodePools": {
+                            "type": "array",
+                            "description": "List of node pool names to be updated with the new Kubernetes version as part of the upgrade.\n",
+                            "items": {
+                              "type": "string"
+                            },
+                            "example": [
+                              "userpool",
+                              "systemNp1"
+                            ]
                           }
                         }
                       }
@@ -65612,7 +65722,7 @@
         },
         "responses": {
           "200": {
-            "description": "Ocean AKS Create Auto Upgrade Response",
+            "description": "Ocean AKS Create Auto Upgrade",
             "content": {
               "application/json": {
                 "schema": {
@@ -65642,51 +65752,7 @@
                               "items": {
                                 "allOf": [
                                   {
-                                    "type": "object",
-                                    "properties": {
-                                      "oceanId": {
-                                        "type": "string",
-                                        "description": "The identifier of the ocean cluster being upgraded.\n",
-                                        "example": "o-12e31234"
-                                      },
-                                      "scope": {
-                                        "type": "string",
-                                        "enum": [
-                                          "patch"
-                                        ],
-                                        "example": "Cluster"
-                                      },
-                                      "id": {
-                                        "type": "string",
-                                        "description": "The identifier of the cluster roll (if created).\n",
-                                        "example": "scr-12345abc"
-                                      },
-                                      "oldVersion": {
-                                        "type": "string",
-                                        "description": "The old version of the cluster's control plane.\n",
-                                        "example": "1.0.10"
-                                      },
-                                      "newVersion": {
-                                        "type": "string",
-                                        "description": "The newest available version.\n",
-                                        "example": "1.0.15"
-                                      },
-                                      "status": {
-                                        "type": "string",
-                                        "description": "The status of the upgrade.\n",
-                                        "enum": [
-                                          "COMPLETED",
-                                          "PARTLY_COMPLETED",
-                                          "FAILED"
-                                        ],
-                                        "example": "COMPLETED"
-                                      },
-                                      "createdAt": {
-                                        "type": "string",
-                                        "description": "The creation timestamp of the upgrade.\n",
-                                        "example": "2019-03-24T15:46:09.000Z"
-                                      }
-                                    }
+                                    "$ref": "#/paths/~1ocean~1azure~1np~1cluster~1%7BoceanClusterId%7D~1autoUpgrade/get/responses/200/content/application~1json/schema/items"
                                   }
                                 ]
                               }
@@ -65702,6 +65768,196 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/ocean/azure/np/cluster/{oceanClusterId}/systemNodePool/upgradeVersion": {
+      "summary": "Ocean for AKS",
+      "post": {
+        "summary": "Start system node pool upgrade",
+        "description": "Initiates a Kubernetes version upgrade for specified system node pools in an Ocean AKS cluster.\n",
+        "operationId": "oceanAksStartSystemNodePoolUpgrade",
+        "tags": [
+          "Ocean AKS"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/paths/~1azure~1costs/get/parameters/0"
+          },
+          {
+            "$ref": "#/paths/~1ocean~1aws~1k8s~1cluster~1%7BoceanClusterId%7D/get/parameters/1"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "oceanId",
+                  "scope",
+                  "systemNodePoolNames"
+                ],
+                "properties": {
+                  "oceanId": {
+                    "type": "string",
+                    "description": "The ID of the Ocean AKS cluster.",
+                    "example": "o-12345abc"
+                  },
+                  "scope": {
+                    "type": "string",
+                    "enum": [
+                      "PATCH"
+                    ],
+                    "description": "The scope of the upgrade operation. Currently, only \"PATCH\" is supported.",
+                    "example": "PATCH"
+                  },
+                  "systemNodePoolNames": {
+                    "type": "array",
+                    "description": "List of system node pool names to be upgraded.",
+                    "items": {
+                      "type": "string",
+                      "example": [
+                        "np1",
+                        "np2"
+                      ]
+                    },
+                    "minItems": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ocean AKS System Node Pool Upgrade Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/paths/~1healthCheck/get/responses/200/content/application~1json/schema/allOf/0"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "request": {
+                          "type": "object",
+                          "properties": {
+                            "url": {
+                              "example": "/ocean/azure/np/cluster/o-12345abc/systemNodePool/upgradeVersion/snpo-1234abc"
+                            },
+                            "method": {
+                              "example": "POST"
+                            }
+                          }
+                        },
+                        "response": {
+                          "type": "object",
+                          "properties": {
+                            "items": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "operationId": {
+                                    "type": "string",
+                                    "description": "The unique identifier for the system node pool upgrade operation.\n",
+                                    "example": "op-12345abc"
+                                  },
+                                  "upgradedNodePoolNames": {
+                                    "type": "array",
+                                    "description": "List of system node pool names that were successfully upgraded.\n",
+                                    "items": {
+                                      "type": "string"
+                                    },
+                                    "example": [
+                                      "np1",
+                                      "np2"
+                                    ]
+                                  },
+                                  "inProgressNodePoolNames": {
+                                    "type": "array",
+                                    "description": "List of system node pool names that are currently in progress of being upgraded.\n",
+                                    "items": {
+                                      "type": "string"
+                                    },
+                                    "example": [
+                                      "np3"
+                                    ]
+                                  },
+                                  "failedNodePoolNames": {
+                                    "type": "array",
+                                    "description": "List of system node pool names that failed to upgrade.\n",
+                                    "items": {
+                                      "type": "string"
+                                    },
+                                    "example": [
+                                      "np4"
+                                    ]
+                                  },
+                                  "newVersion": {
+                                    "type": "string",
+                                    "description": "The new version to which the system node pools are being upgraded.\n",
+                                    "example": "1.28.3"
+                                  }
+                                }
+                              }
+                            },
+                            "kind": {
+                              "example": "spotinst:ocean:azure:np:systemNodePoolUpgrade"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/ocean/azure/np/cluster/{oceanClusterId}/systemNodePool/upgradeVersion/{systemNodePoolsOperationId}": {
+      "summary": "Ocean for AKS",
+      "get": {
+        "summary": "Get system node pool upgrade operation",
+        "description": "Returns the status of a specific system node pool upgrade operation for the specified Ocean AKS cluster.\n",
+        "operationId": "oceanAksGetSystemNodePoolUpgradeOperation",
+        "tags": [
+          "Ocean AKS"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/paths/~1azure~1costs/get/parameters/0"
+          },
+          {
+            "$ref": "#/paths/~1ocean~1aws~1k8s~1cluster~1%7BoceanClusterId%7D/get/parameters/1"
+          },
+          {
+            "in": "path",
+            "name": "systemNodePoolsOperationId",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "example": "snpo-12345abc",
+            "description": "System node pools operation identifier.\n"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/paths/~1ocean~1azure~1np~1cluster~1%7BoceanClusterId%7D~1systemNodePool~1upgradeVersion/post/responses/200"
           },
           "400": {
             "description": "Bad Request"
