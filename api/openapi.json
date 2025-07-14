@@ -47709,165 +47709,6 @@
         }
       }
     },
-    "/notificationCenter/compute/event": {
-      "get": {
-        "summary": "Get Events Types",
-        "description": "Gets all available event types for the notification policies, depending on your account provider.\n",
-        "operationId": "EventTypeList",
-        "tags": [
-          "Notification Center Service"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/paths/~1azure~1costs/get/parameters/0"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Event Type List Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "allOf": [
-                    {
-                      "$ref": "#/paths/~1healthCheck/get/responses/200/content/application~1json/schema/allOf/0"
-                    },
-                    {
-                      "type": "object",
-                      "properties": {
-                        "request": {
-                          "type": "object",
-                          "properties": {
-                            "url": {
-                              "example": "/notificationCenter/compute/event/act-123456789"
-                            },
-                            "method": {
-                              "example": "GET"
-                            }
-                          }
-                        },
-                        "response": {
-                          "type": "object",
-                          "properties": {
-                            "items": {
-                              "type": "array",
-                              "items": {
-                                "type": "object",
-                                "description": "Event type for the notification policy.\n",
-                                "properties": {
-                                  "event": {
-                                    "type": "string",
-                                    "description": "The event name.",
-                                    "example": "Missing configuration"
-                                  },
-                                  "type": {
-                                    "type": "string",
-                                    "description": "The severity level of the event.",
-                                    "example": "error"
-                                  }
-                                }
-                              }
-                            },
-                            "kind": {
-                              "example": "spotinst:notification:compute:event"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  ]
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request"
-          }
-        }
-      }
-    },
-    "/notificationCenter/compute/resource": {
-      "get": {
-        "summary": "Get Account Resources",
-        "description": "Gets a list of all resources for a specific account.   \n",
-        "operationId": "AccountResourceList",
-        "tags": [
-          "Notification Center Service"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/paths/~1azure~1costs/get/parameters/0"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Account Resource List Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "allOf": [
-                    {
-                      "$ref": "#/paths/~1healthCheck/get/responses/200/content/application~1json/schema/allOf/0"
-                    },
-                    {
-                      "type": "object",
-                      "properties": {
-                        "request": {
-                          "type": "object",
-                          "properties": {
-                            "url": {
-                              "example": "/notificationCenter/compute/resource/act-123456789"
-                            },
-                            "method": {
-                              "example": "GET"
-                            }
-                          }
-                        },
-                        "response": {
-                          "type": "object",
-                          "properties": {
-                            "items": {
-                              "type": "array",
-                              "items": {
-                                "type": "object",
-                                "description": "Account Resource.\n",
-                                "properties": {
-                                  "Id": {
-                                    "type": "string",
-                                    "description": "The unique identifier of the account.",
-                                    "example": "act-123456789"
-                                  },
-                                  "name": {
-                                    "type": "string",
-                                    "description": "The name of the account.",
-                                    "example": "Example for account name"
-                                  },
-                                  "type": {
-                                    "type": "string",
-                                    "description": "The type of the resource.",
-                                    "example": "ocean"
-                                  }
-                                }
-                              }
-                            },
-                            "kind": {
-                              "example": "spotinst:notification:compute:accountResource"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  ]
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request"
-          }
-        }
-      }
-    },
     "/notificationCenter/policy": {
       "post": {
         "summary": "Create Notification Policy",
@@ -47915,6 +47756,7 @@
                       },
                       "subscriptions": {
                         "type": "array",
+                        "description": "For public policies, you can decide how the notifications are delivered. For example, by email, webhook, slack, sns.",
                         "items": {
                           "type": "object",
                           "properties": {
@@ -47968,7 +47810,7 @@
                       },
                       "computePolicyConfig": {
                         "type": "object",
-                        "description": "Use only one of these parameters: a non-empty resourceIds, a non-empty dynamicRules, or shouldIncludeAllResources set to true.\n",
+                        "description": "You can only use one resource type. For example: All resources (use \"shouldIncludeAllResources\": true), Rule Based Resources (use at least one dynamicRules), OR Individual Resources (use a least one resourceIds).\n",
                         "required": [
                           "events"
                         ],
@@ -48479,6 +48321,165 @@
                             },
                             "method": {
                               "example": "DELETE"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/notificationCenter/compute/resource": {
+      "get": {
+        "summary": "Get Account Resources",
+        "description": "Gets a list of all resources for a specific account.   \n",
+        "operationId": "AccountResourceList",
+        "tags": [
+          "Notification Center Service"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/paths/~1azure~1costs/get/parameters/0"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Account Resource List Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/paths/~1healthCheck/get/responses/200/content/application~1json/schema/allOf/0"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "request": {
+                          "type": "object",
+                          "properties": {
+                            "url": {
+                              "example": "/notificationCenter/compute/resource/act-123456789"
+                            },
+                            "method": {
+                              "example": "GET"
+                            }
+                          }
+                        },
+                        "response": {
+                          "type": "object",
+                          "properties": {
+                            "items": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "description": "Account Resource.\n",
+                                "properties": {
+                                  "Id": {
+                                    "type": "string",
+                                    "description": "The unique identifier of the account.",
+                                    "example": "act-123456789"
+                                  },
+                                  "name": {
+                                    "type": "string",
+                                    "description": "The name of the account.",
+                                    "example": "Example for account name"
+                                  },
+                                  "type": {
+                                    "type": "string",
+                                    "description": "The type of the resource.",
+                                    "example": "ocean"
+                                  }
+                                }
+                              }
+                            },
+                            "kind": {
+                              "example": "spotinst:notification:compute:accountResource"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/notificationCenter/compute/event": {
+      "get": {
+        "summary": "Get Events Types",
+        "description": "Gets all available event types for the notification policies, depending on your account provider.\n",
+        "operationId": "EventTypeList",
+        "tags": [
+          "Notification Center Service"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/paths/~1azure~1costs/get/parameters/0"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Event Type List Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/paths/~1healthCheck/get/responses/200/content/application~1json/schema/allOf/0"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "request": {
+                          "type": "object",
+                          "properties": {
+                            "url": {
+                              "example": "/notificationCenter/compute/event/act-123456789"
+                            },
+                            "method": {
+                              "example": "GET"
+                            }
+                          }
+                        },
+                        "response": {
+                          "type": "object",
+                          "properties": {
+                            "items": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "description": "Event type for the notification policy.\n",
+                                "properties": {
+                                  "event": {
+                                    "type": "string",
+                                    "description": "The event name.",
+                                    "example": "Missing configuration"
+                                  },
+                                  "type": {
+                                    "type": "string",
+                                    "description": "The severity level of the event.",
+                                    "example": "error"
+                                  }
+                                }
+                              }
+                            },
+                            "kind": {
+                              "example": "spotinst:notification:compute:event"
                             }
                           }
                         }
