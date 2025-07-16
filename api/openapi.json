@@ -23786,7 +23786,6 @@
                                   },
                                   "managedServiceIdentities": {
                                     "type": "array",
-                                    "writeOnly": true,
                                     "description": "Defines a user-assigned managed identity to the launched VMs.\n",
                                     "items": {
                                       "type": "object",
@@ -23804,6 +23803,11 @@
                                           "type": "string",
                                           "description": "Defines the resource group of the managed service identities.\n",
                                           "example": "myResourceGroup"
+                                        },
+                                        "subscriptionId": {
+                                          "type": "string",
+                                          "description": "Defines the subscription ID of the managed service identities.\n\nRequired if the managed service identity is in a different subscription.\nTo use a user-assigned managed identity in a different subscription, you must | \nensure that the spotAccount's Service Principal has access to the defined subscription and that it |\nhas the two following permissions:\n1. Microsoft.ManagedIdentity/userAssignedIdentities/assign/action\n2. Microsoft.ManagedIdentity/userAssignedIdentities/read\n",
+                                          "example": "12345678-abcd-1234-abcd-123456789ab"
                                         }
                                       }
                                     }
@@ -25248,7 +25252,6 @@
                                   },
                                   "managedServiceIdentities": {
                                     "type": "array",
-                                    "writeOnly": true,
                                     "description": "Add a user-assigned managed identity to the Stateful Node's VM.\n",
                                     "items": {
                                       "type": "object",
@@ -25266,6 +25269,11 @@
                                           "type": "string",
                                           "description": "The Resource Group that the user-assigned managed identity resides in.\n",
                                           "example": "myResourceGroup"
+                                        },
+                                        "subscriptionId": {
+                                          "type": "string",
+                                          "description": "Defines the subscription ID of the managed service identities.\n\nRequired if the managed service identity is in a different subscription.\nTo use a user-assigned managed identity in a different subscription, you must | \nensure that the spotAccount's Service Principal has access to the defined subscription and that it |\nhas the two following permissions:\n1. Microsoft.ManagedIdentity/userAssignedIdentities/assign/action\n2. Microsoft.ManagedIdentity/userAssignedIdentities/read\n",
+                                          "example": "12345678-abcd-1234-abcd-123456789ab"
                                         }
                                       }
                                     }
