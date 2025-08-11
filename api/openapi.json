@@ -40131,6 +40131,11 @@
                                   "default": false,
                                   "example": false
                                 },
+                                "primaryIpv6": {
+                                  "type": "boolean",
+                                  "example": false,
+                                  "description": "Enables assignment of a primary IPv6 address to the cluster. This feature is only available when `associateIpv6Addresses` is explicitly set to `true`. Additionally, the cluster must have been initially created as an EKS cluster in IPv6 mode.\n"
+                                },
                                 "monitoring": {
                                   "type": "boolean",
                                   "description": "Enable detailed monitoring for cluster. Flag will enable CloudWatch detailed monitoring (one minute increments). There are additional hourly costs for this service based on the region used.\n",
