@@ -5,7 +5,7 @@
     "description": "Welcome to the Spot by Flexera OpenAPI Specification.\nHere you will find REST definitions for all Spot products and platform administration tasks.\n\nThe API is hosted at `https://api.spotinst.io` and requires Bearer Token\nAuthentication.\n\nFor more information on how to use the Spot platform, including user guides,\ndeveloper guides, concepts, and tutorials, see the external [Spot Documentation](https://docs.spot.io/).\n",
     "title": "Spot by Flexera API",
     "x-logo": {
-      "url": "https://docs.spot.io/_media/images/flexera-spot.png",
+      "url": "https://spec.dev.spot.io/_media/images/flexera-spot.png",
       "altText": "SpotByFlexeraLogo",
       "href": "https://docs.spot.io/api"
     },
