@@ -39468,21 +39468,28 @@
                           "enum": [
                             "CLASSIC",
                             "TARGET_GROUP"
-                          ],
-                          "example": "TARGET_GROUP"
+                          ]
                         },
                         "name": {
                           "type": "string",
-                          "description": "If type is \"CLASSIC\" then a name is required. Otherwise is not allowed.\n",
-                          "example": "MyTargetGroup"
+                          "description": "If the type is \"CLASSIC\", then a name is required. Otherwise, not allowed.\n"
                         },
                         "arn": {
                           "type": "string",
-                          "description": "If type is \"TARGET_GROUP\" then an ARN is required. Otherwise is not allowed.\n",
-                          "example": "arn:aws:elasticloadbalancing:us-west-2:922761411234:targetgroup"
+                          "description": "If the type is \"TARGET_GROUP\", then an ARN is required. Otherwise, not allowed.\n"
                         }
                       }
-                    }
+                    },
+                    "example": [
+                      {
+                        "type": "CLASSIC",
+                        "name": "MyClassicLoadBalancer"
+                      },
+                      {
+                        "type": "TARGET_GROUP",
+                        "arn": "arn:aws:elasticloadbalancing:us-west-2:922761411234:targetgroup"
+                      }
+                    ]
                   }
                 }
               }
@@ -39571,6 +39578,9 @@
                     "description": "Load balancers to remove from the Ocean cluster.\n",
                     "items": {
                       "$ref": "#/paths/~1ocean~1aws~1k8s~1cluster~1%7BoceanClusterId%7D~1loadBalancer~1attach/put/requestBody/content/application~1json/schema/properties/loadBalancers/items"
+                    },
+                    "example": {
+                      "$ref": "#/paths/~1ocean~1aws~1k8s~1cluster~1%7BoceanClusterId%7D~1loadBalancer~1attach/put/requestBody/content/application~1json/schema/properties/loadBalancers/example"
                     }
                   }
                 }
@@ -40099,24 +40109,10 @@
                                   "type": "array",
                                   "description": "Configure load balancer settings for the Ocean cluster.\n",
                                   "items": {
-                                    "type": "object",
-                                    "properties": {
-                                      "type": {
-                                        "type": "string",
-                                        "description": "Type of load balancer to use. Supported types are: \"TARGET_GROUP\", and \"CLASSIC\".\n",
-                                        "example": "TARGET_GROUP"
-                                      },
-                                      "name": {
-                                        "type": "string",
-                                        "description": "If type is \"CLASSIC\" then a name is required. Otherwise Name is optional.\n",
-                                        "example": "MyTargetGroup"
-                                      },
-                                      "arn": {
-                                        "type": "string",
-                                        "description": "If type is \"TARGET_GROUP\" then an ARN is required.\n",
-                                        "example": "arn:aws:elasticloadbalancing:us-west-2:922761411234:targetgroup"
-                                      }
-                                    }
+                                    "$ref": "#/paths/~1ocean~1aws~1k8s~1cluster~1%7BoceanClusterId%7D~1loadBalancer~1attach/put/requestBody/content/application~1json/schema/properties/loadBalancers/items"
+                                  },
+                                  "example": {
+                                    "$ref": "#/paths/~1ocean~1aws~1k8s~1cluster~1%7BoceanClusterId%7D~1loadBalancer~1attach/put/requestBody/content/application~1json/schema/properties/loadBalancers/example"
                                   }
                                 },
                                 "associatePublicIpAddress": {
@@ -43992,6 +43988,16 @@
                             }
                           ]
                         }
+                      },
+                      "loadBalancers": {
+                        "type": "array",
+                        "description": "Configure load balancer settings for the VNG.\n",
+                        "items": {
+                          "$ref": "#/paths/~1ocean~1aws~1k8s~1cluster~1%7BoceanClusterId%7D~1loadBalancer~1attach/put/requestBody/content/application~1json/schema/properties/loadBalancers/items"
+                        },
+                        "example": {
+                          "$ref": "#/paths/~1ocean~1aws~1k8s~1cluster~1%7BoceanClusterId%7D~1loadBalancer~1attach/put/requestBody/content/application~1json/schema/properties/loadBalancers/example"
+                        }
                       }
                     }
                   }
@@ -44095,6 +44101,190 @@
                               "type": "array",
                               "items": {
                                 "$ref": "#/paths/~1ocean~1aws~1k8s~1launchSpec/post/requestBody/content/application~1json/schema/allOf/0/properties/launchSpec"
+                              }
+                            },
+                            "kind": {
+                              "example": "spotinst:ocean:aws:k8s:launchSpec"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/ocean/aws/k8s/launchSpec/{launchSpecId}/loadBalancer/attach": {
+      "put": {
+        "summary": "Attach Virtual Node Group Load Balancers",
+        "description": "Add new load balancers to the existing ones on the Ocean Cluster Virtual Node Group (VNG).\n",
+        "operationId": "OceanAWSClusterLaunchSpecAttachLb",
+        "tags": [
+          "Ocean AWS"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/paths/~1azure~1costs/get/parameters/0"
+          },
+          {
+            "$ref": "#/paths/~1ocean~1aws~1ecs~1launchSpec~1%7BlaunchSpecId%7D/get/parameters/1"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "loadBalancers"
+                ],
+                "properties": {
+                  "loadBalancers": {
+                    "type": "array",
+                    "description": "Load balancers to add to the Ocean Cluster VNG.\n",
+                    "items": {
+                      "$ref": "#/paths/~1ocean~1aws~1k8s~1cluster~1%7BoceanClusterId%7D~1loadBalancer~1attach/put/requestBody/content/application~1json/schema/properties/loadBalancers/items"
+                    },
+                    "example": {
+                      "$ref": "#/paths/~1ocean~1aws~1k8s~1cluster~1%7BoceanClusterId%7D~1loadBalancer~1attach/put/requestBody/content/application~1json/schema/properties/loadBalancers/example"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ocean Virtual Node Group response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/paths/~1healthCheck/get/responses/200/content/application~1json/schema/allOf/0"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "request": {
+                          "type": "object",
+                          "properties": {
+                            "url": {
+                              "example": "/ocean/aws/k8s/launchSpec/ols-12345abc/loadBalancer/attach"
+                            },
+                            "method": {
+                              "example": "PUT"
+                            }
+                          }
+                        },
+                        "response": {
+                          "type": "object",
+                          "properties": {
+                            "items": {
+                              "type": "array",
+                              "items": {
+                                "$ref": "#/paths/~1ocean~1aws~1k8s~1launchSpec~1%7BlaunchSpecId%7D/put/requestBody/content/application~1json/schema/properties/launchSpec"
+                              }
+                            },
+                            "kind": {
+                              "example": "spotinst:ocean:aws:k8s:launchSpec"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/ocean/aws/k8s/launchSpec/{launchSpecId}/loadBalancer/detach": {
+      "put": {
+        "summary": "Detach Virtual Node Group Load Balancers",
+        "description": "Remove load balancers from the existing ones on the Ocean Cluster Virtual Node Group (VNG).\n",
+        "operationId": "OceanAWSClusterLaunchSpecDetachLb",
+        "tags": [
+          "Ocean AWS"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/paths/~1azure~1costs/get/parameters/0"
+          },
+          {
+            "$ref": "#/paths/~1ocean~1aws~1ecs~1launchSpec~1%7BlaunchSpecId%7D/get/parameters/1"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "loadBalancers"
+                ],
+                "properties": {
+                  "loadBalancers": {
+                    "type": "array",
+                    "description": "Load balancers to remove from the Ocean Cluster VNG.\n",
+                    "items": {
+                      "$ref": "#/paths/~1ocean~1aws~1k8s~1cluster~1%7BoceanClusterId%7D~1loadBalancer~1attach/put/requestBody/content/application~1json/schema/properties/loadBalancers/items"
+                    },
+                    "example": {
+                      "$ref": "#/paths/~1ocean~1aws~1k8s~1cluster~1%7BoceanClusterId%7D~1loadBalancer~1attach/put/requestBody/content/application~1json/schema/properties/loadBalancers/example"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ocean Virtual Node Group response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/paths/~1healthCheck/get/responses/200/content/application~1json/schema/allOf/0"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "request": {
+                          "type": "object",
+                          "properties": {
+                            "url": {
+                              "example": "/ocean/aws/k8s/launchSpec/ols-12345abc/loadBalancer/detach"
+                            },
+                            "method": {
+                              "example": "PUT"
+                            }
+                          }
+                        },
+                        "response": {
+                          "type": "object",
+                          "properties": {
+                            "items": {
+                              "type": "array",
+                              "items": {
+                                "$ref": "#/paths/~1ocean~1aws~1k8s~1launchSpec~1%7BlaunchSpecId%7D/put/requestBody/content/application~1json/schema/properties/launchSpec"
                               }
                             },
                             "kind": {
