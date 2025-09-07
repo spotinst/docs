@@ -86248,6 +86248,11 @@
                             }
                           }
                         }
+                      },
+                      "downsideOnly": {
+                        "type": "boolean",
+                        "description": "When set to 'true', only downscale recommendations will be applied.",
+                        "default": false
                       }
                     }
                   }
@@ -86446,6 +86451,11 @@
                                   },
                                   "autoApplyDefinition": {
                                     "$ref": "#/paths/~1ocean~1%7BoceanId%7D~1rightSizing~1rule/post/requestBody/content/application~1json/schema/allOf/0/properties/autoApplyDefinition"
+                                  },
+                                  "downsideOnly": {
+                                    "type": "boolean",
+                                    "description": "When set to 'true', only downscale recommendations will be applied.",
+                                    "example": false
                                   }
                                 }
                               }
@@ -86714,6 +86724,11 @@
                       },
                       "autoApplyDefinition": {
                         "$ref": "#/paths/~1ocean~1%7BoceanId%7D~1rightSizing~1rule/post/requestBody/content/application~1json/schema/allOf/0/properties/autoApplyDefinition"
+                      },
+                      "downsideOnly": {
+                        "type": "boolean",
+                        "description": "When set to 'true', only downscale recommendations will be applied.",
+                        "default": false
                       }
                     }
                   }
@@ -87633,6 +87648,11 @@
                               95,
                               100
                             ]
+                          },
+                          "downsideOnly": {
+                            "type": "boolean",
+                            "description": "When set to 'true', only downscale recommendations will be applied.",
+                            "default": false
                           }
                         }
                       }
@@ -87693,6 +87713,10 @@
                                       "recommendationsMemoryPercentile": {
                                         "type": "integer",
                                         "example": 85
+                                      },
+                                      "downsideOnly": {
+                                        "type": "boolean",
+                                        "example": false
                                       }
                                     }
                                   }
