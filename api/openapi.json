@@ -37554,11 +37554,11 @@
                                   },
                                   "aggressiveScaleDown": {
                                     "type": "object",
-                                    "description": "Enable and customize the Aggressive Scale Down feature. This allows nodes to be promptly scaled down by the Ocean Autoscaler as soon as they become eligible, without any waiting period.",
+                                    "description": "Enable and configure the Accelerated Scale Down feature to allow the Ocean autoscaler to immediately scale down eligible nodes without any waiting period.",
                                     "properties": {
                                       "isEnabled": {
                                         "type": "boolean",
-                                        "description": "When set to 'true', the Aggressive Scale Down feature is enabled",
+                                        "description": "When set to 'true', Accelerated Scale Down is enabled.",
                                         "default": false
                                       }
                                     }
@@ -38274,11 +38274,11 @@
                                   },
                                   "aggressiveScaleDown": {
                                     "type": "object",
-                                    "description": "Enable and customize the Aggressive Scale Down feature. This allows nodes to be promptly scaled down by the Ocean Autoscaler as soon as they become eligible, without any waiting period.",
+                                    "description": "Enable and configure the Accelerated Scale Down feature to allow the Ocean autoscaler to immediately scale down eligible nodes without any waiting period.",
                                     "properties": {
                                       "isEnabled": {
                                         "type": "boolean",
-                                        "description": "When set to 'true', the Aggressive Scale Down feature is enabled",
+                                        "description": "When set to 'true', Accelerated Scale Down is enabled.",
                                         "default": false
                                       }
                                     }
@@ -43568,6 +43568,17 @@
                                 "maximum": 100,
                                 "description": "The maximum percentage allowed to scale down in a single scaling action on the nodes running in a specific VNG. Allowed only if maxScaleDownPercentage is set to null at the cluster level.\n",
                                 "example": 30
+                              },
+                              "aggressiveScaleDown": {
+                                "type": "object",
+                                "description": "Enable and configure the Accelerated Scale Down feature to allow the Ocean autoscaler to immediately scale down eligible nodes without any waiting period.",
+                                "properties": {
+                                  "isEnabled": {
+                                    "type": "boolean",
+                                    "description": "When set to 'true', Accelerated Scale Down is enabled.",
+                                    "default": false
+                                  }
+                                }
                               }
                             }
                           }
@@ -55582,11 +55593,11 @@
                                   },
                                   "aggressiveScaleDown": {
                                     "type": "object",
-                                    "description": "Enable and customize the Aggressive Scale Down feature. This allows nodes to be promptly scaled down by the Ocean Autoscaler as soon as they become eligible, without any waiting period.",
+                                    "description": "Enable and configure the Accelerated Scale Down feature to allow the Ocean autoscaler to immediately scale down eligible nodes without any waiting period.",
                                     "properties": {
                                       "isEnabled": {
                                         "type": "boolean",
-                                        "description": "When set to 'true', the Aggressive Scale Down feature is enabled",
+                                        "description": "When set to 'true', Accelerated Scale Down is enabled.",
                                         "default": false
                                       }
                                     }
