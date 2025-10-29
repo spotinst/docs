@@ -37547,6 +37547,11 @@
                                 "type": "object",
                                 "description": "Autoscaling scale down operations.",
                                 "properties": {
+                                  "evaluationPeriods": {
+                                    "type": "integer",
+                                    "deprecated": true,
+                                    "description": "Deprecated — no longer used.\n"
+                                  },
                                   "maxScaleDownPercentage": {
                                     "type": "integer",
                                     "description": "Represents the maximum percent of your instances to scale down in a single scale-down action. Number between 1-100.",
@@ -38267,6 +38272,11 @@
                                 "type": "object",
                                 "description": "Autoscaling scale down operations.",
                                 "properties": {
+                                  "evaluationPeriods": {
+                                    "type": "integer",
+                                    "deprecated": true,
+                                    "description": "Deprecated — no longer used.\n"
+                                  },
                                   "maxScaleDownPercentage": {
                                     "type": "integer",
                                     "description": "Represents the maximum percent of your instances to scale down in a single scale-down action. Number between 1-100.",
