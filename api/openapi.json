@@ -254,6 +254,12 @@
         "Misconfiguration",
         "Assets"
       ]
+    },
+    {
+      "name": "Flexera Integration",
+      "tags": [
+        "Flexera CCO Integration"
+      ]
     }
   ],
   "paths": {
@@ -91894,6 +91900,370 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/ccoUsageExporter/flexeraIntegration": {
+      "get": {
+        "summary": "Get CCO Integration",
+        "description": "Get details for the selected Flexera CCO integration\n",
+        "operationId": "getFlexeraCcoIntegration",
+        "tags": [
+          "Flexera CCO Integration"
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Flexera CCO Integration Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "request": {
+                          "type": "object",
+                          "description": "Original request properties\n",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "example": "46642c7d-bc29-417d-8ce4-79626f00c63c",
+                              "description": "Unique ID associated with this request\n"
+                            },
+                            "url": {
+                              "type": "string",
+                              "example": "/ccoUsageExporter/flexeraIntegration",
+                              "description": "The URL that was used for the request\n"
+                            },
+                            "method": {
+                              "type": "string",
+                              "description": "The HTTP **METHOD** used for the request\n"
+                            },
+                            "timestamp": {
+                              "type": "string",
+                              "example": "2018-11-19T13:49:11.911Z",
+                              "description": "When the request was received by Spot\n"
+                            }
+                          }
+                        },
+                        "response": {
+                          "type": "object",
+                          "description": "Response package that includes the status, type, and any relevant data\n",
+                          "properties": {
+                            "status": {
+                              "type": "object",
+                              "properties": {
+                                "code": {
+                                  "type": "integer",
+                                  "example": 200,
+                                  "description": "HTTP status code associated with this response\n"
+                                },
+                                "message": {
+                                  "type": "string",
+                                  "example": "OK",
+                                  "description": "HTTP status message associated with the status code\n"
+                                }
+                              }
+                            },
+                            "kind": {
+                              "type": "string",
+                              "example": "mcs:ocean:ccoUsageExporter:flexeraIntegration",
+                              "description": "Specifies the data type for each object returned in the response\n"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "request": {
+                          "type": "object",
+                          "properties": {
+                            "method": {
+                              "example": "GET"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "response": {
+                          "type": "object",
+                          "properties": {
+                            "items": {
+                              "type": "array",
+                              "description": "Array of data objects\n",
+                              "items": [
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "spotOrganizationId": {
+                                      "type": "integer",
+                                      "description": "Spot Organization ID\n",
+                                      "example": 172012381312
+                                    },
+                                    "flexeraOrganizationId": {
+                                      "type": "integer",
+                                      "description": "Flexera Organization ID\n",
+                                      "example": 9921
+                                    },
+                                    "flexeraBillConnectId": {
+                                      "type": "string",
+                                      "description": "Flexera Bill Connect ID\n",
+                                      "example": "cbi-oi-ocean-bill-connect"
+                                    }
+                                  }
+                                }
+                              ]
+                            },
+                            "count": {
+                              "type": "integer",
+                              "example": 1,
+                              "description": "Size of the data object array\n"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create CCO Integration",
+        "description": "Create Flexera CCO integration\n",
+        "operationId": "createFlexeraCcoIntegration",
+        "tags": [
+          "Flexera CCO Integration"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/paths/~1ccoUsageExporter~1flexeraIntegration/put/requestBody/content/application~1json/schema/allOf/0"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Create Flexera CCO Integration Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/paths/~1ccoUsageExporter~1flexeraIntegration/get/responses/200/content/application~1json/schema/allOf/0"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "request": {
+                          "type": "object",
+                          "properties": {
+                            "method": {
+                              "example": "POST"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "response": {
+                          "type": "object",
+                          "properties": {
+                            "items": {
+                              "type": "array",
+                              "description": "Array of data objects\n",
+                              "items": [
+                                {
+                                  "$ref": "#/paths/~1ccoUsageExporter~1flexeraIntegration/get/responses/200/content/application~1json/schema/allOf/2/properties/response/properties/items/items/0"
+                                }
+                              ]
+                            },
+                            "count": {
+                              "type": "integer",
+                              "example": 1,
+                              "description": "Size of the data object array\n"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update CCO Integration",
+        "description": "Update Flexera CCO integration.\n\nFlexera CCO integration API supports partial updates, allowing specific fields to be updated without sending the entire resource.\n",
+        "operationId": "updateFlexeraCcoIntegration",
+        "tags": [
+          "Flexera CCO Integration"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "flexeraOrganizationId": {
+                        "type": "integer",
+                        "description": "Flexera Organization ID\n",
+                        "example": 9921
+                      },
+                      "flexeraRefreshToken": {
+                        "type": "string",
+                        "description": "Flexera Refresh Token\n",
+                        "example": "token"
+                      },
+                      "flexeraBillConnectId": {
+                        "type": "string",
+                        "description": "Flexera Bill Connect ID\n",
+                        "example": "cbi-oi-ocean-bill-connect"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Update Flexera CCO Integration Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/paths/~1ccoUsageExporter~1flexeraIntegration/get/responses/200/content/application~1json/schema/allOf/0"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "request": {
+                          "type": "object",
+                          "properties": {
+                            "method": {
+                              "example": "PUT"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "response": {
+                          "type": "object",
+                          "properties": {
+                            "items": {
+                              "type": "array",
+                              "description": "Array of data objects\n",
+                              "items": [
+                                {
+                                  "$ref": "#/paths/~1ccoUsageExporter~1flexeraIntegration/get/responses/200/content/application~1json/schema/allOf/2/properties/response/properties/items/items/0"
+                                }
+                              ]
+                            },
+                            "count": {
+                              "type": "integer",
+                              "example": 1,
+                              "description": "Size of the data object array\n"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete CCO Integration",
+        "description": "Delete Flexera CCO integration\n",
+        "operationId": "deleteFlexeraCcoIntegration",
+        "tags": [
+          "Flexera CCO Integration"
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete Flexera CCO Integration Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/paths/~1ccoUsageExporter~1flexeraIntegration/get/responses/200/content/application~1json/schema/allOf/0"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "request": {
+                          "type": "object",
+                          "properties": {
+                            "method": {
+                              "example": "DELETE"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "response": {
+                          "type": "object",
+                          "properties": {
+                            "removed": {
+                              "type": "boolean",
+                              "example": true,
+                              "description": "Response is `true` if the Flexera CCO integration was successfully deleted\n"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
