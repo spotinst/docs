@@ -23251,7 +23251,7 @@
                               },
                               "interruptionToleration": {
                                 "type": "object",
-                                "description": "Interruption tolerance settings for the stateful node.\n",
+                                "description": "Interruption tolerance settings for the stateful node. When enabled, the stateful node tracks interruption frequency and \ntemporarily switches the node to On-Demand if too many interruptions occur within a defined evaluation window.\n",
                                 "properties": {
                                   "isEnabled": {
                                     "type": "boolean",
@@ -24761,7 +24761,7 @@
                                 "properties": {
                                   "isEnabled": {
                                     "type": "boolean",
-                                    "description": "Enables interruption tolerance for the stateful node. If set to true\n",
+                                    "description": "Interruption tolerance settings for the stateful node. When enabled, the stateful node tracks interruption frequency and\ntemporarily switches the node to On-Demand if too many interruptions occur within a defined evaluation window.\n",
                                     "example": true
                                   },
                                   "cooldown": {
