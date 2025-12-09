@@ -23248,6 +23248,37 @@
                                 "description": "Set the desired preference for the Spot market VM selection. (100-  Availability, 0- cost)\n",
                                 "type": "integer",
                                 "example": 100
+                              },
+                              "interruptionToleration": {
+                                "type": "object",
+                                "description": "Interruption tolerance settings for the stateful node.\n",
+                                "properties": {
+                                  "isEnabled": {
+                                    "type": "boolean",
+                                    "description": "Enables interruption tolerance for the stateful node.\n",
+                                    "example": true
+                                  },
+                                  "cooldown": {
+                                    "type": "integer",
+                                    "description": "The cooldown period in minutes after an interruption occurs before another interruption can be tolerated.\nMust be set if isEnabled is true.\n",
+                                    "minimum": 120,
+                                    "maximum": 10080,
+                                    "example": 20
+                                  },
+                                  "evaluationPeriod": {
+                                    "type": "integer",
+                                    "description": "The period in minutes to evaluate the interruption tolerance. \nMust be set if isEnabled is true.\n",
+                                    "minimum": 30,
+                                    "maximum": 1440,
+                                    "example": 60
+                                  },
+                                  "threshold": {
+                                    "type": "integer",
+                                    "description": "The maximum number of interruptions allowed within the evaluation period.\nMust be set if isEnabled is true.\n",
+                                    "minimum": 3,
+                                    "example": 3
+                                  }
+                                }
                               }
                             }
                           },
@@ -24723,6 +24754,37 @@
                                 "description": "Set the desired preference for the Spot market VM selection. (100-  Availability, 0- cost)\n",
                                 "type": "integer",
                                 "example": 100
+                              },
+                              "interruptionToleration": {
+                                "type": "object",
+                                "description": "Interruption tolerance settings for the stateful node.\n",
+                                "properties": {
+                                  "isEnabled": {
+                                    "type": "boolean",
+                                    "description": "Enables interruption tolerance for the stateful node. If set to true\n",
+                                    "example": true
+                                  },
+                                  "cooldown": {
+                                    "type": "integer",
+                                    "description": "The cooldown period in minutes after an interruption occurs before another interruption can be tolerated.\n",
+                                    "minimum": 120,
+                                    "maximum": 10080,
+                                    "example": 20
+                                  },
+                                  "evaluationPeriod": {
+                                    "type": "integer",
+                                    "description": "The period in minutes to evaluate the interruption tolerance.\n",
+                                    "minimum": 30,
+                                    "maximum": 1440,
+                                    "example": 60
+                                  },
+                                  "threshold": {
+                                    "type": "integer",
+                                    "description": "The maximum number of interruptions allowed within the evaluation period.\n",
+                                    "minimum": 3,
+                                    "example": 3
+                                  }
+                                }
                               }
                             }
                           },
