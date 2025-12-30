@@ -40175,7 +40175,7 @@
                                               "resource",
                                               "sizePerResourceUnit"
                                             ],
-                                            "description": "Set dynamic IOPS properties. When using this object, you cannot use the 'iops' object. You must use one or the other.\n",
+                                            "description": "Set dynamic IOPS properties. When using this object, you cannot use the `iops` object. You must use one or the other.\nWhen `dynamicIops` is configured, the `volumeType` field must also be set.\n",
                                             "properties": {
                                               "baseSize": {
                                                 "type": "integer",
@@ -40208,7 +40208,7 @@
                                           },
                                           "volumeType": {
                                             "type": "string",
-                                            "description": "Set volume type.\n",
+                                            "description": "Specifies the EBS volume type. This field is required when either `dynamicIops` or `dynamicVolumeSize` is configured.\n",
                                             "example": "gp2"
                                           },
                                           "volumeSize": {
@@ -40222,7 +40222,7 @@
                                               "resource",
                                               "sizePerResourceUnit"
                                             ],
-                                            "description": "Set dynamic volume size properties. When using this object, you cannot use volumeSize. You must use one or the other.\n",
+                                            "description": "Set dynamic volume size properties. When using this object, you cannot use volumeSize. You must use one or the other. When `dynamicVolumeSize` is configured, the `volumeType` field must also be set.\n",
                                             "properties": {
                                               "baseSize": {
                                                 "type": "integer",
@@ -43813,7 +43813,7 @@
                                     "resource",
                                     "sizePerResourceUnit"
                                   ],
-                                  "description": "Set dynamic IOPS properties. When using this object, you cannot use the 'iops' property. You must use one or the other.\n",
+                                  "description": "Set dynamic IOPS properties. When using this object, you cannot use the `iops` property. You must use one or the other.\nWhen `dynamicIops` is configured, the `volumeType` field must also be set.\n",
                                   "properties": {
                                     "baseSize": {
                                       "type": "integer",
@@ -43846,7 +43846,7 @@
                                 },
                                 "volumeType": {
                                   "type": "string",
-                                  "description": "Set volume type.\n",
+                                  "description": "Specifies the EBS volume type. This field is required when either `dynamicIops` or `dynamicVolumeSize` is configured.\n",
                                   "enum": [
                                     "standard",
                                     "io1",
@@ -43869,7 +43869,7 @@
                                     "resource",
                                     "sizePerResourceUnit"
                                   ],
-                                  "description": "Set dynamic volume size properties. When using this object, you cannot use volumeSize.\\\nYou must use one or the other.\n",
+                                  "description": "Set dynamic volume size properties. When using this object, you cannot use volumeSize.\\\nYou must use one or the other. When `dynamicVolumeSize` is configured, the `volumeType` field must also be set.\n",
                                   "properties": {
                                     "baseSize": {
                                       "type": "integer",
