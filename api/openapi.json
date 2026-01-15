@@ -16435,6 +16435,12 @@
                             "title": "Elastigroup Strategy",
                             "description": "Strategy for Elastigroup.\n",
                             "properties": {
+                              "shouldUtilizeCommitments": {
+                                "type": "boolean",
+                                "description": "Determines whether to utilize any existing Azure Savings Plans or Reserved Instances associated with the subscription for On-Demand VMs.\n",
+                                "example": true,
+                                "default": false
+                              },
                               "spotPercentage": {
                                 "type": "integer",
                                 "example": 50,
@@ -18831,6 +18837,12 @@
                             "type": "object",
                             "title": "Scaling Strategy",
                             "properties": {
+                              "shouldUtilizeCommitments": {
+                                "type": "boolean",
+                                "description": "Determines whether to utilize any existing Azure Savings Plans or Reserved Instances associated with the subscription for On-Demand VMs.\n",
+                                "example": true,
+                                "default": false
+                              },
                               "spotPercentage": {
                                 "title": "Spot Percentage",
                                 "description": "Percentage of Spot-VMs to maintain.  <a style=color:red>Required if odCount isn't specified.</a>",
@@ -23116,6 +23128,12 @@
                                 "example": "od",
                                 "default": "spot"
                               },
+                              "shouldUtilizeCommitments": {
+                                "type": "boolean",
+                                "description": "Determines whether to utilize any existing Azure Savings Plans or Reserved Instances associated with the subscription for On-Demand VMs.\n",
+                                "example": true,
+                                "default": false
+                              },
                               "signals": {
                                 "type": "array",
                                 "description": "Signals that VMs are expected to send to the platform.\n",
@@ -24621,6 +24639,12 @@
                                 "description": "The desired type of VM.\n",
                                 "example": "od",
                                 "default": "spot"
+                              },
+                              "shouldUtilizeCommitments": {
+                                "type": "boolean",
+                                "description": "Determines whether to utilize any existing Azure Savings Plans or Reserved Instances associated with the subscription for On-Demand VMs.\n",
+                                "example": true,
+                                "default": false
                               },
                               "signals": {
                                 "type": "array",
@@ -55708,6 +55732,109 @@
         }
       }
     },
+    "/azure/setup/tenant/credentials": {
+      "post": {
+        "summary": "Set Credentials for Azure Tenant",
+        "description": "Link a Spot to an Azure Cloud tenant. \n This is used to set up credentials at the tenant level which are utilized for Azure Savings Plan and Reservation utilization. \n",
+        "operationId": "OrganizationsAndAccountsSetCloudCredentialsForAzureTenant",
+        "tags": [
+          "Accounts"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/paths/~1azure~1costs/get/parameters/0"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "type": "object",
+                    "required": [
+                      "clientId",
+                      "clientSecret",
+                      "tenantId",
+                      "expirationDate"
+                    ],
+                    "properties": {
+                      "clientId": {
+                        "type": "string",
+                        "description": "Set the application ID",
+                        "example": 111111111
+                      },
+                      "clientSecret": {
+                        "type": "string",
+                        "description": "Set the key secret",
+                        "example": "32431r2431434132"
+                      },
+                      "tenantId": {
+                        "type": "string",
+                        "description": "Set the directory ID",
+                        "example": "1321e1e3123er23"
+                      },
+                      "expirationDate": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "Set the key secret expiration date",
+                        "example": "2025-12-31T23:59:00.000Z"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/paths/~1azure~1setup~1credentials/post/responses/200"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/azure/setup/tenant/credentials/validation": {
+      "post": {
+        "summary": "Validate Credentials for Azure Tenant",
+        "description": "Validate the credentials linked to an Azure Cloud tenant. \n This is used to validate credentials at the tenant level which are utilized for Azure Savings Plan and Reservation utilization. \n",
+        "operationId": "OrganizationsAndAccountsValidateCloudCredentialsForAzureTenant",
+        "tags": [
+          "Accounts"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/paths/~1azure~1costs/get/parameters/0"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/paths/~1azure~1setup~1tenant~1credentials/post/requestBody/content/application~1json/schema/allOf/0"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/paths/~1azure~1setup~1credentials/post/responses/200"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
     "/ocean/gcp/k8s/cluster": {
       "summary": "Ocean for GKE",
       "post": {
@@ -63461,6 +63588,12 @@
                         "title": "Ocean AKS Strategy",
                         "description": "The Ocean AKS Strategy object.\n",
                         "properties": {
+                          "shouldUtilizeCommitments": {
+                            "type": "boolean",
+                            "description": "Determines whether to utilize any existing Azure Savings Plans or Reserved Instances associated with the subscription for On-Demand VMs.\n",
+                            "example": true,
+                            "default": false
+                          },
                           "spotPercentage": {
                             "type": "integer",
                             "description": "Percentage of spot VMs to maintain.\n",
