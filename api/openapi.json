@@ -38008,6 +38008,62 @@
                                     "description": "Flag to enable or disable the shutdown hours mechanism. When False, the mechanism is deactivated, and the cluster remains in its current state.\n"
                                   }
                                 }
+                              },
+                              "optimizationWindows": {
+                                "type": "object",
+                                "description": "An object used to specify time windows during which certain optimization constraints can be eased.\n",
+                                "title": "Optimization Windows",
+                                "required": [
+                                  "isEnabled"
+                                ],
+                                "properties": {
+                                  "isEnabled": {
+                                    "type": "boolean",
+                                    "example": true,
+                                    "description": "Used to enable or disable the optimization windows mechanism. Must be a boolean (null is invalid). When true, at least one window must be defined. When false, windows can be empty or omitted.\n"
+                                  },
+                                  "windows": {
+                                    "type": "array",
+                                    "description": "The times when the optimization windows will apply. Required if isEnabled is true.\n",
+                                    "items": {
+                                      "type": "object",
+                                      "title": "Optimization Window Definition",
+                                      "required": [
+                                        "cronExpression",
+                                        "duration",
+                                        "effects"
+                                      ],
+                                      "properties": {
+                                        "cronExpression": {
+                                          "type": "string",
+                                          "example": "0 0 * * *",
+                                          "description": "A valid cron expression defining when the optimization window starts. For example: \"0 0 * * *\" (daily at midnight). The cron job runs in UTC time and follows Unix cron format.\n"
+                                        },
+                                        "duration": {
+                                          "type": "string",
+                                          "example": "8h",
+                                          "description": "The duration of the optimization window. Must be in the format <number><unit> where unit is 'm' (minutes), 'h' (hours), or 'd' (days). Examples: 10m, 5h, 2d.\n"
+                                        },
+                                        "effects": {
+                                          "type": "array",
+                                          "minItems": 1,
+                                          "description": "The list of effects that will be applied during this optimization window.\n",
+                                          "items": {
+                                            "type": "string",
+                                            "enum": [
+                                              "ignorePdb",
+                                              "ignoreRestrictScaleDown"
+                                            ]
+                                          },
+                                          "example": [
+                                            "ignorePdb",
+                                            "ignoreRestrictScaleDown"
+                                          ]
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
                               }
                             }
                           },
@@ -44107,6 +44163,9 @@
                                 "description": "Flag to enable or disable the shutdown hours mechanism. When False, the mechanism is deactivated, and the virtual node group remains in its current state.\n"
                               }
                             }
+                          },
+                          "optimizationWindows": {
+                            "$ref": "#/paths/~1ocean~1aws~1k8s~1cluster~1%7BoceanClusterId%7D/put/requestBody/content/application~1json/schema/allOf/0/properties/cluster/properties/scheduling/properties/optimizationWindows"
                           }
                         }
                       },
