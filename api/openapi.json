@@ -67788,7 +67788,7 @@
         }
       }
     },
-    "/ocean/azure/k8s/cluster/{oceanClusterId}/nodes": {
+    "/ocean/azure/np/cluster/{oceanClusterId}/nodes": {
       "get": {
         "summary": "Get Cluster Nodes",
         "description": "Get nodes data of an Ocean AKS cluster.\n",
