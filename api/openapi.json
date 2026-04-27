@@ -59667,6 +59667,16 @@
                         "type": "integer",
                         "description": "Defines the number of local SSDs to be attached per node for this VNG.\n\nIf instanceTypes are configured in this VNG, **all of them** must support the value of localSsdCount.\nOtherwise, if the Ocean cluster has instanceTypes on a permit list, **at least one** must support the value of localSsdCount.\n\nFor more information about local SSDs, it is recommended to review the GCP documentation:\n* [GCP Local SSD](https://cloud.google.com/compute/docs/disks#localssds)\n* [Local SSDs and machine types](https://cloud.google.com/compute/docs/disks#local_ssd_machine_type_restrictions)\n* [GKE Using local SSDs](https://cloud.google.com/kubernetes-engine/docs/how-to/persistent-volumes/local-ssd#use)\n",
                         "example": 2
+                      },
+                      "localSsdEphemeralStorageCount": {
+                        "type": "integer",
+                        "description": "Defines the number of local SSDs to be used as ephemeral storage per node for this VNG.\n\nThis field is derived from nodes enabled with the `--ephemeral-storage-local-ssd` flag in GKE,\nwhich configures ephemeral storage (used for temporary data such as container images and writable layers)\nbacked by local SSDs instead of the boot disk.\n\n**All** instanceTypes configured in this VNG must support the value of localSsdEphemeralStorageCount.\nOtherwise, if the Ocean cluster has instanceTypes on a permit list, **at least one** must support the value of localSsdEphemeralStorageCount.\n\nFor more information about local SSDs with ephemeral storage, it is recommended to review the GCP documentation:\n* [GKE ephemeral storage backed by local SSDs](https://cloud.google.com/kubernetes-engine/docs/how-to/persistent-volumes/local-ssd#lssd-ephemeral-storage)\n",
+                        "example": 2
+                      },
+                      "localNvmeSsdCount": {
+                        "type": "integer",
+                        "description": "Defines the number of local NVMe SSDs to be attached per node in raw block mode for this VNG.\n\nThis field is derived from nodes enabled with the `--local-nvme-ssd-block` flag in GKE,\nwhich attaches local NVMe SSDs as raw block devices, providing the highest possible storage performance.\n\n**All** instanceTypes configured in this VNG must support the value of localNvmeSsdCount.\nOtherwise, if the Ocean cluster has instanceTypes on a permit list, **at least one** must support the value of localNvmeSsdCount.\n\nFor more information about local NVMe SSDs, it is recommended to review the GCP documentation:\n* [GKE local NVMe SSD block storage](https://cloud.google.com/kubernetes-engine/docs/how-to/persistent-volumes/local-ssd-raw)\n",
+                        "example": 2
                       }
                     }
                   },
