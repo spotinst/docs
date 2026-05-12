@@ -23534,6 +23534,42 @@
                                       }
                                     }
                                   },
+                                  "purchasePlan": {
+                                    "description": "Defines the Azure Marketplace purchase plan metadata for the selected image or osDisk image.\n",
+                                    "allOf": [
+                                      {
+                                        "type": "object",
+                                        "title": "Purchase Plan",
+                                        "additionalProperties": false,
+                                        "description": "Defines the Azure Marketplace purchase plan for the VM image.\n",
+                                        "required": [
+                                          "publisher",
+                                          "product",
+                                          "name"
+                                        ],
+                                        "properties": {
+                                          "publisher": {
+                                            "type": "string",
+                                            "minLength": 1,
+                                            "description": "Purchase plan publisher.\n",
+                                            "example": "canonical"
+                                          },
+                                          "product": {
+                                            "type": "string",
+                                            "minLength": 1,
+                                            "description": "Purchase plan product / offer.\n",
+                                            "example": "0001-com-ubuntu-pro-jammy"
+                                          },
+                                          "name": {
+                                            "type": "string",
+                                            "minLength": 1,
+                                            "description": "Purchase plan name / SKU.\n* This value is case-sensitive and must exactly match the Azure plan metadata.\n",
+                                            "example": "pro-22_04-lts"
+                                          }
+                                        }
+                                      }
+                                    ]
+                                  },
                                   "vmName": {
                                     "type": "string",
                                     "description": "* Set a VM name that will be persisted throughout the entire node lifecycle.\n* The name value should comply with the following limitations: \n  *  A maximal length of 64 characters.\n  * The name can’t contain spaces, control characters, or these characters: ~ ! @ # $ % ^ & * ( ) = + _ [ ] { } | ; : . ' \" , < > / ?\n  *  A Windows VM name can't include a period or end with a hyphen.\n  * A Linux VM name can't end with a period or hyphen.\n",
@@ -25044,6 +25080,37 @@
                                         }
                                       }
                                     }
+                                  },
+                                  "purchasePlan": {
+                                    "description": "Defines the Azure Marketplace purchase plan metadata for the selected image or osDisk image.\n",
+                                    "allOf": [
+                                      {
+                                        "type": "object",
+                                        "title": "Purchase Plan",
+                                        "additionalProperties": false,
+                                        "description": "Defines the Azure Marketplace purchase plan for the VM image.\n* On update, each provided field must contain a non-empty value.\n",
+                                        "properties": {
+                                          "publisher": {
+                                            "type": "string",
+                                            "minLength": 1,
+                                            "description": "Purchase plan publisher.\n",
+                                            "example": "canonical"
+                                          },
+                                          "product": {
+                                            "type": "string",
+                                            "minLength": 1,
+                                            "description": "Purchase plan product / offer.\n",
+                                            "example": "0001-com-ubuntu-pro-jammy"
+                                          },
+                                          "name": {
+                                            "type": "string",
+                                            "minLength": 1,
+                                            "description": "Purchase plan name / SKU.\n* This value is case-sensitive and must exactly match the Azure plan metadata.\n",
+                                            "example": "pro-22_04-lts"
+                                          }
+                                        }
+                                      }
+                                    ]
                                   },
                                   "vmName": {
                                     "type": "string",
