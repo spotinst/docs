@@ -63314,6 +63314,11 @@
                           },
                           "scheduling": {
                             "$ref": "#/paths/~1ocean~1azure~1np~1virtualNodeGroup~1%7BvirtualNodeGroupId%7D/put/requestBody/content/application~1json/schema/properties/virtualNodeGroup/properties/scheduling"
+                          },
+                          "restrictScaleDown": {
+                            "type": "boolean",
+                            "description": "When set to True, VNG nodes will be treated as if all pods running have the [restrict-scale-down label](https://docs.flexera.com/spot/ocean/features/labels-and-taints).\nTherefore, Ocean will not scale nodes down unless they are empty.\n",
+                            "example": false
                           }
                         }
                       }
@@ -63512,6 +63517,11 @@
                                   },
                                   "scheduling": {
                                     "$ref": "#/paths/~1ocean~1azure~1np~1virtualNodeGroup~1%7BvirtualNodeGroupId%7D/put/requestBody/content/application~1json/schema/properties/virtualNodeGroup/properties/scheduling"
+                                  },
+                                  "restrictScaleDown": {
+                                    "type": "boolean",
+                                    "description": "When set to True, VNG nodes will be treated as if all pods running have the [restrict-scale-down label](https://docs.flexera.com/spot/ocean/features/labels-and-taints).\nTherefore, Ocean will not scale nodes down unless they are empty.\n",
+                                    "example": false
                                   },
                                   "createdAt": {
                                     "type": "string",
@@ -64088,6 +64098,11 @@
                             }
                           }
                         }
+                      },
+                      "restrictScaleDown": {
+                        "type": "boolean",
+                        "description": "When set to True, VNG nodes will be treated as if all pods running have the [restrict-scale-down label](https://docs.flexera.com/spot/ocean/features/labels-and-taints).\nTherefore, Ocean will not scale nodes down unless they are empty.\n",
+                        "example": false
                       }
                     }
                   }
@@ -64339,6 +64354,11 @@
                                       "tags": {
                                         "type": "object",
                                         "description": "A maximum of 10 unique key-value pairs for VM tags in the virtual node group.\n"
+                                      },
+                                      "restrictScaleDown": {
+                                        "type": "boolean",
+                                        "description": "When set to True, VNG nodes will be treated as if all pods running have the [restrict-scale-down label](https://docs.flexera.com/spot/ocean/features/labels-and-taints).\nTherefore, Ocean will not scale nodes down unless they are empty.\n",
+                                        "example": false
                                       }
                                     }
                                   }
