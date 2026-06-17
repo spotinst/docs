@@ -64174,9 +64174,6 @@
           },
           {
             "$ref": "#/paths/~1ocean~1azure~1np~1virtualNodeGroup~1%7BvirtualNodeGroupId%7D/get/parameters/1"
-          },
-          {
-            "$ref": "#/paths/~1ocean~1aws~1k8s~1launchSpec~1%7BlaunchSpecId%7D/delete/parameters/2"
           }
         ],
         "responses": {
