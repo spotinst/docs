@@ -80789,6 +80789,265 @@
         }
       }
     },
+    "/ocean/{oceanId}/rightSizing/namespaces/{namespace}/{workloadType}/{workloadName}/recommendation-history": {
+      "get": {
+        "summary": "Get Ocean Rightsizing Recommendation History",
+        "description": "Get right-sizing recommendation history for a specific workload in an Ocean cluster.\n",
+        "operationId": "oceanRightsizingRecommendationHistory",
+        "tags": [
+          "Ocean Automatic Rightsizing"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/paths/~1ocean~1%7BoceanId%7D~1rightSizing~1rule/get/parameters/0"
+          },
+          {
+            "in": "path",
+            "name": "namespace",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "example": "default",
+            "description": "Namespace of the workload.\n"
+          },
+          {
+            "in": "path",
+            "name": "workloadType",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "deployment",
+                "daemonSet",
+                "statefulSet",
+                "rollout"
+              ]
+            },
+            "required": true,
+            "example": "deployment",
+            "description": "Type of the workload.\n"
+          },
+          {
+            "in": "path",
+            "name": "workloadName",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "example": "checkout-service",
+            "description": "Name of the workload.\n"
+          },
+          {
+            "$ref": "#/paths/~1azure~1costs/get/parameters/0"
+          },
+          {
+            "in": "query",
+            "name": "clusterIdentifier",
+            "schema": {
+              "type": "string"
+            },
+            "required": false,
+            "example": "dev-cluster",
+            "description": "Identifier of the cluster from which recommendation history should be retrieved.\n"
+          },
+          {
+            "in": "query",
+            "name": "fromDate",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "required": true,
+            "example": 1717200000000,
+            "description": "Start time filter as Unix epoch timestamp in milliseconds.\n"
+          },
+          {
+            "in": "query",
+            "name": "toDate",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "required": false,
+            "example": 1719800000000,
+            "description": "End time filter as Unix epoch timestamp in milliseconds.\n"
+          },
+          {
+            "in": "query",
+            "name": "containerNames",
+            "required": true,
+            "description": "List of container names to filter by.\n",
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "example": [
+              "app",
+              "sidecar"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ocean Rightsizing Recommendation History Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/paths/~1healthCheck/get/responses/200/content/application~1json/schema/allOf/0"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "request": {
+                          "type": "object",
+                          "properties": {
+                            "url": {
+                              "example": "/ocean/o-abcd1234/rightSizing/namespaces/default/deployment/checkout-service/recommendation-history?accountId=act-123456789&fromDate=1717200000000&clusterIdentifier=dev-cluster"
+                            },
+                            "method": {
+                              "example": "GET"
+                            }
+                          }
+                        },
+                        "response": {
+                          "type": "object",
+                          "properties": {
+                            "items": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "recommendations": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "title": "Ocean Rightsizing Recommendation History Item",
+                                      "description": "Recommendation snapshot for a workload at a specific point in time.\n",
+                                      "properties": {
+                                        "podCount": {
+                                          "type": "integer",
+                                          "description": "Number of pods in the workload at recommendation time."
+                                        },
+                                        "cpu": {
+                                          "type": "object",
+                                          "description": "CPU recommendation details.",
+                                          "properties": {
+                                            "requested": {
+                                              "type": "number"
+                                            },
+                                            "recommended": {
+                                              "type": "number"
+                                            },
+                                            "limit": {
+                                              "type": "number"
+                                            },
+                                            "p99": {
+                                              "type": "number"
+                                            },
+                                            "p95": {
+                                              "type": "number"
+                                            },
+                                            "p90": {
+                                              "type": "number"
+                                            },
+                                            "p85": {
+                                              "type": "number"
+                                            }
+                                          }
+                                        },
+                                        "memory": {
+                                          "type": "object",
+                                          "description": "Memory recommendation details.",
+                                          "properties": {
+                                            "requested": {
+                                              "type": "number"
+                                            },
+                                            "recommended": {
+                                              "type": "number"
+                                            },
+                                            "limit": {
+                                              "type": "number"
+                                            },
+                                            "p100": {
+                                              "type": "number"
+                                            },
+                                            "p95": {
+                                              "type": "number"
+                                            },
+                                            "p90": {
+                                              "type": "number"
+                                            },
+                                            "p85": {
+                                              "type": "number"
+                                            }
+                                          }
+                                        },
+                                        "recommendedAt": {
+                                          "type": "integer",
+                                          "format": "int64",
+                                          "description": "Unix epoch timestamp in milliseconds when the recommendation was generated."
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "example": [
+                                {
+                                  "recommendations": [
+                                    {
+                                      "podCount": 1,
+                                      "cpu": {
+                                        "requested": 0.01,
+                                        "recommended": 0.01,
+                                        "limit": 0.02,
+                                        "p99": 0,
+                                        "p95": 0,
+                                        "p90": 0,
+                                        "p85": 0
+                                      },
+                                      "memory": {
+                                        "requested": 32,
+                                        "recommended": 32,
+                                        "limit": 64,
+                                        "p100": 7.59,
+                                        "p95": 7.56,
+                                        "p90": 7.56,
+                                        "p85": 7.53
+                                      },
+                                      "recommendedAt": 1783313815984
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            "count": {
+                              "example": 1
+                            },
+                            "kind": {
+                              "example": "mcs:ocean:rightSizing:clusterResourceRecommendationsHistory"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
     "/ocean/{oceanId}/rightSizing/rollbacks": {
       "get": {
         "summary": "List Ocean Rightsizing Rollbacks",
@@ -81431,40 +81690,13 @@
             "$ref": "#/paths/~1ocean~1%7BoceanId%7D~1rightSizing~1rule/get/parameters/0"
           },
           {
-            "in": "path",
-            "name": "namespace",
-            "schema": {
-              "type": "string"
-            },
-            "required": true,
-            "example": "kube-system",
-            "description": "Kubernetes namespace.\n"
+            "$ref": "#/paths/~1ocean~1%7BoceanId%7D~1rightSizing~1namespaces~1%7Bnamespace%7D~1%7BworkloadType%7D~1%7BworkloadName%7D~1recommendation-history/get/parameters/1"
           },
           {
-            "in": "path",
-            "name": "workloadType",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "deployment",
-                "daemonSet",
-                "statefulSet",
-                "rollout"
-              ]
-            },
-            "required": true,
-            "example": "deployment",
-            "description": "Workload type as defined in kubernetes.\n"
+            "$ref": "#/paths/~1ocean~1%7BoceanId%7D~1rightSizing~1namespaces~1%7Bnamespace%7D~1%7BworkloadType%7D~1%7BworkloadName%7D~1recommendation-history/get/parameters/2"
           },
           {
-            "in": "path",
-            "name": "workloadName",
-            "schema": {
-              "type": "string"
-            },
-            "required": true,
-            "example": "redis-controller",
-            "description": "Kubernetes workload name.\n"
+            "$ref": "#/paths/~1ocean~1%7BoceanId%7D~1rightSizing~1namespaces~1%7Bnamespace%7D~1%7BworkloadType%7D~1%7BworkloadName%7D~1recommendation-history/get/parameters/3"
           },
           {
             "$ref": "#/paths/~1azure~1costs/get/parameters/0"
